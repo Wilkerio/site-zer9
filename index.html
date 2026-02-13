@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Preview</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, Helvetica, sans-serif;}
+body{background:#ffffff;margin:0;max-width:none;}
+
+:root{
+  --pad: clamp(18px, 6vw, 88px);
+}
+
+/* ===== HERO ===== */
+.hero{position:relative;height:560px;background:url('Frame.png') center/cover no-repeat;display:flex;align-items:stretch;color:#fff;}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.42) 52%, rgba(0,0,0,.20) 100%);} 
+.hero-inner{position:relative;z-index:2;width:100%;height:100%;padding:0 var(--pad);display:flex;align-items:flex-start;}
+.hero-left{width:560px;max-width:58%;padding-top:86px;position:relative;}
+.hero-logo{width:56px;height:56px;margin-bottom:18px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));}
+.hero h1{font-size:36px;line-height:1.15;font-weight:700;margin-bottom:18px;letter-spacing:-.2px;}
+.hero h1 .bold{font-weight:800;}
+.hero-right{position:absolute;right:var(--pad);top:250px;width:190px;display:flex;flex-direction:column;align-items:flex-start;}
+.hero-right p{font-size:12px;line-height:1.5;opacity:.95;margin-bottom:10px;max-width:300px;}
+.btn-whatsapp{
+  background:#1FBF5A;
+  color:#fff;
+  height:30px;
+  padding:0 14px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+}
+.btn-whatsapp .wa-ico{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.btn-whatsapp .wa-ico svg{width:14px;height:14px;display:block;}
+.btn-whatsapp .wa-ico svg path{fill:#fff;}
+
+/* animações leves */
+.hero-left, .hero-right{animation:fadeUp .55s ease-out both;}
+.hero-right{animation-delay:.08s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
+.btn-whatsapp{transition:transform .15s ease, filter .15s ease;}
+.btn-whatsapp:hover{transform:translateY(-1px);filter:brightness(1.02);} 
+
+/* ===== ORANGE BAR ===== */
+.orange-bar{width:980px;max-width:calc(100% - (var(--pad) * 2));background:#F2A400;margin:-34px auto 0 auto;padding:16px 22px;border-radius:6px;display:flex;justify-content:space-between;color:#fff;position:relative;z-index:5;box-shadow:0 8px 22px rgba(0,0,0,.14);} 
+.orange-item{font-size:12px;display:flex;align-items:center;gap:10px;white-space:nowrap;}
+.orange-ico{width:16px;height:16px;border-radius:3px;background:rgba(255,255,255,.25);display:inline-block;position:relative;}
+.orange-ico::after{content:"";position:absolute;left:4px;top:4px;width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,.65);} 
+
+/* ===== 3 CARDS ===== */
+.section-green{background:#3F5F2D;margin-top:-34px;padding:88px 0 64px 0;display:flex;justify-content:center;gap:56px;}
+.card{width:260px;background:#2E7DBA;border-radius:10px;overflow:hidden;box-shadow:0 10px 22px rgba(0,0,0,.18);} 
+.card-title{background:#2E7DBA;text-align:center;padding:14px 0;color:#fff;font-weight:700;font-size:14px;}
+.card img{width:100%;height:265px;object-fit:cover;display:block;}
+
+/* ===== GALLERY / TESTIMONIAL ===== */
+.gallery-section{background:#EFEFEF;padding:58px 0 62px 0;text-align:center;position:relative;}
+.gallery-wrapper{width:860px;max-width:calc(100% - 176px);margin:0 auto 18px auto;display:flex;align-items:center;gap:16px;}
+.arrow{width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.16);display:flex;align-items:center;justify-content:center;color:#777;font-weight:700;flex:0 0 auto;cursor:pointer;user-select:none;}
+.gallery-grid{display:grid;grid-template-columns:540px 1fr;gap:18px;align-items:stretch;}
+.gallery-grid .big{width:540px;height:210px;object-fit:cover;border-radius:8px;transition:opacity .18s ease;}
+.gallery-grid .small{transition:opacity .18s ease;}
+.gallery-grid .side{display:grid;grid-template-rows:1fr 1fr;gap:18px;}
+.gallery-grid .small{width:270px;height:96px;object-fit:cover;border-radius:8px;}
+.testimonial{width:760px;max-width:calc(100% - 176px);margin:14px auto 0 auto;font-size:11px;color:#666;line-height:1.6;transition:opacity .18s ease;}
+.testimonial strong{color:#555;font-weight:700;}
+
+/* ===== CTA GREEN ===== */
+.cta{background:#0EA54C;padding:34px var(--pad);display:flex;justify-content:space-between;align-items:center;color:#fff;gap:30px;}
+.cta-left{width:640px;max-width:70%;}
+.cta h2{font-size:10px;letter-spacing:.9px;font-weight:800;margin-bottom:8px;opacity:.95;}
+.cta p{font-size:11px;line-height:1.55;opacity:.92;max-width:520px;}
+.cta .btn{
+  background:#fff;
+  color:#0EA54C;
+  height:34px;
+  padding:0 18px;
+  border-radius:8px;
+  font-size:12px;
+  text-decoration:none;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
+  border:1px solid rgba(255,255,255,.65);
+}
+.cta .btn .wa-ico{width:18px;height:18px;border-radius:50%;background:transparent;border:1px solid rgba(14,165,76,.65);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.cta .btn .wa-ico svg{width:12px;height:12px;display:block;}
+.cta .btn .wa-ico svg path{fill:#0EA54C;} 
+
+/* ===== SOLUTIONS ===== */
+.solutions-wrap{background:#F3F3F3;padding:54px 0 72px 0;}
+.solutions{width:1100px;max-width:calc(100% - 176px);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+.solution-card{background:#F6F6F6;border:2px solid #2E7D32;border-radius:10px;min-height:230px;padding:26px;position:relative;}
+.solution-card h3{color:#E5A20A;font-size:12px;font-weight:800;margin-bottom:18px;}
+.solution-card .label{color:#E5A20A;font-size:9px;font-weight:800;margin-bottom:6px;}
+.solution-card p{font-size:10px;color:#666;line-height:1.55;max-width:330px;}
+.solution-card .btn-small{
+  position:absolute;
+  bottom:22px;
+  background:#1FBF5A;
+  color:#fff;
+  height:32px;
+  padding:0 16px;
+  border-radius:8px;
+  font-size:11px;
+  text-decoration:none;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.solution-card .btn-small .wa-ico{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.96);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.solution-card .btn-small .wa-ico svg{width:12px;height:12px;display:block;}
+.solution-card .btn-small .wa-ico svg path{fill:#1FBF5A;}
+.solution-card.with-btn .btn-small{left:50%;transform:translateX(-50%);} 
+
+/* ===== CONTACT ===== */
+.contact{background:#2E5B38;padding:44px var(--pad) 64px var(--pad);display:flex;gap:34px;color:#fff;align-items:flex-start;}
+.map{width:420px;height:270px;border-radius:8px;overflow:hidden;box-shadow:0 10px 22px rgba(0,0,0,.22);flex:0 0 auto;} 
+.map img{width:100%;height:100%;object-fit:cover;display:block;}
+.contact-form{flex:1;min-width:0;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:14px;}
+.field label{display:block;font-size:10px;font-weight:700;opacity:.9;margin:0 0 6px 0;}
+.field input,.field textarea{width:100%;padding:10px 12px;border-radius:4px;border:0;background:rgba(255,255,255,.07);color:#fff;outline:none;}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.55);} 
+.field textarea{height:92px;resize:none;}
+.send{margin-top:12px;}
+.send button{width:100%;height:34px;border-radius:6px;border:0;background:#fff;color:#2E5B38;font-weight:800;font-size:11px;}
+
+/* ===== FINAL MOSAIC ===== */
+.final{background:#244A2F;padding:38px var(--pad) 54px var(--pad);}
+.mosaic{display:grid;grid-template-columns:repeat(3, 1fr);grid-auto-rows:150px;gap:14px;}
+.mosaic .tile{border-radius:8px;overflow:hidden;position:relative;}
+.mosaic img{width:100%;height:100%;object-fit:cover;display:block;}
+.mosaic .tag{position:absolute;left:10px;bottom:10px;color:#fff;font-weight:800;font-size:10px;opacity:.9;text-shadow:0 2px 10px rgba(0,0,0,.45);} 
+
+/* layout semelhante ao print */
+.t1{grid-column:1 / span 2;grid-row:1 / span 2;} 
+.t2{grid-column:3;grid-row:1 / span 2;} 
+.t3{grid-column:1;grid-row:3;} 
+.t4{grid-column:2;grid-row:3;} 
+.t5{grid-column:3;grid-row:3;} 
+.t6{grid-column:1 / span 2;grid-row:4 / span 2;} 
+.t7{grid-column:3;grid-row:4;} 
+.t8{grid-column:3;grid-row:5;} 
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 1200px){
+  .gallery-wrapper, .testimonial, .solutions{max-width:calc(100% - 96px);} 
+}
+
+@media (max-width: 960px){
+  :root{ --pad: 48px; }
+  .hero{height:520px;}
+  .hero-inner{flex-direction:column;gap:22px;padding:48px;}
+  .hero-left{width:auto;padding-top:0;max-width:none;}
+  .hero-right{position:relative;right:auto;top:auto;width:auto;}
+
+  .orange-bar{flex-wrap:wrap;gap:12px;justify-content:flex-start;}
+  .section-green{padding:44px 0 54px 0;gap:18px;flex-wrap:wrap;}
+  .gallery-wrapper{flex-direction:column;align-items:stretch;}
+  .arrow{display:none;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .gallery-grid .big{width:100%;height:240px;}
+  .gallery-grid .small{width:100%;height:120px;}
+  .cta{flex-direction:column;align-items:flex-start;}
+  .cta-left{max-width:100%;width:auto;}
+  .solutions{grid-template-columns:1fr;}
+  .contact{flex-direction:column;}
+  .map{width:100%;height:260px;}
+}
+
+@media (max-width: 640px){
+  :root{ --pad: 26px; }
+  .hero{height:520px;}
+  .hero-inner{padding:26px;}
+  .hero h1{font-size:30px;}
+  .orange-bar{max-width:calc(100% - 52px);} 
+  .testimonial{max-width:calc(100% - 52px);} 
+  .cta, .contact, .final{padding-left:26px;padding-right:26px;}
+  .solutions{max-width:calc(100% - 52px);} 
+  .form-row{grid-template-columns:1fr;}
+  .mosaic{grid-template-columns:repeat(2, 1fr);grid-auto-rows:140px;}
+  .t1{grid-column:1 / span 2;grid-row:auto;} 
+  .t2{grid-column:1 / span 2;grid-row:auto;} 
+  .t6{grid-column:1 / span 2;grid-row:auto;} 
+  .t3,.t4,.t5,.t7,.t8{grid-column:auto;grid-row:auto;}
+}
+
+@media (max-width: 420px){
+  .mosaic{grid-template-columns:1fr;grid-auto-rows:170px;}
+  .t1,.t2,.t6{grid-column:1;}
+}
+
+
+
+/* ===== INTERAÇÕES / ANIMAÇÕES (sem alterar layout parado) ===== */
+.card, .solution-card, .mosaic .tile, .arrow, .cta .btn, .btn-small{
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(0,0,0,.22);} 
+.solution-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(0,0,0,.10);} 
+.mosaic .tile:hover{transform:translateY(-2px);filter:brightness(1.02);} 
+.arrow:hover{transform:scale(1.03);}
+.cta .btn:hover, .btn-small:hover{transform:translateY(-1px);filter:brightness(1.02);} 
+
+/* focus (acessibilidade) */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid rgba(37,211,102,.65);outline-offset:2px;border-radius:6px;}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(12px);}
+.reveal.in{opacity:1;transform:translateY(0);transition:opacity .55s ease, transform .55s ease;}
+
+/* respeita redução de movimento */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+  .reveal{opacity:1;transform:none;}
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero reveal">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <img class="hero-logo" alt="logo" src="Group 7.png" />
+      <h1>Transformamos o<br/>conteúdo da sala de<br/>aula em <span class="bold">experiências</span><br/><span class="bold">inesquecíveis.</span></h1>
+    </div>
+    <div class="hero-right">
+      <p>converse com a gente e planeje<br/>sua visita escolar inesquecível</p>
+      <a href="#" class="btn-whatsapp"><span class="wa-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+      </span> Conversar pelo WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<div class="orange-bar reveal">
+  <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
+  <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
+  <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
+  <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
+</div>
+
+<section class="section-green reveal">
+  <div class="card"><div class="card-title">Hopi Hari</div><img alt="" src="Frame 509.png"/></div>
+  <div class="card"><div class="card-title">Hopi Hari</div><img alt="" src="Frame 509-1.png"/></div>
+  <div class="card"><div class="card-title">Hopi Hari</div><img alt="" src="Frame 509-2.png"/></div>
+</section>
+
+<section class="gallery-section reveal">
+  <div class="gallery-wrapper">
+    <div class="arrow" id="galPrev" role="button" aria-label="Anterior">‹</div>
+    <div class="gallery-grid">
+      <img alt="" src="Rectangle 79.png" class="big" id="galBig" />
+      <div class="side">
+        <img alt="" src="Rectangle 80.png" class="small" id="galSmall1" />
+        <img alt="" src="Rectangle 81.png" class="small" id="galSmall2" />
+      </div>
+    </div>
+    <div class="arrow" id="galNext" role="button" aria-label="Próximo">›</div>
+  </div>
+  <div class="testimonial" id="galTestimonial">
+    <span id="galText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</span>
+    <br/><br/>
+    <strong id="galAuthor">Rinaldo, Diretora Colégio A</strong>
+  </div>
+</section>
+
+<section class="cta reveal">
+  <div class="cta-left">
+    <h2>ENTRE EM CONTATO COM A GENTE</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae. Vivamus in bibendum est.</p>
+  </div>
+  <a href="#" class="btn"><span class="wa-ico" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+    </span> Conversar pelo WhatsApp</a>
+</section>
+
+<section class="solutions-wrap reveal">
+  <div class="solutions">
+    <div class="solution-card with-btn">
+      <h3>Solução 1</h3>
+      <div class="label">Lorem ipsum</div>
+      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+      <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+      </span> Conversar pelo WhatsApp</a>
+    </div>
+    <div class="solution-card">
+      <h3>Solução 2</h3>
+      <div class="label">Lorem ipsum</div>
+      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+    </div>
+    <div class="solution-card">
+      <h3>Solução 3</h3>
+      <div class="label">Lorem ipsum</div>
+      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+    </div>
+    <div class="solution-card">
+      <h3>Solução 4</h3>
+      <div class="label">Lorem ipsum</div>
+      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact reveal">
+  <div class="map"><img alt="" src="Frame 510.png"/></div>
+  <div class="contact-form">
+    <div class="form-row">
+      <div class="field"><label>Nome:</label><input placeholder="Digite seu nome"/></div>
+      <div class="field"><label>WhatsApp*</label><input placeholder="(11) 99999-9999"/></div>
+    </div>
+    <div class="form-row">
+      <div class="field"><label>Email:</label><input placeholder="seuemail@dominio.com"/></div>
+      <div class="field"><label>Escola:</label><input placeholder="Escola Doe e Helio"/></div>
+    </div>
+    <div class="field"><label>Fale um pouco da ideia da viagem</label><textarea placeholder="Ex: turma A, 9º ano, visita em... "></textarea></div>
+    <div class="send"><button>Enviar Mensagem</button></div>
+  </div>
+</section>
+
+<section class="final reveal">
+  <div class="mosaic">
+    <div class="tile t1"><img alt="" src="Frame 510-1.png"/><div class="tag">VIAGEM XXX</div></div>
+    <div class="tile t2"><img alt="" src="Frame 510-2.png"/><div class="tag">VIAGEM XXX</div></div>
+    <div class="tile t3"><img alt="" src="Frame 509.png"/><div class="tag">VIAGEM XXX</div></div>
+    <div class="tile t4"><img alt="" src="Frame 509-1.png"/><div class="tag">VIAGEM XXX</div></div>
+    <div class="tile t5"><img alt="" src="Frame 509-2.png"/><div class="tag">VIAGEM XXX</div></div>
+    <div class="tile t6"><img alt="" src="Rectangle 79.png"/><div class="tag">VIAGEM XXX</div></div>
+    <div class="tile t7"><img alt="" src="Rectangle 80.png"/><div class="tag">VIAGEM XXX</div></div>
+    <div class="tile t8"><img alt="" src="Rectangle 81.png"/><div class="tag">VIAGEM XXX</div></div>
+  </div>
+</section>
+
+
+<script>
+  // Reveal on scroll (não altera layout, só anima entrada)
+  (function(){
+    const els = Array.from(document.querySelectorAll('.reveal'));
+    if (!('IntersectionObserver' in window)){
+      els.forEach(e=>e.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if (en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { root: null, threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+    els.forEach(e=>io.observe(e));
+  })();
+
+  // Gallery / Depoimento (carrossel): troca imagens + texto ao clicar nas setas
+  (function(){
+    const big = document.getElementById('galBig');
+    const s1 = document.getElementById('galSmall1');
+    const s2 = document.getElementById('galSmall2');
+    const prev = document.getElementById('galPrev');
+    const next = document.getElementById('galNext');
+    const wrap = document.getElementById('galTestimonial');
+    const txt = document.getElementById('galText');
+    const author = document.getElementById('galAuthor');
+
+    if (!big || !s1 || !s2 || !prev || !next || !wrap || !txt || !author) return;
+
+    // slides: use somente nomes de arquivo existentes na sua pasta
+    const slides = [
+      {
+        big: 'Rectangle 79.png',
+        s1: 'Rectangle 80.png',
+        s2: 'Rectangle 81.png',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+        author: 'Rinaldo, Diretora Colégio A'
+      },
+      {
+        big: 'Frame 509.png',
+        s1: 'Frame 509-1.png',
+        s2: 'Frame 509-2.png',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+        author: 'Rinaldo, Diretora Colégio A'
+      },
+      {
+        big: 'Frame 510-1.png',
+        s1: 'Frame 510-2.png',
+        s2: 'Frame 510.png',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+        author: 'Rinaldo, Diretora Colégio A'
+      }
+    ];
+
+    let i = 0;
+
+    function fadeOut(){
+      big.style.opacity = '0';
+      s1.style.opacity = '0';
+      s2.style.opacity = '0';
+      wrap.style.opacity = '0';
+    }
+    function fadeIn(){
+      big.style.opacity = '1';
+      s1.style.opacity = '1';
+      s2.style.opacity = '1';
+      wrap.style.opacity = '1';
+    }
+
+    function paint(idx){
+      const sl = slides[idx];
+      fadeOut();
+      setTimeout(()=>{
+        big.src = sl.big;
+        s1.src = sl.s1;
+        s2.src = sl.s2;
+        txt.textContent = sl.text;
+        author.textContent = sl.author;
+        fadeIn();
+      }, 110);
+    }
+
+    function go(dir){
+      i = (i + dir + slides.length) % slides.length;
+      paint(i);
+    }
+
+    // clique
+    prev.addEventListener('click', ()=>go(-1));
+    next.addEventListener('click', ()=>go(1));
+
+    // teclado (não muda visual)
+    prev.tabIndex = 0;
+    next.tabIndex = 0;
+    prev.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(-1);} });
+    next.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(1);} });
+
+    // garante estado inicial consistente
+    paint(0);
+  })();
+</script>
+</body>
+</html>
