@@ -55,20 +55,33 @@ body{background:#ffffff;margin:0;max-width:none;}
 
 /* ===== 3 CARDS ===== */
 .section-green{background:#3F5F2D;margin-top:-34px;padding:88px 0 64px 0;display:flex;justify-content:center;gap:56px;}
-.card{width:260px;background:#2E7DBA;border-radius:10px;overflow:hidden;box-shadow:0 10px 22px rgba(0,0,0,.18);} 
-.card-title{background:#2E7DBA;text-align:center;padding:14px 0;color:#fff;font-weight:700;font-size:14px;}
+.card{width:260px;border-radius:10px;overflow:hidden;box-shadow:0 10px 22px rgba(0,0,0,.18);position:relative;background:transparent;}
+.card-title{
+  position:absolute;
+  top:18px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#fff;
+  font-weight:800;
+  font-size:34px;
+  line-height:1;
+  text-shadow:0 6px 18px rgba(0,0,0,.45);
+  z-index:2;
+  pointer-events:none;
+}
 .card img{width:100%;height:265px;object-fit:cover;display:block;}
 
 /* ===== GALLERY / TESTIMONIAL ===== */
 .gallery-section{background:#EFEFEF;padding:58px 0 62px 0;text-align:center;position:relative;}
-.gallery-wrapper{width:860px;max-width:calc(100% - 176px);margin:0 auto 18px auto;display:flex;align-items:center;gap:16px;}
+.gallery-wrapper{width:860px;max-width:calc(100% - (var(--pad) * 2));margin:0 auto 18px auto;display:flex;align-items:center;gap:16px;}
 .arrow{width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.16);display:flex;align-items:center;justify-content:center;color:#777;font-weight:700;flex:0 0 auto;cursor:pointer;user-select:none;}
 .gallery-grid{display:grid;grid-template-columns:540px 1fr;gap:18px;align-items:stretch;}
 .gallery-grid .big{width:540px;height:210px;object-fit:cover;border-radius:8px;transition:opacity .18s ease;}
 .gallery-grid .small{transition:opacity .18s ease;}
 .gallery-grid .side{display:grid;grid-template-rows:1fr 1fr;gap:18px;}
 .gallery-grid .small{width:270px;height:96px;object-fit:cover;border-radius:8px;}
-.testimonial{width:760px;max-width:calc(100% - 176px);margin:14px auto 0 auto;font-size:11px;color:#666;line-height:1.6;transition:opacity .18s ease;}
+.testimonial{width:760px;max-width:calc(100% - (var(--pad) * 2));margin:14px auto 0 auto;font-size:11px;color:#666;line-height:1.6;transition:opacity .18s ease;}
 .testimonial strong{color:#555;font-weight:700;}
 
 /* ===== CTA GREEN ===== */
@@ -97,30 +110,37 @@ body{background:#ffffff;margin:0;max-width:none;}
 
 /* ===== SOLUTIONS ===== */
 .solutions-wrap{background:#F3F3F3;padding:54px 0 72px 0;}
-.solutions{width:1100px;max-width:calc(100% - 176px);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:26px;}
-.solution-card{background:#F6F6F6;border:2px solid #2E7D32;border-radius:10px;min-height:230px;padding:26px;position:relative;}
+.solutions{width:1100px;max-width:calc(100% - (var(--pad) * 2));margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+.solution-card{background:#F6F6F6;border:2px solid #2E7D32;border-radius:10px;min-height:260px;padding:32px 26px 80px 26px;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:flex-start;}
 .solution-card h3{color:#E5A20A;font-size:12px;font-weight:800;margin-bottom:18px;}
 .solution-card .label{color:#E5A20A;font-size:9px;font-weight:800;margin-bottom:6px;}
-.solution-card p{font-size:10px;color:#666;line-height:1.55;max-width:330px;}
+.solution-card p{font-size:10px;color:#666;line-height:1.55;max-width:330px;margin-top:auto;}
 .solution-card .btn-small{
   position:absolute;
-  bottom:22px;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%) scale(.95);
+  opacity:0;
   background:#1FBF5A;
   color:#fff;
-  height:32px;
-  padding:0 16px;
-  border-radius:8px;
-  font-size:11px;
+  height:36px;
+  padding:0 22px;
+  border-radius:10px;
+  font-size:12px;
   text-decoration:none;
   font-weight:700;
   display:inline-flex;
   align-items:center;
   gap:10px;
+  transition:all .25s ease;
 }
 .solution-card .btn-small .wa-ico{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.96);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
 .solution-card .btn-small .wa-ico svg{width:12px;height:12px;display:block;}
 .solution-card .btn-small .wa-ico svg path{fill:#1FBF5A;}
-.solution-card.with-btn .btn-small{left:50%;transform:translateX(-50%);} 
+.solution-card:hover .btn-small{
+  opacity:1;
+  transform:translateX(-50%) scale(1);
+} 
 
 /* ===== CONTACT ===== */
 .contact{background:#2E5B38;padding:44px var(--pad) 64px var(--pad);display:flex;gap:34px;color:#fff;align-items:flex-start;}
@@ -154,7 +174,7 @@ body{background:#ffffff;margin:0;max-width:none;}
 
 /* ===== RESPONSIVO ===== */
 @media (max-width: 1200px){
-  .gallery-wrapper, .testimonial, .solutions{max-width:calc(100% - 96px);} 
+  /* mantém tudo centralizado usando --pad */
 }
 
 @media (max-width: 960px){
@@ -164,7 +184,7 @@ body{background:#ffffff;margin:0;max-width:none;}
   .hero-left{width:auto;padding-top:0;max-width:none;}
   .hero-right{position:relative;right:auto;top:auto;width:auto;}
 
-  .orange-bar{flex-wrap:wrap;gap:12px;justify-content:flex-start;}
+  .orange-bar{flex-wrap:wrap;gap:12px;justify-content:center;}
   .section-green{padding:44px 0 54px 0;gap:18px;flex-wrap:wrap;}
   .gallery-wrapper{flex-direction:column;align-items:stretch;}
   .arrow{display:none;}
@@ -183,10 +203,9 @@ body{background:#ffffff;margin:0;max-width:none;}
   .hero{height:520px;}
   .hero-inner{padding:26px;}
   .hero h1{font-size:30px;}
-  .orange-bar{max-width:calc(100% - 52px);} 
-  .testimonial{max-width:calc(100% - 52px);} 
+  .cta, .contact, .final{padding-left:26px;padding-right:26px;} 
   .cta, .contact, .final{padding-left:26px;padding-right:26px;}
-  .solutions{max-width:calc(100% - 52px);} 
+  .solutions{max-width:calc(100% - (var(--pad) * 2));} 
   .form-row{grid-template-columns:1fr;}
   .mosaic{grid-template-columns:repeat(2, 1fr);grid-auto-rows:140px;}
   .t1{grid-column:1 / span 2;grid-row:auto;} 
@@ -206,7 +225,7 @@ body{background:#ffffff;margin:0;max-width:none;}
 .card, .solution-card, .mosaic .tile, .arrow, .cta .btn, .btn-small{
   transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
-.card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(0,0,0,.22);} 
+.card:hover{transform:none;box-shadow:0 10px 22px rgba(0,0,0,.18);} 
 .solution-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(0,0,0,.10);} 
 .mosaic .tile:hover{transform:translateY(-2px);filter:brightness(1.02);} 
 .arrow:hover{transform:scale(1.03);}
@@ -288,28 +307,40 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 <section class="solutions-wrap reveal">
   <div class="solutions">
-    <div class="solution-card with-btn">
+    <div class="solution-card">
       <h3>Solução 1</h3>
       <div class="label">Lorem ipsum</div>
-      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+      <p>Lorem ipsum dolor sit amet</p>
       <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true">
         <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
       </span> Conversar pelo WhatsApp</a>
     </div>
+
     <div class="solution-card">
       <h3>Solução 2</h3>
       <div class="label">Lorem ipsum</div>
-      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+      <p>Lorem ipsum dolor sit amet</p>
+      <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+      </span> Conversar pelo WhatsApp</a>
     </div>
+
     <div class="solution-card">
       <h3>Solução 3</h3>
       <div class="label">Lorem ipsum</div>
-      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+      <p>Lorem ipsum dolor sit amet</p>
+      <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+      </span> Conversar pelo WhatsApp</a>
     </div>
+
     <div class="solution-card">
       <h3>Solução 4</h3>
       <div class="label">Lorem ipsum</div>
-      <p>Duis sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae.</p>
+      <p>Lorem ipsum dolor sit amet</p>
+      <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+      </span> Conversar pelo WhatsApp</a>
     </div>
   </div>
 </section>
