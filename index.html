@@ -40,7 +40,7 @@
     /* ===== BLOCO VERDE DO TOPO (hero + barra laranja + cards) ===== */
     .top-block {
       background: var(--green);
-      padding-bottom: 64px;
+      padding-bottom: 48px;
     }
 
     /* ===== HERO ===== */
@@ -137,14 +137,17 @@
       position: absolute;
       right: clamp(72px, 10vw, 170px);
       top: 168px;
-      width: 320px;
+      width: 274px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
     
     .hero-right p {
       font-size: 13px;
       line-height: 1.4;
       opacity: .95;
-      margin-bottom: 12px;
+      margin-bottom: 0;
       color: #fff;
       font-weight: 500;
     }
@@ -152,14 +155,15 @@
     .btn-whatsapp {
       background: var(--wa);
       color: #fff;
-      height: 38px;
-      padding: 0 18px;
+      min-height: 48px;
+      padding: 14px 20px;
       border-radius: 8px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       box-shadow: 0 6px 18px rgba(0,0,0,.25);
       position: relative;
@@ -168,6 +172,8 @@
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
+      text-align: center;
+      line-height: 1.3;
     }
     
     .btn-whatsapp::after {
@@ -202,16 +208,17 @@
     }
 
     .btn-whatsapp .wa-ico {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
     
     .btn-whatsapp .wa-ico svg {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       display: block;
     }
     
@@ -241,10 +248,10 @@
 
     /* ===== ORANGE BAR ===== */
     .orange-bar {
-      width: min(1000px, calc(100% - (var(--pad) * 2)));
+      width: min(889px, calc(100% - (var(--pad) * 2)));
       background: var(--orange);
-      margin: -34px auto 0 auto;
-      padding: 16px 28px;
+      margin: -32px auto 0 auto;
+      padding: 24px 32px;
       border-radius: 8px;
       display: flex;
       justify-content: space-between;
@@ -253,6 +260,8 @@
       position: relative;
       z-index: 5;
       box-shadow: 0 8px 22px rgba(0,0,0,.14);
+      min-height: 97px;
+      align-items: center;
     }
     
     .orange-item {
@@ -265,38 +274,45 @@
       font-weight: 600;
     }
     
+    /* Ícone com padrão de grade (como no design) */
     .orange-ico {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 3px;
-      background: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.25);
       display: inline-block;
       position: relative;
       flex-shrink: 0;
     }
     
+    .orange-ico::before,
     .orange-ico::after {
       content: "";
       position: absolute;
+      background: rgba(255,255,255,.7);
+    }
+    
+    /* Grid 2x2 */
+    .orange-ico::before {
       left: 4px;
       top: 4px;
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      background: rgba(255,255,255,.8);
+      width: 5px;
+      height: 5px;
+      border-radius: 1px;
+      box-shadow: 7px 0 0 rgba(255,255,255,.7), 0 7px 0 rgba(255,255,255,.7), 7px 7px 0 rgba(255,255,255,.7);
     }
 
     /* ===== 3 CARDS ===== */
     .section-green {
-      padding: 54px 0 0 0;
+      padding: 48px 0 0 0;
       display: flex;
       justify-content: center;
-      gap: 28px;
+      gap: 24px;
       flex-wrap: wrap;
     }
     
     .card {
-      width: 280px;
+      width: 317px;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 10px 28px rgba(0,0,0,.18);
@@ -310,22 +326,12 @@
       box-shadow: 0 14px 36px rgba(0,0,0,.25);
     }
     
-    .card-title {
-      background: #2E7DBA;
-      text-align: center;
-      padding: 16px 0;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-    }
-    
     .card img {
       width: 100%;
-      height: 280px;
+      height: 359px;
       object-fit: cover;
       display: block;
-      background: #2E7DBA;
+      border-radius: 12px;
       transition: transform .6s ease, filter .4s ease;
     }
     
@@ -334,99 +340,191 @@
       filter: brightness(1.05);
     }
     
-    .card::after {
-      content: "";
+    /* Título SEM fundo, em cima da imagem (como no Figma) */
+    .card-title {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.25), transparent 60%);
-      opacity: 0;
-      transition: opacity .4s ease;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: transparent;
+      text-align: center;
+      padding: 16px 0;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0,0,0,.4);
     }
     
-    .card:hover::after {
+    /* Overlay com texto e botão no hover */
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,.75);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+    
+    .card:hover .card-overlay {
       opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .card-overlay p {
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+    
+    .card-btn {
+      background: #fff;
+      color: #333;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .card-btn:hover {
+      background: #25D366;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    
+    .card-btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+    
+    .card-btn:hover svg {
+      transform: scale(1.1);
     }
 
     /* ===== GALLERY / TESTIMONIAL ===== */
     .gallery-section {
       background: #EFEFEF;
-      padding: 64px 0 68px 0;
+      padding: 56px 0 64px 0;
       text-align: center;
     }
     
     .gallery-wrapper {
-      width: min(900px, calc(100% - (var(--pad) * 2)));
-      margin: 0 auto 24px auto;
+      width: min(980px, calc(100% - (var(--pad) * 2)));
+      margin: 0 auto;
       display: flex;
       align-items: center;
-      gap: 20px;
+      justify-content: center;
+      gap: 32px;
+    }
+    
+    .gallery-container {
+      width: 100%;
+      max-width: 756px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
     }
     
     .arrow {
-      width: 38px;
-      height: 38px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: #fff;
-      box-shadow: 0 6px 18px rgba(0,0,0,.16);
+      box-shadow: 0 4px 12px rgba(0,0,0,.12);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #999;
       font-weight: 700;
-      font-size: 20px;
+      font-size: 26px;
       flex: 0 0 auto;
       cursor: pointer;
       user-select: none;
       transition: all 0.2s ease;
       border: none;
-      background-color: #fff;
     }
     
     .arrow:hover {
-      background: #f5f5f5;
+      background: #f8f8f8;
       transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0,0,0,.16);
     }
     
     .gallery-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 440px 200px;
+      grid-template-rows: 112px 112px;
       gap: 16px;
-      align-items: stretch;
-      width: 100%;
+      justify-content: center;
     }
     
     .gallery-grid .big {
       width: 100%;
-      height: 240px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 16px;
       transition: opacity .18s ease;
       grid-column: 1;
       grid-row: 1 / 3;
     }
     
     .gallery-grid .side {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 16px;
-      grid-column: 2;
+      display: contents;
     }
     
     .gallery-grid .small {
       width: 100%;
-      height: 112px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 16px;
       transition: opacity .18s ease;
     }
     
+    .gallery-grid .small:first-child {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    
+    .gallery-grid .small:last-child {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    
     .testimonial {
-      width: min(800px, calc(100% - (var(--pad) * 2)));
-      margin: 20px auto 0 auto;
-      font-size: 12px;
+      width: 100%;
+      margin: 0;
+      padding: 0 20px;
+      font-size: 13px;
       color: #666;
       line-height: 1.7;
       transition: opacity .18s ease;
+      text-align: center;
     }
     
     .testimonial strong {
@@ -437,7 +535,7 @@
     /* ===== CTA GREEN ===== */
     .cta {
       background: #0EA54C;
-      padding: 40px var(--pad);
+      padding: 48px var(--pad);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -446,7 +544,7 @@
     }
     
     .cta-left {
-      width: 640px;
+      width: 572px;
       max-width: 70%;
     }
     
@@ -469,14 +567,16 @@
     .cta .btn {
       background: #fff;
       color: #0EA54C;
-      height: 38px;
+      width: 413px;
+      height: 82px;
       padding: 0 20px;
       border-radius: 8px;
-      font-size: 13px;
+      font-size: 14px;
       text-decoration: none;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       flex: 0 0 auto;
       transition: all 0.3s ease;
@@ -490,16 +590,16 @@
     }
     
     .cta .btn .wa-ico {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
     
     .cta .btn .wa-ico svg {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       display: block;
     }
     
@@ -510,25 +610,28 @@
     /* ===== SOLUTIONS (hover botão em TODOS) ===== */
     .solutions-wrap {
       background: #F3F3F3;
-      padding: 60px 0 80px 0;
+      padding: 56px 0 72px 0;
     }
     
     .solutions {
-      width: min(1100px, calc(100% - (var(--pad) * 2)));
+      width: min(1200px, calc(100% - (var(--pad) * 2)));
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(2, 527px);
+      justify-content: center;
+      gap: 36px;
     }
     
     .solution-card {
       background: #F6F6F6;
       border: 2px solid #2E7D32;
-      border-radius: 16px;
-      min-height: 340px;
-      padding: 40px 36px 100px 36px;
+      border-radius: 12px;
+      height: 407px;
+      padding: 36px 32px 24px 32px;
       position: relative;
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
     
     .solution-card:hover {
@@ -538,9 +641,9 @@
     
     .solution-card h3 {
       color: #E5A20A;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       letter-spacing: -0.5px;
     }
     
@@ -548,7 +651,7 @@
       color: #E5A20A;
       font-size: 12px;
       font-weight: 800;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       letter-spacing: .6px;
       text-transform: uppercase;
     }
@@ -557,18 +660,20 @@
       font-size: 14px;
       color: #7a7a7a;
       line-height: 1.6;
-      max-width: 320px;
+      max-width: 100%;
+      flex: 1;
     }
 
     .solution-card .btn-small {
-      position: absolute;
-      left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%) scale(.96);
+      position: relative;
+      left: auto;
+      bottom: auto;
+      transform: none;
       opacity: 0;
       background: var(--wa);
       color: #fff;
       height: 44px;
+      width: 100%;
       padding: 0 28px;
       border-radius: 8px;
       font-size: 14px;
@@ -576,15 +681,17 @@
       font-weight: 700;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
       transition: opacity .22s ease, transform .22s ease;
       border: none;
       cursor: pointer;
+      margin-top: auto;
     }
     
     .solution-card:hover .btn-small {
       opacity: 1;
-      transform: translateX(-50%) scale(1);
+      transform: translateY(0);
     }
     
     .solution-card .btn-small .wa-ico {
@@ -618,16 +725,23 @@
     /* ===== CONTACT (MAPA) ===== */
     .contact {
       background: var(--green-2);
-      padding: 50px var(--pad) 70px var(--pad);
+      padding: 56px var(--pad) 64px var(--pad);
       display: flex;
-      gap: 40px;
+      justify-content: center;
       color: #fff;
+    }
+    
+    .contact-inner {
+      display: flex;
+      gap: 24px;
+      max-width: 1100px;
+      width: 100%;
       align-items: flex-start;
     }
     
     .map {
-      width: 420px;
-      height: 280px;
+      width: 376px;
+      height: 326px;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 10px 28px rgba(0,0,0,.22);
@@ -644,34 +758,49 @@
     .contact-form {
       flex: 1;
       min-width: 0;
+      max-width: 550px;
+    }
+    
+    .contact-form h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      opacity: .95;
+    }
+    
+    .contact-form .subtext {
+      font-size: 11px;
+      opacity: .85;
+      margin-bottom: 18px;
+      line-height: 1.5;
     }
     
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 18px;
+      gap: 14px;
+      margin-bottom: 14px;
     }
     
     .field label {
       display: block;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       opacity: .9;
-      margin: 0 0 8px 0;
+      margin: 0 0 5px 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     
     .field input, .field textarea {
       width: 100%;
-      padding: 12px 14px;
+      padding: 9px 11px;
       border-radius: 6px;
       border: 0;
       background: rgba(255,255,255,.08);
       color: #fff;
       outline: none;
-      font-size: 13px;
+      font-size: 12px;
       transition: all 0.2s ease;
     }
     
@@ -685,13 +814,13 @@
     }
     
     .field textarea {
-      height: 100px;
+      height: 80px;
       resize: none;
       font-family: inherit;
     }
     
     .send {
-      margin-top: 16px;
+      margin-top: 10px;
     }
     
     .send button {
@@ -702,7 +831,7 @@
       background: #fff;
       color: var(--green-2);
       font-weight: 800;
-      font-size: 12px;
+      font-size: 11px;
       cursor: pointer;
       transition: all 0.3s ease;
       text-transform: uppercase;
@@ -717,14 +846,16 @@
     /* ===== FINAL MOSAIC ===== */
     .final {
       background: var(--green-3);
-      padding: 44px var(--pad) 60px var(--pad);
+      padding: 48px var(--pad) 56px var(--pad);
     }
     
     .mosaic {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 160px;
-      gap: 16px;
+      grid-auto-rows: 195px;
+      gap: 14px;
+      max-width: 1064px;
+      margin: 0 auto;
     }
     
     .mosaic .tile {
@@ -733,10 +864,12 @@
       position: relative;
       cursor: pointer;
       transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
     }
     
     .mosaic .tile:hover {
       transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0,0,0,.3);
     }
     
     .mosaic img {
@@ -752,30 +885,34 @@
       bottom: 12px;
       color: #fff;
       font-weight: 800;
-      font-size: 11px;
+      font-size: 10px;
       opacity: .95;
       text-shadow: 0 2px 10px rgba(0,0,0,.45);
       letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
-    /* layout semelhante ao print */
+    /* Layout exato da referência com 5 tiles */
+    /* Linha 1: 1 imagem LARGA (3 colunas) */
     .t1 {
-      grid-column: 1 / span 2;
-      grid-row: 1 / span 2;
+      grid-column: 1 / span 3;
+      grid-row: 1;
     }
     
+    /* Linha 2: 2 imagens (1 pequena + 2 grande) */
     .t2 {
-      grid-column: 3;
-      grid-row: 1 / span 2;
+      grid-column: 1;
+      grid-row: 2;
     }
     
     .t3 {
-      grid-column: 1;
-      grid-row: 3;
+      grid-column: 2 / span 2;
+      grid-row: 2;
     }
     
+    /* Linha 3: 2 imagens (2 grande + 1 pequena) */
     .t4 {
-      grid-column: 2;
+      grid-column: 1 / span 2;
       grid-row: 3;
     }
     
@@ -784,19 +921,9 @@
       grid-row: 3;
     }
     
-    .t6 {
-      grid-column: 1 / span 2;
-      grid-row: 4 / span 2;
-    }
-    
-    .t7 {
-      grid-column: 3;
-      grid-row: 4;
-    }
-    
-    .t8 {
-      grid-column: 3;
-      grid-row: 5;
+    /* Remove tiles extras */
+    .t6, .t7, .t8 {
+      display: none;
     }
 
     /* ===== INTERAÇÕES / EFEITOS ===== */
@@ -894,15 +1021,24 @@
         display: none;
       }
       
+      .gallery-container {
+        width: 100%;
+      }
+      
       .gallery-grid {
         grid-template-columns: 1fr;
+        margin-bottom: 16px;
       }
       
       .gallery-grid .big {
         width: 100%;
-        height: 240px;
+        height: 200px;
         grid-column: auto;
         grid-row: auto;
+      }
+      
+      .gallery-grid .side {
+        display: contents;
       }
       
       .gallery-grid .small {
@@ -920,17 +1056,27 @@
         width: auto;
       }
       
+      .cta .btn {
+        width: 100%;
+        max-width: 413px;
+      }
+      
       .solutions {
         grid-template-columns: 1fr;
       }
       
+      .contact-inner {
+        flex-direction: column;
+      }
+      
       .contact {
         flex-direction: column;
+        align-items: flex-start;
       }
       
       .map {
         width: 100%;
-        height: 260px;
+        height: 280px;
       }
     }
 
@@ -1013,12 +1159,12 @@
       }
       
       .card {
-        flex: 0 0 260px;
+        flex: 0 0 300px;
         scroll-snap-align: center;
       }
       
       .card img {
-        height: 320px;
+        height: 340px;
       }
 
       .form-row {
@@ -1040,14 +1186,40 @@
         grid-row: auto;
       }
       
+      .t3, .t4, .t5 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+      
       .t6 {
         grid-column: 1 / span 2;
         grid-row: auto;
       }
       
-      .t3, .t4, .t5, .t7, .t8 {
-        grid-column: auto;
+      .t7 {
+        grid-column: 1 / span 2;
         grid-row: auto;
+      }
+      
+      .t8 {
+        grid-column: 1 / span 2;
+        grid-row: auto;
+      }
+      
+      /* Botões sempre visíveis no mobile */
+      .solution-card .btn-small {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .solutions {
+        grid-template-columns: 1fr;
+      }
+      
+      .solution-card {
+        max-width: 527px;
+        margin: 0 auto;
+        width: 100%;
       }
     }
 
@@ -1123,28 +1295,66 @@
       </div>
 
       <section class="section-green reveal">
-        <div class="card"><div class="card-title">Hopi Hari</div><img alt="Hopi Hari - Atividade 1" src="Frame 509.png"/></div>
-        <div class="card"><div class="card-title">Hopi Hari</div><img alt="Hopi Hari - Atividade 2" src="Frame 509-1.png"/></div>
-        <div class="card"><div class="card-title">Hopi Hari</div><img alt="Hopi Hari - Atividade 3" src="Frame 509-2.png"/></div>
+        <div class="card">
+          <div class="card-title">Hopi Hari</div>
+          <img alt="Hopi Hari - Atividade 1" src="Frame 509.png"/>
+          <div class="card-overlay">
+            <p>Passeio educativo ao Parque temático com diversos brinquedos e atrações.</p>
+            <a href="#" class="card-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/>
+              </svg>
+              Ver Mais
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Hopi Hari</div>
+          <img alt="Hopi Hari - Atividade 2" src="Frame 509-1.png"/>
+          <div class="card-overlay">
+            <p>Passeio educativo ao Parque temático com diversos brinquedos e atrações.</p>
+            <a href="#" class="card-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/>
+              </svg>
+              Ver Mais
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Hopi Hari</div>
+          <img alt="Hopi Hari - Atividade 3" src="Frame 509-2.png"/>
+          <div class="card-overlay">
+            <p>Passeio educativo ao Parque temático com diversos brinquedos e atrações.</p>
+            <a href="#" class="card-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/>
+              </svg>
+              Ver Mais
+            </a>
+          </div>
+        </div>
       </section>
     </div>
 
     <section class="gallery-section reveal">
       <div class="gallery-wrapper">
         <div class="arrow" id="galPrev" role="button" tabindex="0" aria-label="Anterior">‹</div>
-        <div class="gallery-grid">
-          <img alt="Galeria - Imagem principal" src="Rectangle 79.png" class="big" id="galBig" />
-          <div class="side">
-            <img alt="Galeria - Imagem secundária 1" src="Rectangle 80.png" class="small" id="galSmall1" />
-            <img alt="Galeria - Imagem secundária 2" src="Rectangle 81.png" class="small" id="galSmall2" />
+        <div class="gallery-container">
+          <div class="gallery-grid">
+            <img alt="Galeria - Imagem principal" src="Rectangle 79.png" class="big" id="galBig" />
+            <div class="side">
+              <img alt="Galeria - Imagem secundária 1" src="Rectangle 80.png" class="small" id="galSmall1" />
+              <img alt="Galeria - Imagem secundária 2" src="Rectangle 81.png" class="small" id="galSmall2" />
+            </div>
+          </div>
+          <div class="testimonial" id="galTestimonial">
+            <span id="galText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</span>
+            <br/><br/>
+            <strong id="galAuthor">Bárbara, Diretora Colégio A+</strong>
           </div>
         </div>
         <div class="arrow" id="galNext" role="button" tabindex="0" aria-label="Próximo">›</div>
-      </div>
-      <div class="testimonial" id="galTestimonial">
-        <span id="galText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</span>
-        <br/><br/>
-        <strong id="galAuthor">Rinaldo, Diretora Colégio A</strong>
       </div>
     </section>
 
@@ -1199,20 +1409,21 @@
     </section>
 
     <section class="contact reveal">
-      <div class="map">
-        <iframe title="Mapa de localização" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.6989804631057!2d-46.66063468447402!3d-23.5863396846719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8b7f8b0c1%3A0x8c7f2ad3b1c9d4d8!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1710000000000"></iframe>
-      </div>
-      <div class="contact-form">
-        <div class="form-row">
-          <div class="field"><label>Nome:</label><input type="text" placeholder="Digite seu nome"/></div>
-          <div class="field"><label>WhatsApp*</label><input type="tel" placeholder="(11) 99999-9999"/></div>
+      <div class="contact-inner">
+        <div class="map">
+          <iframe title="Mapa de localização" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.6989804631057!2d-46.66063468447402!3d-23.5863396846719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8b7f8b0c1%3A0x8c7f2ad3b1c9d4d8!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1710000000000"></iframe>
         </div>
-        <div class="form-row">
-          <div class="field"><label>Email:</label><input type="email" placeholder="seuemail@dominio.com"/></div>
+        <div class="contact-form">
+          <h3>Nome*</h3>
+          <p class="subtext">Lorem ipsum dolor sit amet</p>
+          <div class="form-row">
+            <div class="field"><label>Whatsapp*</label><input type="tel" placeholder="(11) 99999-9999"/></div>
+            <div class="field"><label>Email:</label><input type="email" placeholder="seuemail@dominio.com"/></div>
+          </div>
           <div class="field"><label>Escola:</label><input type="text" placeholder="Escola Doe e Helio"/></div>
+          <div class="field"><label>Fale um pouco da ideia da viagem</label><textarea placeholder="Ex: turma A, 9º ano, visita em... "></textarea></div>
+          <div class="send"><button type="button">Enviar Mensagem →</button></div>
         </div>
-        <div class="field"><label>Fale um pouco da ideia da viagem</label><textarea placeholder="Ex: turma A, 9º ano, visita em... "></textarea></div>
-        <div class="send"><button type="button">Enviar Mensagem</button></div>
       </div>
     </section>
 
@@ -1221,11 +1432,8 @@
         <div class="tile t1"><img alt="Viagem - Atividade 1" src="Frame 510-1.png"/><div class="tag">VIAGEM XXX</div></div>
         <div class="tile t2"><img alt="Viagem - Atividade 2" src="Frame 510-2.png"/><div class="tag">VIAGEM XXX</div></div>
         <div class="tile t3"><img alt="Viagem - Atividade 3" src="Frame 509.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t4"><img alt="Viagem - Atividade 4" src="Frame 509-1.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t5"><img alt="Viagem - Atividade 5" src="Frame 509-2.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t6"><img alt="Viagem - Atividade 6" src="Rectangle 79.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t7"><img alt="Viagem - Atividade 7" src="Rectangle 80.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t8"><img alt="Viagem - Atividade 8" src="Rectangle 81.png"/><div class="tag">VIAGEM XXX</div></div>
+        <div class="tile t4"><img alt="Viagem - Atividade 4" src="Rectangle 79.png"/><div class="tag">VIAGEM XXX</div></div>
+        <div class="tile t5"><img alt="Viagem - Atividade 5" src="Rectangle 80.png"/><div class="tag">VIAGEM XXX</div></div>
       </div>
     </section>
 
