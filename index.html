@@ -3,1603 +3,1319 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NPM - Transformando Experiências em Sala de Aula</title>
+  <title>Zero9 – Turismo Pedagógico em Minas Gerais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    }
-    
-    body {
-      background: #fff;
-      color: #333;
-      overflow-x: hidden;
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
     }
 
     :root {
-      --maxw: 1440px;
-      --pad: 88px;
-      --green: #3F5F2D;
-      --green-2: #2E5B38;
-      --green-3: #244A2F;
-      --orange: #F2A400;
-      --wa: #25D366;
-      --light-gray: #F3F3F3;
-      --border-gray: #E0E0E0;
+      --green:    #3F5F2D;
+      --green-2:  #2E5B38;
+      --green-3:  #1E3D22;
+      --orange:   #F2A400;
+      --orange-2: #E5940A;
+      --wa:       #25D366;
+      --white:    #FFFFFF;
+      --gray-bg:  #F4F4F2;
+      --text:     #2A2A2A;
+      --text-sub: #666;
+      --pad: clamp(20px, 6vw, 88px);
+      --maxw: 1280px;
+      --radius: 14px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
     }
 
-    /* ===== CONTAINER CENTRAL ===== */
-    .page {
-      max-width: var(--maxw);
-      margin: 0 auto;
+    html { scroll-behavior: smooth; }
+
+    body {
       background: #fff;
-      overflow: hidden;
-      width: 100%;
-    }
-
-    /* ===== BLOCO VERDE DO TOPO (hero + barra laranja + cards) ===== */
-    .top-block {
-      background: var(--green);
-      padding-bottom: 48px;
+      color: var(--text);
+      font-family: var(--font-body);
       overflow-x: hidden;
     }
 
-    /* ===== HERO ===== */
+    .page { max-width: var(--maxw); margin: 0 auto; }
+
+    /* ── HERO ─────────────────────────────────────────── */
     .hero {
       position: relative;
-      height: 560px;
+      height: 600px;
+      background: var(--green-3);
       overflow: hidden;
-      background: var(--green);
     }
-    
+
     .hero::before {
       content: "";
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: url('Frame.png') center/cover no-repeat;
-      transform: scale(1.02);
+      animation: kb 16s ease-in-out infinite alternate;
       transform-origin: center;
-      z-index: 0;
-      animation: kenburns 14s ease-in-out infinite alternate;
     }
-    
-    @keyframes kenburns {
-      from {
-        transform: scale(1.02) translateY(0);
-      }
-      to {
-        transform: scale(1.08) translateY(-6px);
-      }
+
+    @keyframes kb {
+      from { transform: scale(1.02) translateY(0); }
+      to   { transform: scale(1.09) translateY(-8px); }
     }
-    
+
     .hero::after {
       content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.42) 52%, rgba(0,0,0,.20) 100%);
-      z-index: 1;
-    }
-    
-    .hero .vignette {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      box-shadow: inset 0 0 0 9999px rgba(0,0,0,.06), inset 0 -120px 140px rgba(0,0,0,.18);
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg,
+        rgba(20,40,15,.82) 0%,
+        rgba(20,40,15,.55) 55%,
+        rgba(20,40,15,.22) 100%);
     }
 
     .hero-inner {
-      position: relative;
-      z-index: 2;
+      position: relative; z-index: 2;
       height: 100%;
       padding: 0 var(--pad);
       display: flex;
-      gap: 64px;
-      align-items: flex-start;
-      box-sizing: border-box;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: var(--maxw);
+      margin: 0 auto;
     }
-    
+
     .hero-left {
-      width: 560px;
-      padding-top: 86px;
+      max-width: 600px;
+      animation: fadeUp .6s ease both;
     }
-    
+
     .hero-logo {
-      width: 56px;
-      height: 56px;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
-      animation: floatLogo 4.2s ease-in-out infinite;
+      width: 58px; height: 58px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.4));
+      animation: float 4s ease-in-out infinite;
     }
-    
-    @keyframes floatLogo {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-3px);
-      }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 18px;
     }
 
     .hero h1 {
-      font-size: 48px;
-      line-height: 1.15;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.13;
       color: #fff;
-      margin-bottom: 24px;
-    }
-    
-    .hero h1 .bold {
-      font-weight: 800;
+      font-weight: 900;
+      margin-bottom: 20px;
     }
 
-    /* bloco do texto pequeno + botão do WhatsApp (desktop) */
+    .hero h1 em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,.82);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 460px;
+    }
+
     .hero-right {
-      position: absolute;
-      right: clamp(72px, 10vw, 100px);
-      top: 220px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       gap: 12px;
-    }
-    
-    .hero-right p {
-      font-size: 12px;
-      line-height: 1.3;
-      opacity: .95;
-      margin-bottom: 0;
-      color: #fff;
-      font-weight: 500;
-      max-width: 250px;
+      align-items: flex-start;
+      animation: fadeUp .6s .12s ease both;
+      flex-shrink: 0;
     }
 
-    .btn-whatsapp {
+    .hero-right p {
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+      font-weight: 500;
+      line-height: 1.4;
+      max-width: 230px;
+    }
+
+    /* ── BOTÃO WHATSAPP ───────────────────────────────── */
+    .btn-wa {
       background: var(--wa);
       color: #fff;
-      min-height: 40px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 13px;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-size: 14px;
       font-weight: 700;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.25);
-      position: relative;
-      overflow: hidden;
-      transform: translateZ(0);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      line-height: 1.3;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      transition: transform .2s, filter .2s, box-shadow .2s;
+      border: none; cursor: pointer;
       white-space: nowrap;
-      flex-shrink: 0;
     }
-    
-    .btn-whatsapp::after {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      left: -60%;
-      width: 60%;
-      background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.26) 45%, rgba(255,255,255,0) 70%);
-      transform: skewX(-18deg);
-      opacity: 0;
-    }
-    
-    .btn-whatsapp:hover {
+    .btn-wa:hover {
       transform: translateY(-2px);
-      filter: brightness(1.08);
-      box-shadow: 0 8px 24px rgba(0,0,0,.3);
+      filter: brightness(1.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,.3);
     }
-    
-    .btn-whatsapp:hover::after {
-      opacity: 1;
-      animation: shine 1.05s ease both;
-    }
-    
-    @keyframes shine {
-      from {
-        left: -60%;
-      }
-      to {
-        left: 120%;
-      }
-    }
+    .wa-ico { width: 20px; height: 20px; flex-shrink: 0; }
+    .wa-ico svg { width: 20px; height: 20px; display: block; }
+    .wa-ico svg path { fill: #fff; }
 
-    .btn-whatsapp .wa-ico {
-      width: 18px;
-      height: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    
-    .btn-whatsapp .wa-ico svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-    }
-    
-    .btn-whatsapp .wa-ico svg path {
-      fill: #fff;
-    }
-
-    /* animação leve entrada */
-    .hero-left, .hero-right {
-      animation: fadeUp .55s ease-out both;
-    }
-    
-    .hero-right {
-      animation-delay: .08s;
-    }
-    
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== ORANGE BAR ===== */
+    /* ── ORANGE BAR ───────────────────────────────────── */
     .orange-bar {
-      width: min(889px, calc(100% - (var(--pad) * 2)));
       background: var(--orange);
-      margin: -32px auto 0 auto;
-      padding: 24px 32px;
-      border-radius: 8px;
+      padding: 0 var(--pad);
       display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      color: #fff;
-      position: relative;
-      z-index: 5;
-      box-shadow: 0 8px 22px rgba(0,0,0,.14);
-      min-height: 97px;
+      justify-content: center;
+      gap: 0;
+      min-height: 72px;
       align-items: center;
+      flex-wrap: wrap;
     }
-    
+
     .orange-item {
-      font-size: 13px;
       display: flex;
       align-items: center;
       gap: 10px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 16px 28px;
       white-space: nowrap;
-      flex: 0 0 auto;
-      font-weight: 600;
-    }
-    
-    /* Ícone com padrão de grade (como no design) */
-    .orange-ico {
-      width: 20px;
-      height: 20px;
-      border-radius: 3px;
-      background: rgba(255,255,255,.25);
-      display: inline-block;
       position: relative;
-      flex-shrink: 0;
-    }
-    
-    .orange-ico::before,
-    .orange-ico::after {
-      content: "";
-      position: absolute;
-      background: rgba(255,255,255,.7);
-    }
-    
-    /* Grid 2x2 */
-    .orange-ico::before {
-      left: 4px;
-      top: 4px;
-      width: 5px;
-      height: 5px;
-      border-radius: 1px;
-      box-shadow: 7px 0 0 rgba(255,255,255,.7), 0 7px 0 rgba(255,255,255,.7), 7px 7px 0 rgba(255,255,255,.7);
+      letter-spacing: .3px;
+      text-transform: uppercase;
     }
 
-    /* ===== 3 CARDS ===== */
-    .section-green {
-      padding: 48px 0 0 0;
+    .orange-item + .orange-item::before {
+      content: "";
+      position: absolute; left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(255,255,255,.35);
+    }
+
+    .orange-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.7);
+      flex-shrink: 0;
+    }
+
+    /* ── SEÇÃO VERDE: CARDS ───────────────────────────── */
+    .top-block { background: var(--green); }
+
+    .section-cards {
+      padding: 52px var(--pad) 60px;
       display: flex;
       justify-content: center;
       gap: 24px;
       flex-wrap: wrap;
     }
-    
+
     .card {
-      width: 317px;
-      border-radius: 12px;
+      width: 320px;
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 10px 28px rgba(0,0,0,.18);
-      background: #2E7DBA;
+      box-shadow: 0 12px 32px rgba(0,0,0,.22);
       position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
     }
-    
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 36px rgba(0,0,0,.25);
-    }
-    
+
+    .card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,.3); }
+
     .card img {
-      width: 100%;
-      height: 359px;
-      object-fit: cover;
-      display: block;
-      border-radius: 12px;
-      transition: transform .6s ease, filter .4s ease;
+      width: 100%; height: 370px;
+      object-fit: cover; display: block;
+      transition: transform .6s ease;
     }
-    
-    .card:hover img {
-      transform: scale(1.08);
-      filter: brightness(1.05);
-    }
-    
-    /* Título SEM fundo, em cima da imagem (como no Figma) */
+
+    .card:hover img { transform: scale(1.07); }
+
     .card-title {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: transparent;
-      text-align: center;
-      padding: 16px 0;
+      position: absolute; top: 0; left: 0; right: 0;
+      padding: 18px 20px;
+      font-family: var(--font-display);
+      font-size: 18px; font-weight: 800;
       color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.5);
       z-index: 2;
-      text-shadow: 0 2px 8px rgba(0,0,0,.4);
     }
-    
-    /* Overlay com texto e botão no hover */
+
     .card-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,.75);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-      opacity: 0;
-      transition: opacity .35s ease;
-      pointer-events: none;
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.1) 0%, rgba(0,0,0,.85) 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 24px;
+      opacity: 0; transition: opacity .35s;
       z-index: 3;
     }
-    
-    .card:hover .card-overlay {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
+
+    .card:hover .card-overlay,
+    .card:focus-within .card-overlay { opacity: 1; }
+
     .card-overlay p {
-      color: #fff;
-      font-size: 13px;
-      line-height: 1.6;
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 400;
-    }
-    
-    .card-btn {
-      background: #fff;
-      color: #333;
-      padding: 10px 24px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-    
-    .card-btn:hover {
-      background: #25D366;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-    
-    .card-btn svg {
-      width: 16px;
-      height: 16px;
-      transition: transform 0.3s ease;
-    }
-    
-    .card-btn:hover svg {
-      transform: scale(1.1);
+      color: #fff; font-size: 13px; line-height: 1.65;
+      margin-bottom: 16px; font-weight: 400;
     }
 
-    /* ===== GALLERY / TESTIMONIAL ===== */
-    .gallery-section {
-      background: #EFEFEF;
-      padding: 56px 0 64px 0;
-      text-align: center;
+    .card-btn {
+      background: #fff; color: #222;
+      padding: 10px 20px; border-radius: 8px;
+      font-size: 13px; font-weight: 700;
+      text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px;
+      transition: background .2s, color .2s, transform .2s;
+      align-self: flex-start;
     }
-    
-    .gallery-wrapper {
-      width: min(980px, calc(100% - (var(--pad) * 2)));
+
+    .card-btn:hover { background: var(--wa); color: #fff; transform: translateY(-1px); }
+    .card-btn svg { width: 16px; height: 16px; }
+    .card-btn svg path { fill: currentColor; }
+
+    /* ── TURISMO PEDAGÓGICO ───────────────────────────── */
+    .pedagogy-section {
+      background: var(--gray-bg);
+      padding: 72px var(--pad);
+    }
+
+    .pedagogy-inner {
+      max-width: var(--maxw);
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-    }
-    
-    .gallery-container {
-      width: 100%;
-      max-width: 756px;
-      background: #fff;
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.12);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-    }
-    
-    .arrow {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-weight: 700;
-      font-size: 26px;
-      flex: 0 0 auto;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s ease;
-      border: none;
-    }
-    
-    .arrow:hover {
-      background: #f8f8f8;
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0,0,0,.16);
-    }
-    
-    .gallery-grid {
       display: grid;
-      grid-template-columns: 440px 200px;
-      grid-template-rows: 112px 112px;
-      gap: 16px;
-      justify-content: center;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
     }
-    
-    .gallery-grid .big {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 16px;
-      transition: opacity .18s ease;
-      grid-column: 1;
-      grid-row: 1 / 3;
+
+    .pedagogy-left .section-label {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff; font-size: 10px;
+      font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; padding: 5px 11px;
+      border-radius: 4px; margin-bottom: 16px;
     }
-    
-    .gallery-grid .side {
-      display: contents;
+
+    .pedagogy-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 900; line-height: 1.2;
+      color: var(--green-3);
+      margin-bottom: 20px;
     }
-    
-    .gallery-grid .small {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 16px;
-      transition: opacity .18s ease;
+
+    .pedagogy-left p {
+      font-size: 15px; color: var(--text-sub);
+      line-height: 1.75; margin-bottom: 16px;
     }
-    
-    .gallery-grid .small:first-child {
-      grid-column: 2;
+
+    .pedagogy-highlights {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pedagogy-highlights li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--text); font-weight: 500;
+    }
+
+    .pedagogy-highlights li .star {
+      color: var(--orange); font-size: 16px; flex-shrink: 0; margin-top: 1px;
+    }
+
+    .pedagogy-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px;
+      gap: 12px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .pedagogy-visual .pv-main {
+      grid-column: 1 / span 2;
       grid-row: 1;
     }
-    
-    .gallery-grid .small:last-child {
-      grid-column: 2;
-      grid-row: 2;
-    }
-    
-    .testimonial {
-      width: 100%;
-      margin: 0;
-      padding: 0 20px;
-      font-size: 13px;
-      color: #666;
-      line-height: 1.7;
-      transition: opacity .18s ease;
-      text-align: center;
-    }
-    
-    .testimonial strong {
-      color: #555;
-      font-weight: 700;
+
+    .pedagogy-visual .pv-side { grid-row: 2; }
+
+    .pedagogy-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      border-radius: 8px;
+      transition: transform .5s ease;
     }
 
-    /* ===== CTA GREEN ===== */
+    .pedagogy-visual img:hover { transform: scale(1.04); }
+
+    /* ── GALLERY / DEPOIMENTOS ────────────────────────── */
+    .gallery-section {
+      background: #EFEFEF;
+      padding: 72px 0;
+      text-align: center;
+    }
+
+    .gallery-header {
+      max-width: var(--maxw);
+      margin: 0 auto 40px;
+      padding: 0 var(--pad);
+    }
+
+    .gallery-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.8vw, 34px);
+      color: var(--green-3); font-weight: 900;
+    }
+
+    .gallery-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .gallery-container {
+      flex: 1;
+      background: #fff;
+      border-radius: 18px;
+      padding: 36px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.1);
+      display: flex; flex-direction: column;
+      gap: 24px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 120px 120px;
+      gap: 12px;
+    }
+
+    .gallery-grid .big {
+      grid-column: 1; grid-row: 1 / 3;
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 10px;
+      transition: opacity .18s;
+    }
+
+    .gallery-grid .small {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 10px;
+      transition: opacity .18s;
+    }
+
+    .testimonial {
+      font-size: 14px; color: #555; line-height: 1.75;
+      text-align: center; transition: opacity .18s;
+    }
+
+    .testimonial strong { color: #333; font-weight: 700; }
+
+    .arrow {
+      width: 48px; height: 48px;
+      border-radius: 50%; background: #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,.12);
+      display: flex; align-items: center; justify-content: center;
+      color: #999; font-weight: 700; font-size: 24px;
+      flex-shrink: 0; cursor: pointer; border: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .arrow:hover { transform: scale(1.08); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+
+    /* ── CTA GREEN ────────────────────────────────────── */
     .cta {
       background: #0EA54C;
-      padding: 48px var(--pad);
+      padding: 52px var(--pad);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #fff;
       gap: 40px;
     }
-    
-    .cta-left {
-      width: 572px;
-      max-width: 70%;
-    }
-    
+
+    .cta-left { max-width: 600px; }
+
     .cta h2 {
-      font-size: 22px;
-      letter-spacing: 0.5px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      opacity: .95;
-      text-transform: uppercase;
-    }
-    
-    .cta p {
-      font-size: 13px;
-      line-height: 1.6;
-      opacity: .92;
-      max-width: 520px;
-    }
-    
-    .cta .btn {
-      background: #fff;
-      color: #0EA54C;
-      width: 413px;
-      height: 82px;
-      padding: 0 20px;
-      border-radius: 8px;
-      font-size: 14px;
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex: 0 0 auto;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-    
-    .cta .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,.15);
-    }
-    
-    .cta .btn .wa-ico {
-      width: 20px;
-      height: 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .cta .btn .wa-ico svg {
-      width: 20px;
-      height: 20px;
-      display: block;
-    }
-    
-    .cta .btn .wa-ico svg path {
-      fill: #0EA54C;
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 900; color: #fff;
+      margin-bottom: 10px; line-height: 1.25;
     }
 
-    /* ===== SOLUTIONS (hover botão em TODOS) ===== */
-    .solutions-wrap {
-      background: #F3F3F3;
-      padding: 56px 0 72px 0;
+    .cta p { font-size: 14px; color: rgba(255,255,255,.88); line-height: 1.65; }
+
+    .cta .btn-wa {
+      flex-shrink: 0;
+      min-width: 260px;
+      justify-content: center;
+      padding: 16px 28px;
+      font-size: 15px;
     }
-    
+
+    .cta .btn-wa .wa-ico svg path { fill: var(--wa); }
+    .cta .btn-wa { background: #fff; color: #0EA54C; }
+
+    /* ── SOLUÇÕES ─────────────────────────────────────── */
+    .solutions-wrap {
+      background: var(--gray-bg);
+      padding: 72px var(--pad);
+    }
+
+    .solutions-wrap .sec-head {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .solutions-wrap .sec-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 36px);
+      color: var(--green-3); font-weight: 900;
+    }
+
     .solutions {
-      width: min(1200px, calc(100% - (var(--pad) * 2)));
+      max-width: var(--maxw);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(2, 527px);
-      justify-content: center;
-      gap: 36px;
-    }
-    
-    .solution-card {
-      background: #F6F6F6;
-      border: 2px solid #2E7D32;
-      border-radius: 12px;
-      height: 407px;
-      padding: 36px 32px 24px 32px;
-      position: relative;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .solution-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,.08);
-    }
-    
-    .solution-card h3 {
-      color: #E5A20A;
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
-    }
-    
-    .solution-card .label {
-      color: #E5A20A;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-    
-    .solution-card p {
-      font-size: 14px;
-      color: #7a7a7a;
-      line-height: 1.6;
-      max-width: 100%;
-      flex: 1;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
     }
 
-    .solution-card .btn-small {
+    .solution-card {
+      background: #fff;
+      border: 2px solid var(--green);
+      border-radius: var(--radius);
+      padding: 36px 32px 28px;
+      display: flex; flex-direction: column;
+      gap: 10px;
+      transition: transform .3s, box-shadow .3s;
       position: relative;
-      left: auto;
-      bottom: auto;
-      transform: none;
-      opacity: 0;
+      overflow: hidden;
+    }
+
+    .solution-card::before {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--green);
+    }
+
+    .solution-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,.1);
+    }
+
+    .solution-card .sol-label {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--orange-2);
+    }
+
+    .solution-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 800;
+      color: var(--green-3); line-height: 1.2;
+    }
+
+    .solution-card p {
+      font-size: 14px; color: var(--text-sub);
+      line-height: 1.7; flex: 1;
+    }
+
+    .btn-small {
       background: var(--wa);
       color: #fff;
-      height: 44px;
-      width: 100%;
-      padding: 0 28px;
+      padding: 12px 20px;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 13px; font-weight: 700;
       text-decoration: none;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      transition: opacity .22s ease, transform .22s ease;
-      border: none;
-      cursor: pointer;
-      margin-top: auto;
-    }
-    
-    .solution-card:hover .btn-small {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .solution-card .btn-small .wa-ico {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.96);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .solution-card .btn-small .wa-ico svg {
-      width: 12px;
-      height: 12px;
-      display: block;
-    }
-    
-    .solution-card .btn-small .wa-ico svg path {
-      fill: var(--wa);
+      display: inline-flex; align-items: center; gap: 10px;
+      align-self: flex-start;
+      border: none; cursor: pointer;
+      transition: transform .2s, filter .2s;
+      margin-top: 8px;
     }
 
-    /* touch: mostrar botão sempre, e overlay do card com foco */
-    @media (hover: none) {
-      .card:focus-within .card-overlay {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      .solution-card .btn-small {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .btn-small:hover { transform: translateY(-2px); filter: brightness(1.06); }
+
+    /* ── CLIENTES / ESCOLAS ───────────────────────────── */
+    .clients-section {
+      background: var(--white);
+      padding: 64px var(--pad);
+      text-align: center;
     }
 
-    /* ===== CONTACT (MAPA) ===== */
-    .contact {
-      background: var(--green-2);
-      padding: 56px var(--pad) 64px var(--pad);
+    .clients-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 30px);
+      color: var(--green-3); font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .clients-section p {
+      font-size: 14px; color: var(--text-sub);
+      margin-bottom: 48px;
+    }
+
+    .clients-logos {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      color: #fff;
-    }
-    
-    .contact-inner {
-      display: flex;
-      gap: 24px;
-      max-width: 1100px;
-      width: 100%;
-      align-items: flex-start;
-    }
-    
-    .map {
-      width: 376px;
-      height: 326px;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 28px rgba(0,0,0,.22);
-      flex: 0 0 auto;
-    }
-    
-    .map iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-    
-    .contact-form {
-      flex: 1;
-      min-width: 0;
-      max-width: 550px;
-    }
-    
-    .contact-form h3 {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      opacity: .95;
-    }
-    
-    .contact-form .subtext {
-      font-size: 11px;
-      opacity: .85;
-      margin-bottom: 18px;
-      line-height: 1.5;
-    }
-    
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-    
-    .field label {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      opacity: .9;
-      margin: 0 0 5px 0;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .field input, .field textarea {
-      width: 100%;
-      padding: 9px 11px;
-      border-radius: 6px;
-      border: 0;
-      background: rgba(255,255,255,.08);
-      color: #fff;
-      outline: none;
-      font-size: 12px;
-      transition: all 0.2s ease;
-    }
-    
-    .field input:focus, .field textarea:focus {
-      background: rgba(255,255,255,.12);
-      box-shadow: 0 0 0 2px rgba(255,255,255,.1);
-    }
-    
-    .field input::placeholder, .field textarea::placeholder {
-      color: rgba(255,255,255,.55);
-    }
-    
-    .field textarea {
-      height: 80px;
-      resize: none;
-      font-family: inherit;
-    }
-    
-    .send {
-      margin-top: 10px;
-    }
-    
-    .send button {
-      width: 100%;
-      height: 38px;
-      border-radius: 6px;
-      border: 0;
-      background: #fff;
-      color: var(--green-2);
-      font-weight: 800;
-      font-size: 11px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .send button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,.15);
-    }
-
-    /* ===== FINAL MOSAIC ===== */
-    .final {
-      background: var(--green-3);
-      padding: 48px var(--pad) 56px var(--pad);
-    }
-    
-    .mosaic {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 195px;
-      gap: 14px;
-      max-width: 1064px;
+      align-items: center;
+      gap: 32px 48px;
+      max-width: 900px;
       margin: 0 auto;
     }
-    
-    .mosaic .tile {
+
+    .client-logo {
+      width: 120px; height: 60px;
+      display: flex; align-items: center; justify-content: center;
+      opacity: .55;
+      filter: grayscale(1);
+      transition: opacity .3s, filter .3s;
+    }
+
+    .client-logo:hover { opacity: 1; filter: grayscale(0); }
+
+    .client-logo img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* Logo placeholder (para quando não há arquivo de imagem) */
+    .client-placeholder {
+      background: var(--gray-bg);
       border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+      width: 120px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      color: var(--text-sub); text-align: center;
+      padding: 6px;
     }
-    
-    .mosaic .tile:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0,0,0,.3);
-    }
-    
-    .mosaic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    
-    .mosaic .tag {
-      position: absolute;
-      left: 12px;
-      bottom: 12px;
+
+    /* ── FAQ ──────────────────────────────────────────── */
+    .faq-section {
+      background: var(--green-3);
+      padding: 72px var(--pad);
       color: #fff;
-      font-weight: 800;
-      font-size: 10px;
-      opacity: .95;
-      text-shadow: 0 2px 10px rgba(0,0,0,.45);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
     }
 
-    /* Layout exato da referência com 5 tiles */
-    /* Linha 1: 1 imagem LARGA (3 colunas) */
-    .t1 {
-      grid-column: 1 / span 3;
-      grid-row: 1;
-    }
-    
-    /* Linha 2: 2 imagens (1 pequena + 2 grande) */
-    .t2 {
-      grid-column: 1;
-      grid-row: 2;
-    }
-    
-    .t3 {
-      grid-column: 2 / span 2;
-      grid-row: 2;
-    }
-    
-    /* Linha 3: 2 imagens (2 grande + 1 pequena) */
-    .t4 {
-      grid-column: 1 / span 2;
-      grid-row: 3;
-    }
-    
-    .t5 {
-      grid-column: 3;
-      grid-row: 3;
-    }
-    
-    /* Remove tiles extras */
-    .t6, .t7, .t8 {
-      display: none;
+    .faq-inner {
+      max-width: 820px;
+      margin: 0 auto;
     }
 
-    /* ===== INTERAÇÕES / EFEITOS ===== */
-    .arrow, .btn-whatsapp, .cta .btn, .solution-card, .mosaic .tile, .orange-item {
-      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
-    }
-    
-    .orange-item {
-      padding: 2px 10px;
-      border-radius: 8px;
-    }
-    
-    .orange-item:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.02);
-    }
-    
-    .cta .btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.02);
-    }
-    
-    .solution-card:hover {
-      transform: translateY(-2px);
+    .faq-header {
+      text-align: center;
+      margin-bottom: 52px;
     }
 
-    /* ===== REVEAL ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    
-    .reveal.in {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity .55s ease, transform .55s ease;
+    .faq-header .section-label {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff; font-size: 10px;
+      font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; padding: 5px 11px;
+      border-radius: 4px; margin-bottom: 16px;
     }
 
-    /* ===== RESPONSIVO (mobile com cara de desktop) ===== */
-    @media (max-width: 1280px) {
-      :root {
-        --pad: 72px;
-      }
+    .faq-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 900; color: #fff;
     }
 
-    @media (max-width: 1100px) {
-      :root {
-        --pad: 56px;
-      }
-      
-      .hero {
-        height: 540px;
-      }
-      
-      .hero-right {
-        top: 160px;
-      }
-      
-      .section-green {
-        gap: 28px;
-      }
+    .faq-list {
+      display: flex; flex-direction: column; gap: 14px;
     }
 
-    /* tablet: mantém visual parecido (ainda 2 blocos) */
+    .faq-item {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      padding: 22px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .faq-question span {
+      font-size: 15px; font-weight: 700; color: #fff; line-height: 1.45;
+    }
+
+    .faq-question .faq-num {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 900;
+      color: var(--orange); opacity: .7; flex-shrink: 0;
+    }
+
+    .faq-toggle {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px; color: rgba(255,255,255,.7);
+      transition: transform .3s, background .3s;
+    }
+
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s;
+    }
+
+    .faq-item.open .faq-answer { max-height: 600px; }
+
+    .faq-answer-inner {
+      padding: 0 24px 24px;
+      font-size: 14px; color: rgba(255,255,255,.78);
+      line-height: 1.75;
+    }
+
+    .faq-answer-inner ul {
+      margin-top: 12px; padding-left: 0;
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .faq-answer-inner li {
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+
+    .faq-answer-inner li::before {
+      content: "✓";
+      color: var(--wa); font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── DESTAQUES EM NEGRITO ─────────────────────────── */
+    strong, .bold-highlight {
+      font-weight: 700;
+      color: inherit;
+    }
+
+    /* Negrito com cor laranja em fundos claros */
+    .pedagogy-left strong,
+    .solution-card strong,
+    .clients-section strong {
+      color: var(--orange-2);
+      font-weight: 700;
+    }
+
+    /* Negrito branco-vivo em fundos escuros */
+    .faq-answer-inner strong,
+    .cta p strong,
+    .hero-sub strong,
+    .contact-form strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Negrito laranja em fundo escuro (FAQ pergunta) */
+    .faq-header strong {
+      color: var(--orange);
+    }
+
+    /* ── CONTATO ──────────────────────────────────────── */
+    .contact {
+      background: var(--green-2);
+      padding: 64px var(--pad);
+    }
+
+    .contact-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: flex; gap: 32px;
+      align-items: flex-start;
+    }
+
+    .map {
+      width: 380px; height: 340px;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0,0,0,.25);
+      flex-shrink: 0;
+    }
+
+    .map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    .contact-form { flex: 1; min-width: 0; }
+
+    .contact-form h3 {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 900; color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .contact-form .subtext { font-size: 13px; color: rgba(255,255,255,.7); margin-bottom: 22px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+    .field label {
+      display: block; font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,.8); text-transform: uppercase;
+      letter-spacing: .7px; margin-bottom: 6px;
+    }
+
+    .field input, .field textarea {
+      width: 100%; padding: 10px 12px;
+      border-radius: 8px; border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.08);
+      color: #fff; font-size: 13px;
+      font-family: var(--font-body);
+      outline: none; transition: background .2s, border-color .2s;
+    }
+
+    .field input:focus, .field textarea:focus {
+      background: rgba(255,255,255,.13);
+      border-color: rgba(255,255,255,.3);
+    }
+
+    .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,.45); }
+
+    .field textarea { height: 90px; resize: none; margin-bottom: 14px; }
+
+    .send button {
+      width: 100%; height: 44px;
+      background: #fff; color: var(--green-2);
+      border: none; border-radius: 8px;
+      font-weight: 800; font-size: 13px;
+      cursor: pointer; text-transform: uppercase;
+      letter-spacing: .6px;
+      transition: transform .2s, box-shadow .2s;
+      font-family: var(--font-body);
+    }
+
+    .send button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
+
+    /* ── MOSAICO FINAL ────────────────────────────────── */
+    .final {
+      background: var(--green-3);
+      padding: 52px var(--pad) 60px;
+    }
+
+    .mosaic {
+      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 200px;
+      gap: 14px;
+    }
+
+    .tile {
+      border-radius: 10px; overflow: hidden;
+      position: relative; cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,.2);
+    }
+
+    .tile:hover { transform: scale(1.025); box-shadow: 0 8px 20px rgba(0,0,0,.35); }
+    .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .tile .tag {
+      position: absolute; left: 12px; bottom: 12px;
+      color: #fff; font-weight: 800; font-size: 10px;
+      text-shadow: 0 1px 6px rgba(0,0,0,.5);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    .t1 { grid-column: 1 / span 3; }
+    .t2 { grid-column: 1; }
+    .t3 { grid-column: 2 / span 2; }
+    .t4 { grid-column: 1 / span 2; }
+    .t5 { grid-column: 3; }
+
+    /* ── REVEAL ───────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(16px); }
+    .reveal.in { opacity: 1; transform: translateY(0); transition: opacity .55s ease, transform .55s ease; }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 960px) {
-      :root {
-        --pad: 40px;
-      }
-      
-      .hero {
-        height: 520px;
-      }
-      
-      .hero-left {
-        width: 520px;
-        padding-top: 74px;
-      }
-      
-      .hero-right {
-        right: clamp(28px, 6vw, 80px);
-        top: 170px;
-      }
-      
-      .orange-bar {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .gallery-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 20px;
-      }
-      
-      .arrow {
-        display: none;
-      }
-      
-      .gallery-container {
-        width: 100%;
-        padding: 24px;
-        border-radius: 12px;
-      }
-      
-      .gallery-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 12px;
-        display: flex;
-        flex-direction: column;
-      }
-      
-      .gallery-grid .big {
-        width: 100%;
-        height: 200px;
-        grid-column: auto;
-        grid-row: auto;
-        border-radius: 12px;
-      }
-      
-      .gallery-grid .side {
-        display: flex;
-        gap: 12px;
-      }
-      
-      .gallery-grid .small {
-        width: 100%;
-        height: 140px;
-        flex: 1;
-        border-radius: 12px;
-      }
-      
-      .testimonial {
-        font-size: 12px;
-        padding: 0 10px;
-      }
-      
-      .cta {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .cta-left {
-        max-width: 100%;
-        width: auto;
-      }
-      
-      .cta .btn {
-        width: 100%;
-        max-width: 413px;
-      }
-      
-      .solutions {
-        grid-template-columns: 1fr;
-      }
-      
-      .contact-inner {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      
-      .contact {
-        padding: 40px var(--pad);
-      }
-      
-      .map {
-        width: 100%;
-        height: 280px;
-        margin-bottom: 24px;
-      }
-      
-      .contact-form {
-        max-width: 100%;
-      }
+      .hero-inner { flex-direction: column; align-items: flex-start; padding-top: 60px; }
+      .hero-right { position: static; width: 100%; }
+      .hero { height: auto; padding-bottom: 40px; }
+      .pedagogy-inner { grid-template-columns: 1fr; }
+      .pedagogy-visual { grid-template-columns: 1fr 1fr; grid-template-rows: 180px; }
+      .pedagogy-visual .pv-main { grid-column: 1 / span 2; }
+      .solutions { grid-template-columns: 1fr; }
+      .contact-inner { flex-direction: column; }
+      .map { width: 100%; }
+      .cta { flex-direction: column; }
+      .cta .btn-wa { width: 100%; }
+      .gallery-wrapper { flex-direction: column; }
+      .arrow { display: none; }
     }
 
-    /* celular: empilha, mas centraliza e mantém "cara" do desktop */
     @media (max-width: 640px) {
-      :root {
-        --pad: 22px;
-      }
-      
-      /* HERO: mantém proporção e não "quebra" o layout */
-      .hero {
-        height: 520px;
-      }
-      
-      .hero-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
-        width: 100%;
-        overflow: hidden;
-      }
-      
-      .hero-left {
-        width: 100%;
-        padding-top: 44px;
-        max-width: 100%;
-      }
-      
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      /* bloco do WhatsApp fica logo abaixo do título (sem deslocar pra direita) */
-      .hero-right {
-        position: static;
-        width: 100%;
-        max-width: 340px;
-        margin-top: 6px;
-      }
-      
-      .btn-whatsapp {
-        height: 40px;
-        border-radius: 10px;
-      }
-
-      /* Destaques: mantém "cara" de desktop via scroll horizontal (sem ficar colado à esquerda) */
-      .orange-bar {
-        margin: -28px calc(-1 * var(--pad)) 0 calc(-1 * var(--pad));
-        padding: 14px var(--pad);
-        justify-content: flex-start;
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        gap: 14px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      
-      .orange-bar::-webkit-scrollbar {
-        display: none;
-      }
-      
-      .orange-item {
-        white-space: nowrap;
-        scroll-snap-align: center;
-      }
-
-      /* Cards: mantém 3 cards como no desktop, com scroll horizontal no mobile */
-      .section-green {
-        width: 100%;
-        padding-top: 44px;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        gap: 18px;
-        padding-left: var(--pad);
-        padding-right: var(--pad);
-        box-sizing: border-box;
-        margin-left: 0;
-      }
-      
-      .section-green::-webkit-scrollbar {
-        display: none;
-      }
-      
-      .card {
-        flex: 0 0 300px;
-        scroll-snap-align: center;
-      }
-      
-      .card img {
-        height: 340px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .mosaic {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 140px;
-      }
-      
-      .t1 {
-        grid-column: 1 / span 2;
-        grid-row: auto;
-      }
-      
-      .t2 {
-        grid-column: 1 / span 2;
-        grid-row: auto;
-      }
-      
-      .t3, .t4, .t5 {
-        grid-column: auto;
-        grid-row: auto;
-      }
-      
-      .t6 {
-        grid-column: 1 / span 2;
-        grid-row: auto;
-      }
-      
-      .t7 {
-        grid-column: 1 / span 2;
-        grid-row: auto;
-      }
-      
-      .t8 {
-        grid-column: 1 / span 2;
-        grid-row: auto;
-      }
-      
-      /* Botões sempre visíveis no mobile */
-      .solution-card .btn-small {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-      .solutions {
-        grid-template-columns: 1fr;
-      }
-      
-      .solution-card {
-        max-width: 527px;
-        margin: 0 auto;
-        width: 100%;
-      }
-      
-      .gallery-wrapper {
-        flex-direction: column;
-        gap: 20px;
-        padding: 0 var(--pad);
-        box-sizing: border-box;
-        width: 100%;
-      }
-      
-      .gallery-section {
-        padding: 40px 0 48px 0;
-      }
-      
-      .cta {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 40px var(--pad);
-      }
-      
-      .cta-left {
-        max-width: 100%;
-        width: 100%;
-      }
-      
-      .cta .btn {
-        width: 100%;
-        max-width: none;
-      }
-      
-      .contact {
-        overflow-x: hidden;
-      }
+      .section-cards { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-left: var(--pad); padding-right: var(--pad); scroll-snap-type: x mandatory; gap: 16px; }
+      .section-cards::-webkit-scrollbar { display: none; }
+      .card { flex-shrink: 0; scroll-snap-align: center; width: 290px; }
+      .orange-bar { overflow-x: auto; justify-content: flex-start; }
+      .orange-bar::-webkit-scrollbar { display: none; }
+      .mosaic { grid-template-columns: 1fr 1fr; }
+      .t1 { grid-column: 1 / span 2; }
+      .t3, .t4 { grid-column: auto; }
+      .form-row { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 420px) {
-      :root {
-        --pad: 16px;
-      }
-      
-      .mosaic {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 170px;
-      }
-      
-      .t1, .t2, .t6 {
-        grid-column: 1;
-      }
-      
-      .orange-bar {
-        padding: 12px var(--pad);
-      }
-      
-      .gallery-wrapper {
-        padding: 0 var(--pad);
-      }
-    }
-
-    /* reduz movimento */
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
-      
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-      
-      .hero::before {
-        animation: none !important;
-        transform: none !important;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
+<div class="page">
 
-    <div class="top-block">
-      <section class="hero reveal">
-        <div class="vignette" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <div class="hero-left">
-            <img class="hero-logo" alt="logo" src="Group 7.png" />
-            <h1>
-              Transformamos o<br/>
-              conteúdo da sala de<br/>
-              aula em <span class="bold">experiências</span><br/>
-              <span class="bold">inesquecíveis.</span>
-            </h1>
-          </div>
-
-          <div class="hero-right">
-            <p>converse com a gente e planeje<br/>sua visita escolar inesquecível</p>
-            <a href="#" class="btn-whatsapp">
-              <span class="wa-ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
-              </span>
-              Conversar pelo WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <div class="orange-bar reveal">
-        <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
-        <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
-        <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
-        <div class="orange-item"><span class="orange-ico"></span> Lorem ipsum</div>
+  <!-- ══ HERO ══════════════════════════════════════════ -->
+  <section class="hero reveal">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <img class="hero-logo" src="Group 7.png" alt="Zero9 Logo" />
+        <span class="hero-eyebrow">Turismo Pedagógico · Minas Gerais</span>
+        <h1>
+          Sua escola pode ir<br/>
+          <em>além da sala de aula</em><br/>
+          e nós mostramos como.
+        </h1>
+        <p class="hero-sub">Aprender na prática muda tudo. <strong>Excursões pedagógicas, viagens de formatura e roteiros de lazer</strong> para <strong>escolas públicas e privadas</strong> de toda MG.</p>
       </div>
-
-      <section class="section-green reveal">
-        <div class="card" tabindex="0">
-          <div class="card-title">Hopi Hari</div>
-          <img alt="Hopi Hari - Atividade 1" src="Frame 509.png"/>
-          <div class="card-overlay">
-            <p>Passeio educativo ao Parque temático com diversos brinquedos e atrações.</p>
-            <a href="#" class="card-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/>
-              </svg>
-              Ver Mais
-            </a>
-          </div>
-        </div>
-        <div class="card" tabindex="0">
-          <div class="card-title">Hopi Hari</div>
-          <img alt="Hopi Hari - Atividade 2" src="Frame 509-1.png"/>
-          <div class="card-overlay">
-            <p>Passeio educativo ao Parque temático com diversos brinquedos e atrações.</p>
-            <a href="#" class="card-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/>
-              </svg>
-              Ver Mais
-            </a>
-          </div>
-        </div>
-        <div class="card" tabindex="0">
-          <div class="card-title">Hopi Hari</div>
-          <img alt="Hopi Hari - Atividade 3" src="Frame 509-2.png"/>
-          <div class="card-overlay">
-            <p>Passeio educativo ao Parque temático com diversos brinquedos e atrações.</p>
-            <a href="#" class="card-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/>
-              </svg>
-              Ver Mais
-            </a>
-          </div>
-        </div>
-      </section>
+      <div class="hero-right">
+        <p>Planeje já a visita escolar inesquecível da sua turma</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Olá%2C%20quero%20saber%20mais%20sobre%20as%20excursões%20Zero9" class="btn-wa">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Conversar pelo WhatsApp
+        </a>
+      </div>
     </div>
+  </section>
 
-    <section class="gallery-section reveal">
-      <div class="gallery-wrapper">
-        <div class="arrow" id="galPrev" role="button" tabindex="0" aria-label="Anterior">‹</div>
-        <div class="gallery-container">
-          <div class="gallery-grid">
-            <img alt="Galeria - Imagem principal" src="Rectangle 79.png" class="big" id="galBig" />
-            <div class="side">
-              <img alt="Galeria - Imagem secundária 1" src="Rectangle 80.png" class="small" id="galSmall1" />
-              <img alt="Galeria - Imagem secundária 2" src="Rectangle 81.png" class="small" id="galSmall2" />
-            </div>
-          </div>
-          <div class="testimonial" id="galTestimonial">
-            <span id="galText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</span>
-            <br/><br/>
-            <strong id="galAuthor">Bárbara, Diretora Colégio A+</strong>
-          </div>
-        </div>
-        <div class="arrow" id="galNext" role="button" tabindex="0" aria-label="Próximo">›</div>
-      </div>
-    </section>
-
-    <section class="cta reveal">
-      <div class="cta-left">
-        <h2>ENTRE EM CONTATO COM A GENTE</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada dui metus, sed efficitur nisl posuere vitae. Vivamus in bibendum est.</p>
-      </div>
-      <a href="#" class="btn">
-        <span class="wa-ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
-        </span>
-        Conversar pelo WhatsApp
-      </a>
-    </section>
-
-    <section class="solutions-wrap reveal">
-      <div class="solutions">
-        <div class="solution-card">
-          <h3>Solução 1</h3>
-          <div class="label">LOREM</div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="#" class="btn-small">
-            <span class="wa-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
-            </span>
-            Conversar pelo WhatsApp
-          </a>
-        </div>
-
-        <div class="solution-card">
-          <h3>Solução 2</h3>
-          <div class="label">LOREM</div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>Conversar pelo WhatsApp</a>
-        </div>
-
-        <div class="solution-card">
-          <h3>Solução 3</h3>
-          <div class="label">LOREM</div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>Conversar pelo WhatsApp</a>
-        </div>
-
-        <div class="solution-card">
-          <h3>Solução 4</h3>
-          <div class="label">LOREM</div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="#" class="btn-small"><span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>Conversar pelo WhatsApp</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact reveal">
-      <div class="contact-inner">
-        <div class="map">
-          <iframe title="Mapa de localização" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.6989804631057!2d-46.66063468447402!3d-23.5863396846719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8b7f8b0c1%3A0x8c7f2ad3b1c9d4d8!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1710000000000"></iframe>
-        </div>
-        <div class="contact-form">
-          <h3>Nome*</h3>
-          <p class="subtext">Lorem ipsum dolor sit amet</p>
-          <div class="form-row">
-            <div class="field"><label>Whatsapp*</label><input type="tel" placeholder="(11) 99999-9999"/></div>
-            <div class="field"><label>Email:</label><input type="email" placeholder="seuemail@dominio.com"/></div>
-          </div>
-          <div class="field"><label>Escola:</label><input type="text" placeholder="Escola Doe e Helio"/></div>
-          <div class="field"><label>Fale um pouco da ideia da viagem</label><textarea placeholder="Ex: turma A, 9º ano, visita em... "></textarea></div>
-          <div class="send"><button type="button">Enviar Mensagem →</button></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="final reveal">
-      <div class="mosaic">
-        <div class="tile t1"><img alt="Viagem - Atividade 1" src="Frame 510-1.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t2"><img alt="Viagem - Atividade 2" src="Frame 510-2.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t3"><img alt="Viagem - Atividade 3" src="Frame 509.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t4"><img alt="Viagem - Atividade 4" src="Rectangle 79.png"/><div class="tag">VIAGEM XXX</div></div>
-        <div class="tile t5"><img alt="Viagem - Atividade 5" src="Rectangle 80.png"/><div class="tag">VIAGEM XXX</div></div>
-      </div>
-    </section>
-
+  <!-- ══ ORANGE BAR ═══════════════════════════════════ -->
+  <div class="orange-bar reveal">
+    <div class="orange-item"><span class="orange-dot"></span>Excursões Escolares</div>
+    <div class="orange-item"><span class="orange-dot"></span>Turismo Pedagógico</div>
+    <div class="orange-item"><span class="orange-dot"></span>Viagens de Formatura</div>
+    <div class="orange-item"><span class="orange-dot"></span>Roteiros de Lazer</div>
   </div>
 
-  <script>
-    // Reveal on scroll
-    (function(){
-      const els = Array.from(document.querySelectorAll('.reveal'));
-      if (!('IntersectionObserver' in window)){
-        els.forEach(e=>e.classList.add('in'));
-        return;
-      }
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if (en.isIntersecting){
-            en.target.classList.add('in');
-            io.unobserve(en.target);
-          }
-        });
-      }, { root: null, threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
-      els.forEach(e=>io.observe(e));
-    })();
+  <!-- ══ CARDS: 3 PRINCIPAIS EXCURSÕES ════════════════ -->
+  <div class="top-block">
+    <section class="section-cards reveal">
 
-    // Gallery (carrossel)
-    (function(){
-      const big = document.getElementById('galBig');
-      const s1 = document.getElementById('galSmall1');
-      const s2 = document.getElementById('galSmall2');
-      const prev = document.getElementById('galPrev');
-      const next = document.getElementById('galNext');
-      const wrap = document.getElementById('galTestimonial');
-      const txt = document.getElementById('galText');
-      const author = document.getElementById('galAuthor');
+      <div class="card" tabindex="0">
+        <div class="card-title">🌿 Fazendinha</div>
+        <img src="Frame 509.png" alt="Fazendinha – excursão escolar com animais e natureza" />
+        <div class="card-overlay">
+          <p>Mais de 25 espécies, passeio de trator e atividades ao ar livre. Ideal para despertar o amor pela natureza e criar memórias afetivas que acompanham a infância.</p>
+          <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20a%20Fazendinha" class="card-btn">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
 
-      if (!big || !s1 || !s2 || !prev || !next || !wrap || !txt || !author) return;
+      <div class="card" tabindex="0">
+        <div class="card-title">🦘 Park Trampolim</div>
+        <img src="Frame 509-1.png" alt="Park Trampolim – excursão de lazer e integração" />
+        <div class="card-overlay">
+          <p>Ambiente seguro e monitorado para pular, brincar e fortalecer os laços de amizade. Ideal para promover integração, bem-estar e um dia de pura alegria.</p>
+          <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20o%20Park%20Trampolim" class="card-btn">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
 
-      const slides = [
-        { big:'Rectangle 79.png', s1:'Rectangle 80.png', s2:'Rectangle 81.png', text:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.', author:'Rinaldo, Diretora Colégio A' },
-        { big:'Frame 509.png', s1:'Frame 509-1.png', s2:'Frame 509-2.png', text:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.', author:'Rinaldo, Diretora Colégio A' },
-        { big:'Frame 510-1.png', s1:'Frame 510-2.png', s2:'Frame 510.png', text:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.', author:'Rinaldo, Diretora Colégio A' }
-      ];
+      <div class="card" tabindex="0">
+        <div class="card-title">🏙️ City Tour BH</div>
+        <img src="Frame 509-2.png" alt="City Tour Belo Horizonte – excursão cultural e pedagógica" />
+        <div class="card-overlay">
+          <p>Imersão pedagógica por BH com degustação no Mercado Central. Ideal para enriquecer conteúdos de História, Geografia e Cultura — aprendizado vivo e significativo.</p>
+          <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20o%20City%20Tour%20BH" class="card-btn">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
 
-      let i = 0;
+    </section>
+  </div>
 
-      function fadeOut(){
-        big.style.opacity = '0';
-        s1.style.opacity = '0';
-        s2.style.opacity = '0';
-        wrap.style.opacity = '0';
-      }
-      
-      function fadeIn(){
-        big.style.opacity = '1';
-        s1.style.opacity = '1';
-        s2.style.opacity = '1';
-        wrap.style.opacity = '1';
-      }
+  <!-- ══ TURISMO PEDAGÓGICO ════════════════════════════ -->
+  <section class="pedagogy-section reveal">
+    <div class="pedagogy-inner">
+      <div class="pedagogy-left">
+        <span class="section-label">🎓 Por que isso importa</span>
+        <h2>O que é Turismo Pedagógico e por que ele diferencia sua escola?</h2>
+        <p>O turismo pedagógico é uma <strong>metodologia educacional</strong> que transforma o aprendizado em <strong>experiências práticas e significativas</strong> fora da sala de aula. Os alunos vivenciam na prática conteúdos trabalhados em sala, tornando o conhecimento mais concreto, envolvente e duradouro.</p>
+        <p>Mais do que um passeio, trata-se de uma <strong>ferramenta estratégica</strong> que fortalece o projeto pedagógico da escola e contribui para o <strong>desenvolvimento integral dos estudantes</strong>.</p>
+        <ul class="pedagogy-highlights">
+          <li><span class="star">✨</span> Diferencial competitivo no mercado educacional</li>
+          <li><span class="star">✨</span> Maior engajamento e motivação dos alunos</li>
+          <li><span class="star">✨</span> Valorização da proposta pedagógica junto às famílias</li>
+          <li><span class="star">✨</span> Fortalecimento da imagem institucional</li>
+        </ul>
+      </div>
+      <div class="pedagogy-visual">
+        <img src="Frame 510-1.png" alt="Alunos em excursão pedagógica" class="pv-main" />
+        <img src="Rectangle 80.png" alt="Atividade escolar ao ar livre" class="pv-side" />
+        <img src="Frame 509.png" alt="Crianças aprendendo na natureza" class="pv-side" />
+      </div>
+    </div>
+  </section>
 
-      function paint(idx){
-        const sl = slides[idx];
-        fadeOut();
-        setTimeout(()=>{
-          big.src = sl.big;
-          s1.src = sl.s1;
-          s2.src = sl.s2;
-          txt.textContent = sl.text;
-          author.textContent = sl.author;
-          fadeIn();
-        }, 110);
-      }
+  <!-- ══ DEPOIMENTOS ═══════════════════════════════════ -->
+  <section class="gallery-section reveal">
+    <div class="gallery-header">
+      <h2>Confiança se constrói com resultados reais.</h2>
+      <p style="font-size:15px;color:#555;margin-top:8px;">Veja o que dizem as instituições que confiaram na Zero9</p>
+    </div>
+    <div class="gallery-wrapper">
+      <button class="arrow" id="galPrev" aria-label="Anterior">‹</button>
+      <div class="gallery-container">
+        <div class="gallery-grid">
+          <img src="Rectangle 79.png" alt="Galeria – imagem principal" class="big" id="galBig" />
+          <img src="Rectangle 80.png" alt="Galeria – imagem 2" class="small" id="galSmall1" />
+          <img src="Rectangle 81.png" alt="Galeria – imagem 3" class="small" id="galSmall2" />
+        </div>
+        <div class="testimonial" id="galTestimonial">
+          <span id="galText">Sou apaixonada pelo trabalho impecavelmente estruturado e, ao mesmo tempo, flexível na personalização das excursões. Fomos extremamente bem atendidos em todas as etapas, e o resultado foi incrível: alunos e pais simplesmente adoraram a experiência!</span>
+          <br/><br/>
+          <strong id="galAuthor">Caroline Braga — Coordenadora</strong>
+        </div>
+      </div>
+      <button class="arrow" id="galNext" aria-label="Próximo">›</button>
+    </div>
+  </section>
 
-      function go(dir){
-        i = (i + dir + slides.length) % slides.length;
-        paint(i);
-      }
+  <!-- ══ CTA ═══════════════════════════════════════════ -->
+  <section class="cta reveal">
+    <div class="cta-left">
+      <h2>Pronto para levar sua escola além da sala de aula?</h2>
+      <p>Atendemos <strong>escolas públicas e privadas em toda Minas Gerais</strong>. Possuímos toda a documentação exigida pela Caixa Escolar, incluindo <strong>Carta de Exclusividade</strong> — sem burocracia para a gestão escolar.</p>
+    </div>
+    <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20planejar%20uma%20excursão%20com%20a%20Zero9" class="btn-wa">
+      <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+      Falar com um especialista
+    </a>
+  </section>
 
-      prev.addEventListener('click', ()=>go(-1));
-      next.addEventListener('click', ()=>go(1));
+  <!-- ══ SOLUÇÕES / VANTAGENS ══════════════════════════ -->
+  <section class="solutions-wrap reveal">
+    <div class="sec-head">
+      <h2>Confira todas as vantagens</h2>
+      <p style="font-size:14px;color:var(--text-sub);margin-top:10px;max-width:520px;margin-left:auto;margin-right:auto;text-align:center;">Cada detalhe da excursão pensado para a escola, os alunos e as famílias.</p>
+    </div>
+    <div class="solutions" style="grid-template-columns:repeat(2,1fr);">
 
-      prev.tabIndex = 0;
-      next.tabIndex = 0;
-      prev.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(-1);} });
-      next.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(1);} });
+      <div class="solution-card">
+        <div class="sol-label">🍔 Incluso</div>
+        <h3>Lanches Deliciosos</h3>
+        <p>Pacotes com <strong>opções de lanche</strong> incluídas. Nada de preocupação extra para a escola ou para os pais.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20os%20pacotes%20Zero9" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
 
-      paint(0);
-    })();
-  </script>
+      <div class="solution-card">
+        <div class="sol-label">📡 Exclusivo Z9 Pass</div>
+        <h3>Pulseira Localizadora</h3>
+        <p>O que é importante para você, é <strong>prioridade para nós</strong>: a segurança dos seus alunos. <strong>Rastreamento em tempo real</strong> via chip durante toda a excursão.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20a%20pulseira%20localizadora" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
+
+      <div class="solution-card">
+        <div class="sol-label">👨‍🏫 Equipe</div>
+        <h3>Monitores Capacitados</h3>
+        <p><strong>Preparados para prestar todo atendimento necessário</strong>, nossa equipe é treinada em primeiros socorros e acompanha os alunos em todas as etapas da excursão.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20os%20monitores%20Zero9" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
+
+      <div class="solution-card">
+        <div class="sol-label">🚌 Transporte</div>
+        <h3>Transporte Seguro com Ar</h3>
+        <p>Transporte com <strong>cinto de segurança</strong>, confortável, climatizado e com <strong>motoristas especializados</strong>. Regularizado e vistoriado para total tranquilidade.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20o%20transporte%20Zero9" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
+
+      <div class="solution-card">
+        <div class="sol-label">📷 Memória</div>
+        <h3>Fotos Exclusivas</h3>
+        <p><strong>Cobertura fotográfica opcional</strong>, disponível em todos os roteiros. Os alunos levam para casa não só as memórias, mas também os registros desse dia especial.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20as%20fotos%20Zero9" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
+
+      <div class="solution-card">
+        <div class="sol-label">🗺️ Personalizado</div>
+        <h3>Roteiros Personalizados</h3>
+        <p>Roteiro <strong>planejado conforme os objetivos pedagógicos da escola</strong>. Cada excursão é única, adaptada à faixa etária, disciplina e proposta pedagógica da sua instituição.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20um%20roteiro%20personalizado%20Zero9" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
+
+      <div class="solution-card">
+        <div class="sol-label">📄 Documentação</div>
+        <h3>Carta de Exclusividade</h3>
+        <p>Mais facilidade para sua <strong>prestação de contas com a Caixa Escolar</strong>. Possuímos toda documentação exigida, garantindo conformidade total para escolas públicas e privadas.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20a%20Carta%20de%20Exclusividade" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
+
+      <div class="solution-card">
+        <div class="sol-label">💳 Facilidade</div>
+        <h3>Pagamento Online</h3>
+        <p><strong>Condições facilitadas e pagamento ajustado à realidade escolar</strong>. Sem burocracia, sem complicação — para a escola e para as famílias dos alunos.</p>
+        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20pagamento%20Zero9" class="btn-small">
+          <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
+          Saber mais
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CLIENTES / ESCOLAS PARCEIRAS ═════════════════ -->
+  <section class="clients-section reveal">
+    <h2>Conheça alguns de nossos clientes</h2>
+    <p>Escolas públicas e privadas de toda Minas Gerais que já confiam na Zero9</p>
+    <div class="clients-logos">
+      <div class="client-placeholder">Colégio<br/>Jean Piaget</div>
+      <div class="client-placeholder">Colégio<br/>Sistema</div>
+      <div class="client-placeholder">Colégio<br/>Bernoulli</div>
+      <div class="client-placeholder">Colégio<br/>Coleguium</div>
+      <div class="client-placeholder">Colégio<br/>SES</div>
+      <div class="client-placeholder">Colégio<br/>CEC</div>
+      <div class="client-placeholder">Colégio<br/>Crescer</div>
+      <div class="client-placeholder">Colégio<br/>Maple Bear</div>
+      <div class="client-placeholder">I.E<br/>Planalto</div>
+      <div class="client-placeholder">Colégio<br/>Aprimorar</div>
+      <div class="client-placeholder">Colégio Sagrado<br/>Coração de Jesus<br/>Congonhas</div>
+      <div class="client-placeholder">Colégio Nossa<br/>Senhora das Dores</div>
+      <div class="client-placeholder">Colégio Sagrado<br/>Coração de Jesus<br/>Contagem</div>
+    </div>
+    <p style="margin-top:32px;font-size:13px;color:#999;font-style:italic;">* Substitua os cards pelos logos reais das escolas para produção</p>
+  </section>
+
+  <!-- ══ FAQ ═══════════════════════════════════════════ -->
+  <section class="faq-section reveal">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <span class="section-label">Dúvidas Frequentes</span>
+        <h2>Perguntas sobre nossas excursões</h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-num">01</span>
+            <span>Quais experiências a Zero9 oferece para as escolas?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              A Zero9 organiza <strong>saídas pedagógicas, excursões, viagens de formatura e roteiros de lazer</strong> para alunos do Infantil ao Ensino Médio de escolas públicas e privadas de toda MG. Nossos roteiros são planejados para complementar o conteúdo escolar, unindo <strong>aprendizado prático, segurança e experiências inesquecíveis</strong> — com pacotes que incluem transporte, lanche, monitor e muito mais.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-num">02</span>
+            <span>A Zero9 atende escolas públicas e privadas?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Sim. Atendemos <strong>escolas públicas e privadas em toda Minas Gerais</strong>, com total conformidade documental e operacional. Possuímos toda a documentação exigida pela <strong>Caixa Escolar</strong>, incluindo <strong>Carta de Exclusividade</strong> — garantindo facilidade e tranquilidade para a gestão escolar.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-num">03</span>
+            <span>Como a Zero9 garante a segurança dos alunos durante as excursões?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Como diferencial exclusivo, oferecemos <strong>pulseiras com chip localizador</strong> para <strong>rastreamento em tempo real</strong> dos alunos durante toda a excursão. Além disso:
+              <ul>
+                <li><strong>Transporte regularizado e vistoriado</strong> com cintos de segurança</li>
+                <li>Equipe treinada em <strong>primeiros socorros</strong> e atendimento escolar</li>
+                <li>Roteiros organizados e <strong>monitoramento contínuo</strong></li>
+                <li>Cumprimento rigoroso das <strong>normas para excursões escolares</strong></li>
+              </ul>
+              Porque o que é importante para você é <strong>prioridade para nós</strong>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTATO ═══════════════════════════════════════ -->
+  <section class="contact reveal">
+    <div class="contact-inner">
+      <div class="map">
+        <iframe title="Localização Zero9" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.0!2d-43.9345!3d-19.9191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDU1JzA4LjgiUyA0M8KwNTYnMDQuMiJX!5e0!3m2!1spt-BR!2sbr!4v1710000000000">
+        </iframe>
+      </div>
+      <div class="contact-form">
+        <h3>Fale com a Zero9</h3>
+        <p class="subtext">Preencha abaixo e entraremos em contato em breve para planejar sua excursão.</p>
+        <form onsubmit="return false;">
+          <div class="form-row">
+            <div class="field"><label for="f-wa">WhatsApp*</label><input id="f-wa" type="tel" placeholder="(31) 99999-9999"/></div>
+            <div class="field"><label for="f-email">E-mail</label><input id="f-email" type="email" placeholder="seu@email.com"/></div>
+          </div>
+          <div class="field"><label for="f-nome">Nome*</label><input id="f-nome" type="text" placeholder="Seu nome"/></div>
+          <div class="field"><label for="f-escola">Escola</label><input id="f-escola" type="text" placeholder="Nome da escola"/></div>
+          <div class="field"><label for="f-msg">Fale um pouco sobre a ideia da viagem</label><textarea id="f-msg" placeholder="Ex: turma do 5º ano, 30 alunos, visita em março..."></textarea></div>
+          <div class="send"><button type="submit">Enviar Mensagem →</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MOSAICO FINAL ═════════════════════════════════ -->
+  <section class="final reveal">
+    <div class="mosaic">
+      <div class="tile t1"><img src="Frame 510-1.png" alt="Excursão Fazendinha"/><div class="tag">Fazendinha</div></div>
+      <div class="tile t2"><img src="Frame 510-2.png" alt="Park Trampolim"/><div class="tag">Park Trampolim</div></div>
+      <div class="tile t3"><img src="Frame 509.png" alt="City Tour BH"/><div class="tag">City Tour BH</div></div>
+      <div class="tile t4"><img src="Rectangle 79.png" alt="Excursão escolar"/><div class="tag">Saída Pedagógica</div></div>
+      <div class="tile t5"><img src="Rectangle 80.png" alt="Viagem de formatura"/><div class="tag">Formatura</div></div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ── Reveal on scroll ────────────────────────────────
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(e=>e.classList.add('in')); return; }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(e => io.observe(e));
+})();
+
+// ── Gallery ─────────────────────────────────────────
+(function(){
+  const big = document.getElementById('galBig');
+  const s1  = document.getElementById('galSmall1');
+  const s2  = document.getElementById('galSmall2');
+  const txt = document.getElementById('galText');
+  const aut = document.getElementById('galAuthor');
+  const wrap= document.getElementById('galTestimonial');
+  if (!big) return;
+
+  const slides = [
+    {
+      big:'Rectangle 79.png', s1:'Rectangle 80.png', s2:'Rectangle 81.png',
+      text:'Sou apaixonada pelo trabalho impecavelmente estruturado e, ao mesmo tempo, flexível na personalização das excursões. Fomos extremamente bem atendidos em todas as etapas, e o resultado foi incrível: alunos e pais simplesmente adoraram a experiência!',
+      author:'Caroline Braga — Coordenadora'
+    },
+    {
+      big:'Frame 509.png', s1:'Frame 509-1.png', s2:'Frame 509-2.png',
+      text:'Mantemos essa parceria a alguns anos porque prezamos pela qualidade e isso se confirma nos transporte, lanche e toda entrega da empresa. A equipe demonstra competência, cuidado e responsabilidade em todas as etapas da excursão. A cada experiência, o padrão se mantém alto e sempre surpreende positivamente.',
+      author:'Flávia Soraia — Proprietária'
+    },
+    {
+      big:'Frame 510-1.png', s1:'Frame 510-2.png', s2:'Frame 509.png',
+      text:'A organização da Zero9 é sensacional. Já participamos de diversas excursões e, em todas, fomos muito bem atendidos. Possuem carta de exclusividade e toda documentação para aprovação da Caixa escolar o que sempre facilita e trás segurança na prestação de contas.',
+      author:'Fernanda Dourado — Vice diretora EMEI Belmonte'
+    }
+  ];
+
+  let i = 0;
+
+  function fade(out) {
+    [big, s1, s2, wrap].forEach(el => el.style.opacity = out ? '0' : '1');
+  }
+
+  function go(dir) {
+    i = (i + dir + slides.length) % slides.length;
+    fade(true);
+    setTimeout(() => {
+      const sl = slides[i];
+      big.src = sl.big; s1.src = sl.s1; s2.src = sl.s2;
+      txt.textContent = sl.text; aut.textContent = sl.author;
+      fade(false);
+    }, 160);
+  }
+
+  document.getElementById('galPrev').addEventListener('click', () => go(-1));
+  document.getElementById('galNext').addEventListener('click', () => go(1));
+})();
+
+// ── FAQ Accordion ───────────────────────────────────
+(function(){
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+      btn.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+})();
+</script>
 </body>
 </html>
