@@ -902,9 +902,15 @@
       .solution-card { padding: 24px 20px 20px; }
       .solution-card h3 { font-size: 18px; }
       .solution-card p { font-size: 13px; }
-      .mosaic { grid-template-columns: 1fr 1fr; }
-      .t1 { grid-column: 1 / span 2; }
-      .t3, .t4 { grid-column: auto; }
+      .mosaic {
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: 200px;
+        gap: 10px;
+      }
+      .t1, .t2, .t3, .t4, .t5 {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+      }
       .form-row { grid-template-columns: 1fr; }
     }
 
