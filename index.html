@@ -85,12 +85,18 @@
 
     .hero-left {
       max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 0;
+      margin-top: -40px;
       animation: fadeUp .6s ease both;
     }
 
     .hero-logo {
       width: 58px; height: 58px;
       margin-bottom: 20px;
+      margin-top: -20px;
       filter: drop-shadow(0 2px 8px rgba(0,0,0,.4));
       animation: float 4s ease-in-out infinite;
     }
@@ -111,6 +117,8 @@
       padding: 5px 12px;
       border-radius: 4px;
       margin-bottom: 18px;
+      margin-left: 0;
+      align-self: flex-start;
     }
 
     .hero h1 {
@@ -145,11 +153,11 @@
     }
 
     .hero-right p {
-      font-size: 12px;
-      color: rgba(255,255,255,.88);
-      font-weight: 500;
-      line-height: 1.4;
-      max-width: 230px;
+      font-size: 15px;
+      color: rgba(255,255,255,.92);
+      font-weight: 700;
+      line-height: 1.5;
+      max-width: 250px;
     }
 
     /* ── BOTÃO WHATSAPP ───────────────────────────────── */
@@ -192,8 +200,13 @@
       gap: 0;
       min-height: 72px;
       align-items: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
     }
+
+    .orange-bar::-webkit-scrollbar { display: none; }
 
     .orange-item {
       display: flex;
@@ -207,6 +220,7 @@
       position: relative;
       letter-spacing: .3px;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
     .orange-item + .orange-item::before {
@@ -884,8 +898,10 @@
       .section-cards { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-left: var(--pad); padding-right: var(--pad); scroll-snap-type: x mandatory; gap: 16px; }
       .section-cards::-webkit-scrollbar { display: none; }
       .card { flex-shrink: 0; scroll-snap-align: center; width: 290px; }
-      .orange-bar { overflow-x: auto; justify-content: flex-start; }
-      .orange-bar::-webkit-scrollbar { display: none; }
+      .solutions { grid-template-columns: 1fr !important; gap: 16px; }
+      .solution-card { padding: 24px 20px 20px; }
+      .solution-card h3 { font-size: 18px; }
+      .solution-card p { font-size: 13px; }
       .mosaic { grid-template-columns: 1fr 1fr; }
       .t1 { grid-column: 1 / span 2; }
       .t3, .t4 { grid-column: auto; }
