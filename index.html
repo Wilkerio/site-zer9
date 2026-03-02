@@ -605,27 +605,37 @@
       margin: 0 auto;
     }
 
-    .client-placeholder {
+    .client-logo-item {
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 10px;
-      height: 72px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(255,255,255,.75);
-      text-align: center;
-      padding: 10px 12px;
-      line-height: 1.4;
-      transition: background .2s, border-color .2s;
+      padding: 12px;
+      transition: background .2s, border-color .2s, transform .2s;
       cursor: default;
     }
 
-    .client-placeholder:hover {
-      background: rgba(255,255,255,.14);
-      border-color: rgba(255,255,255,.25);
+    .client-logo-item:hover {
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.3);
+      transform: translateY(-2px);
+    }
+
+    .client-logo-item img {
+      max-width: 100%;
+      max-height: 52px;
+      object-fit: contain;
+      filter: grayscale(1) brightness(1.8);
+      opacity: .75;
+      transition: filter .3s, opacity .3s;
+    }
+
+    .client-logo-item:hover img {
+      filter: grayscale(0) brightness(1);
+      opacity: 1;
     }
 
     @media (max-width: 960px) {
@@ -633,8 +643,9 @@
     }
 
     @media (max-width: 640px) {
-      .clients-logos { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .client-placeholder { height: 60px; font-size: 10px; }
+      .clients-logos { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .client-logo-item { height: 64px; padding: 8px; }
+      .client-logo-item img { max-height: 40px; }
     }
 
     /* ── FAQ ──────────────────────────────────────────── */
@@ -1156,19 +1167,19 @@
     <h2>Conheça alguns de nossos clientes</h2>
     <p>Escolas públicas e privadas de toda Minas Gerais que já confiam na Zero9</p>
     <div class="clients-logos">
-      <div class="client-placeholder">Colégio Jean Piaget</div>
-      <div class="client-placeholder">Colégio Sistema</div>
-      <div class="client-placeholder">Colégio Bernoulli</div>
-      <div class="client-placeholder">Colégio Coleguium</div>
-      <div class="client-placeholder">Colégio SES</div>
-      <div class="client-placeholder">Colégio CEC</div>
-      <div class="client-placeholder">Colégio Crescer</div>
-      <div class="client-placeholder">Colégio Maple Bear</div>
-      <div class="client-placeholder">I.E Planalto</div>
-      <div class="client-placeholder">Colégio Aprimorar</div>
-      <div class="client-placeholder">Col. Sagrado Coração Congonhas</div>
-      <div class="client-placeholder">Col. Nossa Senhora das Dores</div>
-      <div class="client-placeholder">Col. Sagrado Coração Contagem</div>
+      <div class="client-logo-item"><img src="images/Aprimorar.png" alt="Colégio Aprimorar"/></div>
+      <div class="client-logo-item"><img src="images/Bernoulli.png" alt="Colégio Bernoulli"/></div>
+      <div class="client-logo-item"><img src="images/CEC.png"       alt="Colégio CEC"/></div>
+      <div class="client-logo-item"><img src="images/CNSD.png"      alt="Colégio Nossa Senhora das Dores"/></div>
+      <div class="client-logo-item"><img src="images/Coleguim.png"  alt="Colégio Coleguium"/></div>
+      <div class="client-logo-item"><img src="images/Crescer.png"   alt="Colégio Crescer"/></div>
+      <div class="client-logo-item"><img src="images/CSCJ.png"      alt="Colégio Sagrado Coração de Jesus"/></div>
+      <div class="client-logo-item"><img src="images/IEP.png"       alt="I.E Planalto"/></div>
+      <div class="client-logo-item"><img src="images/JP.png"        alt="Colégio Jean Piaget"/></div>
+      <div class="client-logo-item"><img src="images/Maple.png"     alt="Colégio Maple Bear"/></div>
+      <div class="client-logo-item"><img src="images/Sagrado.png"   alt="Colégio Sagrado Coração Contagem"/></div>
+      <div class="client-logo-item"><img src="images/SES.png"       alt="Colégio SES"/></div>
+      <div class="client-logo-item"><img src="images/Sistema.png"   alt="Colégio Sistema"/></div>
     </div>
   </section>
 
