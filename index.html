@@ -580,7 +580,7 @@
 
     /* ── CLIENTES / ESCOLAS ───────────────────────────── */
     .clients-section {
-      background: var(--white);
+      background: var(--green-3);
       padding: 64px var(--pad);
       text-align: center;
     }
@@ -588,49 +588,53 @@
     .clients-section h2 {
       font-family: var(--font-display);
       font-size: clamp(22px, 2.5vw, 30px);
-      color: var(--green-3); font-weight: 900;
+      color: #fff; font-weight: 900;
       margin-bottom: 10px;
     }
 
     .clients-section p {
-      font-size: 14px; color: var(--text-sub);
+      font-size: 14px; color: rgba(255,255,255,.65);
       margin-bottom: 48px;
     }
 
     .clients-logos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 32px 48px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
       max-width: 900px;
       margin: 0 auto;
     }
 
-    .client-logo {
-      width: 120px; height: 60px;
-      display: flex; align-items: center; justify-content: center;
-      opacity: .55;
-      filter: grayscale(1);
-      transition: opacity .3s, filter .3s;
-    }
-
-    .client-logo:hover { opacity: 1; filter: grayscale(0); }
-
-    .client-logo img {
-      max-width: 100%; max-height: 100%;
-      object-fit: contain;
-    }
-
-    /* Logo placeholder (para quando não há arquivo de imagem) */
     .client-placeholder {
-      background: var(--gray-bg);
-      border-radius: 8px;
-      width: 120px; height: 52px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700;
-      color: var(--text-sub); text-align: center;
-      padding: 6px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.75);
+      text-align: center;
+      padding: 10px 12px;
+      line-height: 1.4;
+      transition: background .2s, border-color .2s;
+      cursor: default;
+    }
+
+    .client-placeholder:hover {
+      background: rgba(255,255,255,.14);
+      border-color: rgba(255,255,255,.25);
+    }
+
+    @media (max-width: 960px) {
+      .clients-logos { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .clients-logos { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .client-placeholder { height: 60px; font-size: 10px; }
     }
 
     /* ── FAQ ──────────────────────────────────────────── */
@@ -1152,21 +1156,20 @@
     <h2>Conheça alguns de nossos clientes</h2>
     <p>Escolas públicas e privadas de toda Minas Gerais que já confiam na Zero9</p>
     <div class="clients-logos">
-      <div class="client-placeholder">Colégio<br/>Jean Piaget</div>
-      <div class="client-placeholder">Colégio<br/>Sistema</div>
-      <div class="client-placeholder">Colégio<br/>Bernoulli</div>
-      <div class="client-placeholder">Colégio<br/>Coleguium</div>
-      <div class="client-placeholder">Colégio<br/>SES</div>
-      <div class="client-placeholder">Colégio<br/>CEC</div>
-      <div class="client-placeholder">Colégio<br/>Crescer</div>
-      <div class="client-placeholder">Colégio<br/>Maple Bear</div>
-      <div class="client-placeholder">I.E<br/>Planalto</div>
-      <div class="client-placeholder">Colégio<br/>Aprimorar</div>
-      <div class="client-placeholder">Colégio Sagrado<br/>Coração de Jesus<br/>Congonhas</div>
-      <div class="client-placeholder">Colégio Nossa<br/>Senhora das Dores</div>
-      <div class="client-placeholder">Colégio Sagrado<br/>Coração de Jesus<br/>Contagem</div>
+      <div class="client-placeholder">Colégio Jean Piaget</div>
+      <div class="client-placeholder">Colégio Sistema</div>
+      <div class="client-placeholder">Colégio Bernoulli</div>
+      <div class="client-placeholder">Colégio Coleguium</div>
+      <div class="client-placeholder">Colégio SES</div>
+      <div class="client-placeholder">Colégio CEC</div>
+      <div class="client-placeholder">Colégio Crescer</div>
+      <div class="client-placeholder">Colégio Maple Bear</div>
+      <div class="client-placeholder">I.E Planalto</div>
+      <div class="client-placeholder">Colégio Aprimorar</div>
+      <div class="client-placeholder">Col. Sagrado Coração Congonhas</div>
+      <div class="client-placeholder">Col. Nossa Senhora das Dores</div>
+      <div class="client-placeholder">Col. Sagrado Coração Contagem</div>
     </div>
-    <p style="margin-top:32px;font-size:13px;color:#999;font-style:italic;">* Substitua os cards pelos logos reais das escolas para produção</p>
   </section>
 
   <!-- ══ FAQ ═══════════════════════════════════════════ -->
