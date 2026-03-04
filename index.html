@@ -312,7 +312,7 @@
 
     /* ── TURISMO PEDAGÓGICO ───────────────────────────── */
     .pedagogy-section {
-      background: var(--gray-bg);
+      background: var(--green-2);
       padding: 72px var(--pad);
     }
 
@@ -338,12 +338,12 @@
       font-family: var(--font-display);
       font-size: clamp(26px, 3vw, 38px);
       font-weight: 900; line-height: 1.2;
-      color: var(--green-3);
+      color: #fff;
       margin-bottom: 20px;
     }
 
     .pedagogy-left p {
-      font-size: 15px; color: var(--text-sub);
+      font-size: 15px; color: rgba(255,255,255,.82);
       line-height: 1.75; margin-bottom: 16px;
     }
 
@@ -355,7 +355,7 @@
 
     .pedagogy-highlights li {
       display: flex; align-items: flex-start; gap: 12px;
-      font-size: 14px; color: var(--text); font-weight: 500;
+      font-size: 14px; color: rgba(255,255,255,.9); font-weight: 500;
     }
 
     .pedagogy-highlights li .star {
@@ -498,7 +498,7 @@
 
     /* ── SOLUÇÕES ─────────────────────────────────────── */
     .solutions-wrap {
-      background: var(--gray-bg);
+      background: var(--green-2);
       padding: 72px var(--pad);
     }
 
@@ -510,7 +510,11 @@
     .solutions-wrap .sec-head h2 {
       font-family: var(--font-display);
       font-size: clamp(26px, 3vw, 36px);
-      color: var(--green-3); font-weight: 900;
+      color: #fff; font-weight: 900;
+    }
+
+    .solutions-wrap .sec-head p {
+      color: rgba(255,255,255,.7);
     }
 
     .solutions {
@@ -522,13 +526,13 @@
     }
 
     .solution-card {
-      background: #fff;
-      border: 2px solid var(--green);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.15);
       border-radius: var(--radius);
       padding: 36px 32px 28px;
       display: flex; flex-direction: column;
       gap: 10px;
-      transition: transform .3s, box-shadow .3s;
+      transition: transform .3s, box-shadow .3s, background .3s;
       position: relative;
       overflow: hidden;
     }
@@ -537,28 +541,29 @@
       content: "";
       position: absolute; top: 0; left: 0;
       width: 4px; height: 100%;
-      background: var(--green);
+      background: var(--orange);
     }
 
     .solution-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0,0,0,.1);
+      background: rgba(255,255,255,.1);
+      box-shadow: 0 10px 28px rgba(0,0,0,.2);
     }
 
     .solution-card .sol-label {
       font-size: 10px; font-weight: 800;
       letter-spacing: 2px; text-transform: uppercase;
-      color: var(--orange-2);
+      color: var(--orange);
     }
 
     .solution-card h3 {
       font-family: var(--font-display);
       font-size: 22px; font-weight: 800;
-      color: var(--green-3); line-height: 1.2;
+      color: #fff; line-height: 1.2;
     }
 
     .solution-card p {
-      font-size: 14px; color: var(--text-sub);
+      font-size: 14px; color: rgba(255,255,255,.75);
       line-height: 1.7; flex: 1;
     }
 
@@ -606,7 +611,7 @@
     }
 
     .client-logo-item {
-      background: rgba(255,255,255,.08);
+      background: #fff;
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 10px;
       height: 80px;
@@ -614,22 +619,23 @@
       align-items: center;
       justify-content: center;
       padding: 12px;
-      transition: background .2s, border-color .2s, transform .2s;
+      transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
       cursor: default;
     }
 
     .client-logo-item:hover {
       background: #fff;
-      border-color: rgba(255,255,255,.3);
+      border-color: var(--orange);
       transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,.15);
     }
 
     .client-logo-item img {
       max-width: 100%;
       max-height: 52px;
       object-fit: contain;
-      filter: grayscale(1) brightness(1.8);
-      opacity: .75;
+      filter: grayscale(0) brightness(1);
+      opacity: .9;
       transition: filter .3s, opacity .3s;
     }
 
@@ -651,7 +657,7 @@
     /* ── FAQ ──────────────────────────────────────────── */
     .faq-section {
       background: var(--green-3);
-      padding: 72px var(--pad);
+      padding: 56px var(--pad);
       color: #fff;
     }
 
@@ -662,7 +668,7 @@
 
     .faq-header {
       text-align: center;
-      margin-bottom: 52px;
+      margin-bottom: 32px;
     }
 
     .faq-header .section-label {
@@ -759,7 +765,6 @@
     }
 
     /* Negrito com cor laranja em fundos claros */
-    .pedagogy-left strong,
     .solution-card strong,
     .clients-section strong {
       color: var(--orange-2);
@@ -767,6 +772,8 @@
     }
 
     /* Negrito branco-vivo em fundos escuros */
+    .pedagogy-left strong,
+    .solution-card strong,
     .faq-answer-inner strong,
     .cta p strong,
     .hero-sub strong,
@@ -897,9 +904,15 @@
       .hero-inner { flex-direction: column; align-items: flex-start; padding-top: 60px; }
       .hero-right { position: static; width: 100%; }
       .hero { height: auto; padding-bottom: 40px; }
-      .pedagogy-inner { grid-template-columns: 1fr; }
-      .pedagogy-visual { grid-template-columns: 1fr 1fr; grid-template-rows: 180px; }
-      .pedagogy-visual .pv-main { grid-column: 1 / span 2; }
+      .pedagogy-inner { grid-template-columns: 1fr; gap: 32px; }
+      .pedagogy-visual { 
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 180px;
+        gap: 10px;
+      }
+      .pedagogy-visual .pv-main { grid-column: 1 / span 2; grid-row: 1; height: 200px; }
+      .pedagogy-visual .pv-side { height: 160px; }
       .solutions { grid-template-columns: 1fr; }
       .contact-inner { flex-direction: column; }
       .map { width: 100%; }
@@ -907,6 +920,8 @@
       .cta .btn-wa { width: 100%; }
       .gallery-wrapper { flex-direction: column; }
       .arrow { display: none; }
+      .faq-header { margin-bottom: 24px; }
+      .pedagogy-section { padding: 40px var(--pad); }
     }
 
     @media (max-width: 640px) {
@@ -1245,10 +1260,8 @@
   <!-- ══ CONTATO ═══════════════════════════════════════ -->
   <section class="contact reveal">
     <div class="contact-inner">
-      <div class="map">
-        <iframe title="Localização Zero9" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.0!2d-43.9345!3d-19.9191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDU1JzA4LjgiUyA0M8KwNTYnMDQuMiJX!5e0!3m2!1spt-BR!2sbr!4v1710000000000">
-        </iframe>
+      <div class="map" style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);">
+        <img src="Group 7.png" alt="Zero9 Logo" style="width:180px; filter: drop-shadow(0 4px 24px rgba(0,0,0,.4));"/>
       </div>
       <div class="contact-form">
         <h3>Fale com a Zero9</h3>
