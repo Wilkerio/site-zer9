@@ -41,7 +41,115 @@
 
     .page { max-width: var(--maxw); margin: 0 auto; }
 
-    /* ── HERO ─────────────────────────────────────────── */
+    /* ── NAVBAR ───────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: #fff;
+      padding: 12px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 16px rgba(0,0,0,.1);
+    }
+
+    .navbar-logo {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .navbar-menu a {
+      color: var(--green-3);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .navbar-menu a:hover { color: var(--orange); }
+
+    .navbar-cta {
+      background: var(--wa);
+      color: #fff !important;
+      padding: 9px 20px;
+      border-radius: 50px;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-cta:hover { background: #1fb958 !important; color: #fff !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--green-3);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: #fff;
+      z-index: 999;
+      padding: 20px var(--pad) 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      color: var(--green-3);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    .mobile-nav .mobile-cta {
+      background: var(--wa);
+      color: #fff !important;
+      text-align: center;
+      padding: 14px;
+      border-radius: 50px;
+      margin-top: 8px;
+      border-bottom: none !important;
+    }
+
+    /* Empurrar conteúdo para baixo da navbar */
+    body { padding-top: 72px; }
+
+    @media (max-width: 768px) {
+      .navbar-menu { display: none; }
+      .hamburger { display: flex; }
+    }
     .hero {
       position: relative;
       height: 600px;
@@ -94,16 +202,16 @@
     }
 
     .hero-logo {
-      width: 58px; height: 58px;
-      margin-bottom: 20px;
+      width: 100px; height: 100px;
+      margin-bottom: 24px;
       margin-top: -20px;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,.4));
+      filter: drop-shadow(0 0 18px rgba(242,164,0,.5)) drop-shadow(0 4px 12px rgba(0,0,0,.5));
       animation: float 4s ease-in-out infinite;
     }
 
     @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(-4px); }
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-6px) scale(1.03); }
     }
 
     .hero-eyebrow {
@@ -389,7 +497,7 @@
 
     /* ── GALLERY / DEPOIMENTOS ────────────────────────── */
     .gallery-section {
-      background: #EFEFEF;
+      background: var(--green);
       padding: 72px 0;
       text-align: center;
     }
@@ -403,7 +511,7 @@
     .gallery-header h2 {
       font-family: var(--font-display);
       font-size: clamp(24px, 2.8vw, 34px);
-      color: var(--green-3); font-weight: 900;
+      color: #fff; font-weight: 900;
     }
 
     .gallery-wrapper {
@@ -417,10 +525,10 @@
 
     .gallery-container {
       flex: 1;
-      background: #fff;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
       border-radius: 18px;
       padding: 36px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.1);
       display: flex; flex-direction: column;
       gap: 24px;
     }
@@ -446,23 +554,23 @@
     }
 
     .testimonial {
-      font-size: 14px; color: #555; line-height: 1.75;
+      font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.75;
       text-align: center; transition: opacity .18s;
     }
 
-    .testimonial strong { color: #333; font-weight: 700; }
+    .testimonial strong { color: #fff; font-weight: 700; }
 
     .arrow {
       width: 48px; height: 48px;
-      border-radius: 50%; background: #fff;
-      box-shadow: 0 4px 14px rgba(0,0,0,.12);
+      border-radius: 50%; background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
       display: flex; align-items: center; justify-content: center;
-      color: #999; font-weight: 700; font-size: 24px;
-      flex-shrink: 0; cursor: pointer; border: none;
-      transition: transform .2s, box-shadow .2s;
+      color: #fff; font-weight: 700; font-size: 24px;
+      flex-shrink: 0; cursor: pointer;
+      transition: transform .2s, background .2s;
     }
 
-    .arrow:hover { transform: scale(1.08); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+    .arrow:hover { transform: scale(1.08); background: rgba(255,255,255,.25); }
 
     /* ── CTA GREEN ────────────────────────────────────── */
     .cta {
@@ -797,13 +905,12 @@
       max-width: var(--maxw);
       margin: 0 auto;
       display: flex; gap: 32px;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
     .map {
-      width: 380px; height: 340px;
+      width: 380px;
       border-radius: 12px; overflow: hidden;
-      box-shadow: 0 12px 32px rgba(0,0,0,.25);
       flex-shrink: 0;
     }
 
@@ -953,6 +1060,33 @@
 <body>
 <div class="page">
 
+  <!-- ══ NAVBAR ════════════════════════════════════════ -->
+  <nav class="navbar">
+    <img src="Group 7.png" alt="Zero9 Logo" class="navbar-logo" />
+    <div class="navbar-menu">
+      <a href="#excursoes">Excursões</a>
+      <a href="#vantagens">Vantagens</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/553135001713" class="navbar-cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══ MOBILE NAV ═══════════════════════════════════ -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#excursoes">Excursões</a>
+    <a href="#vantagens">Vantagens</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://wa.me/553135001713" class="mobile-cta">💬 Falar no WhatsApp</a>
+  </div>
+
   <!-- ══ HERO ══════════════════════════════════════════ -->
   <section class="hero reveal">
     <div class="hero-inner">
@@ -985,7 +1119,7 @@
   </div>
 
   <!-- ══ CARDS: 3 PRINCIPAIS EXCURSÕES ════════════════ -->
-  <div class="top-block">
+  <div class="top-block" id="excursoes">
     <section class="section-cards reveal">
 
       <div class="card" tabindex="0">
@@ -1051,10 +1185,10 @@
   </section>
 
   <!-- ══ DEPOIMENTOS ═══════════════════════════════════ -->
-  <section class="gallery-section reveal">
+  <section class="gallery-section reveal" id="depoimentos">
     <div class="gallery-header">
       <h2>Confiança se constrói com resultados reais.</h2>
-      <p style="font-size:15px;color:#555;margin-top:8px;">Veja o que dizem as instituições que confiaram na Zero9</p>
+      <p style="font-size:15px;color:rgba(255,255,255,.75);margin-top:8px;">Veja o que dizem as instituições que confiaram na Zero9</p>
     </div>
     <div class="gallery-wrapper">
       <button class="arrow" id="galPrev" aria-label="Anterior">‹</button>
@@ -1087,10 +1221,10 @@
   </section>
 
   <!-- ══ SOLUÇÕES / VANTAGENS ══════════════════════════ -->
-  <section class="solutions-wrap reveal">
+  <section class="solutions-wrap reveal" id="vantagens">
     <div class="sec-head">
       <h2>Confira todas as vantagens</h2>
-      <p style="font-size:14px;color:var(--text-sub);margin-top:10px;max-width:520px;margin-left:auto;margin-right:auto;text-align:center;">Cada detalhe da excursão pensado para a escola, os alunos e as famílias.</p>
+      <p style="font-size:14px;color:rgba(255,255,255,.7);margin-top:10px;max-width:520px;margin-left:auto;margin-right:auto;text-align:center;">Cada detalhe da excursão pensado para a escola, os alunos e as famílias.</p>
     </div>
     <div class="solutions" style="grid-template-columns:repeat(2,1fr);">
 
@@ -1199,7 +1333,7 @@
   </section>
 
   <!-- ══ FAQ ═══════════════════════════════════════════ -->
-  <section class="faq-section reveal">
+  <section class="faq-section reveal" id="faq">
     <div class="faq-inner">
       <div class="faq-header">
         <span class="section-label">Dúvidas Frequentes</span>
@@ -1260,8 +1394,39 @@
   <!-- ══ CONTATO ═══════════════════════════════════════ -->
   <section class="contact reveal">
     <div class="contact-inner">
-      <div class="map" style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);">
-        <img src="Group 7.png" alt="Zero9 Logo" style="width:180px; filter: drop-shadow(0 4px 24px rgba(0,0,0,.4));"/>
+      <div class="map" style="
+        display:flex; 
+        align-items:center; 
+        justify-content:center;
+        background: linear-gradient(135deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.04) 100%);
+        border: 1px solid rgba(255,255,255,.2);
+        border-radius: 16px;
+        padding: 32px;
+        align-self: stretch;
+        position: relative;
+        overflow: hidden;
+      ">
+        <!-- brilho decorativo de fundo -->
+        <div style="
+          position:absolute; width:280px; height:280px;
+          background: radial-gradient(circle, rgba(242,164,0,.15) 0%, transparent 70%);
+          top:50%; left:50%; transform:translate(-50%,-50%);
+          pointer-events:none;
+        "></div>
+        <div style="
+          background: #fff;
+          border-radius: 20px;
+          padding: 40px 52px;
+          box-shadow: 0 16px 48px rgba(0,0,0,.25), 0 0 0 1px rgba(242,164,0,.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          position: relative;
+          z-index: 1;
+        ">
+          <img src="cadastur-logo-0fade506dc39935332d5d38e9e0276dd0b02ed16635eaf3f25344bedf6e2a1ee.png" alt="Zero9 Logo" style="width:540px; max-width:100%; display:block;"/>
+        </div>
       </div>
       <div class="contact-form">
         <h3>Fale com a Zero9</h3>
@@ -1365,6 +1530,26 @@
     });
   });
 })();
+  // ── HAMBURGER ──────────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+    const spans = hamburger.querySelectorAll('span');
+    if (mobileNav.classList.contains('open')) {
+      spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    });
+  });
 </script>
 </body>
 </html>
