@@ -55,7 +55,7 @@
     }
 
     .navbar-logo {
-      height: 48px;
+      height: 56px;
       width: auto;
       display: block;
     }
@@ -95,15 +95,19 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      background: none;
+      background: var(--green-3);
       border: none;
-      padding: 4px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      transition: background .2s;
     }
+
+    .hamburger:hover { background: var(--green); }
 
     .hamburger span {
       display: block;
-      width: 24px; height: 2px;
-      background: var(--green-3);
+      width: 22px; height: 2px;
+      background: #fff;
       border-radius: 2px;
       transition: all .3s;
     }
@@ -112,24 +116,27 @@
       display: none;
       position: fixed;
       top: 72px; left: 0; right: 0;
-      background: #fff;
+      background: var(--green-3);
       z-index: 999;
-      padding: 20px var(--pad) 28px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      padding: 24px var(--pad) 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
       flex-direction: column;
-      gap: 16px;
+      gap: 4px;
     }
 
     .mobile-nav.open { display: flex; }
 
     .mobile-nav a {
-      color: var(--green-3);
-      font-size: 15px;
+      color: rgba(255,255,255,.9);
+      font-size: 16px;
       font-weight: 600;
       text-decoration: none;
-      padding: 10px 0;
-      border-bottom: 1px solid #f0f0f0;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      transition: color .2s;
     }
+
+    .mobile-nav a:hover { color: var(--orange); }
 
     .mobile-nav a:last-child { border-bottom: none; }
 
@@ -137,10 +144,13 @@
       background: var(--wa);
       color: #fff !important;
       text-align: center;
-      padding: 14px;
+      padding: 16px;
       border-radius: 50px;
-      margin-top: 8px;
+      margin-top: 12px;
       border-bottom: none !important;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 4px 16px rgba(37,211,102,.3);
     }
 
     /* Empurrar conteúdo para baixo da navbar */
@@ -706,7 +716,7 @@
     }
 
     .clients-section p {
-      font-size: 14px; color: rgba(255,255,255,.65);
+      font-size: 14px; color: rgba(255,255,255,.82);
       margin-bottom: 48px;
     }
 
@@ -820,16 +830,16 @@
     .faq-question .faq-num {
       font-family: var(--font-display);
       font-size: 22px; font-weight: 900;
-      color: var(--orange); opacity: .7; flex-shrink: 0;
+      color: var(--orange); flex-shrink: 0;
     }
 
     .faq-toggle {
       width: 32px; height: 32px;
       border-radius: 50%;
-      background: rgba(255,255,255,.1);
+      background: rgba(255,255,255,.15);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      font-size: 20px; color: rgba(255,255,255,.7);
+      font-size: 20px; color: #fff;
       transition: transform .3s, background .3s;
     }
 
@@ -872,21 +882,19 @@
       color: inherit;
     }
 
-    /* Negrito com cor laranja em fundos claros */
-    .solution-card strong,
-    .clients-section strong {
-      color: var(--orange-2);
-      font-weight: 700;
-    }
-
-    /* Negrito branco-vivo em fundos escuros */
+    /* Negrito laranja em fundos escuros */
     .pedagogy-left strong,
-    .solution-card strong,
     .faq-answer-inner strong,
     .cta p strong,
     .hero-sub strong,
     .contact-form strong {
-      color: #fff;
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* Negrito laranja cards de vantagem */
+    .solution-card strong {
+      color: var(--orange);
       font-weight: 700;
     }
 
@@ -1425,7 +1433,7 @@
           position: relative;
           z-index: 1;
         ">
-          <img src="cadastur-logo-0fade506dc39935332d5d38e9e0276dd0b02ed16635eaf3f25344bedf6e2a1ee.png" alt="Zero9 Logo" style="width:540px; max-width:100%; display:block;"/>
+          <img src="Group 7.png" alt="Zero9 Logo" style="width:240px; max-width:100%; display:block;"/>
         </div>
       </div>
       <div class="contact-form">
