@@ -19,9 +19,10 @@
       --green:    #3F5F2D;
       --green-2:  #2E5B38;
       --green-3:  #1E3D22;
-      --orange:   #F2A400;
-      --orange-2: #E5940A;
-      --wa:       #25D366;
+      --orange:   #FFCC66;
+      --orange-2: #E5B24A;
+      --orange-dark: #9A5E00;
+      --wa:       #1D7A3E;
       --white:    #FFFFFF;
       --gray-bg:  #F4F4F2;
       --text:     #2A2A2A;
@@ -91,7 +92,7 @@
       gap: 8px;
     }
 
-    .navbar-cta:hover { background: #1fb958 !important; color: #fff !important; }
+    .navbar-cta:hover { background: #18703A !important; color: #fff !important; }
 
     .hamburger {
       display: none;
@@ -229,7 +230,7 @@
 
     .hero-eyebrow {
       display: inline-block;
-      background: var(--orange);
+      background: var(--orange-dark);
       color: #fff;
       font-size: 11px;
       font-weight: 700;
@@ -314,7 +315,7 @@
 
     /* ── ORANGE BAR (Marquee) ─────────────────────────── */
     .orange-bar {
-      background: var(--orange);
+      background: var(--orange-dark);
       min-height: 72px;
       overflow: hidden;
       position: relative;
@@ -491,7 +492,7 @@
 
     .pedagogy-left .section-label {
       display: inline-block;
-      background: var(--orange);
+      background: var(--orange-dark);
       color: #fff; font-size: 10px;
       font-weight: 800; letter-spacing: 2px;
       text-transform: uppercase; padding: 5px 11px;
@@ -731,7 +732,7 @@
 
     /* ── CTA GREEN ────────────────────────────────────── */
     .cta {
-      background: #0EA54C;
+      background: var(--wa);
       padding: 52px var(--pad);
       display: flex;
       justify-content: space-between;
@@ -759,7 +760,7 @@
     }
 
     .cta .btn-wa .wa-ico svg path { fill: var(--wa); }
-    .cta .btn-wa { background: #fff; color: #0EA54C; }
+    .cta .btn-wa { background: #fff; color: var(--wa); }
 
     /* ── SOLUÇÕES ─────────────────────────────────────── */
     .solutions-wrap {
@@ -949,7 +950,7 @@
 
     .faq-header .section-label {
       display: inline-block;
-      background: var(--orange);
+      background: var(--orange-dark);
       color: #fff; font-size: 10px;
       font-weight: 800; letter-spacing: 2px;
       text-transform: uppercase; padding: 5px 11px;
@@ -1003,7 +1004,7 @@
 
     .faq-item.open .faq-toggle {
       transform: rotate(45deg);
-      background: var(--orange);
+      background: var(--orange-dark);
       color: #fff;
     }
 
@@ -1083,59 +1084,42 @@
     .map iframe { width: 100%; height: 100%; border: 0; display: block; }
 
     .contact-info-side {
-      width: 380px;
+      width: 500px;
       flex-shrink: 0;
+    }
+
+    .cadastur-card {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      background: linear-gradient(135deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 16px;
-      padding: 40px 32px;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      background: #ececec;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.06);
+      padding: 56px 42px;
+      text-align: center;
     }
 
     .contact-logo {
-      width: 120px;
+      width: min(420px, 100%);
       height: auto;
       object-fit: contain;
     }
 
-    .contact-info-side > h3 {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.3;
+    .cadastur-note {
+      font-size: 17px;
+      line-height: 1.55;
+      color: #2f3136;
+      font-weight: 400;
+      max-width: 640px;
+      margin: 0;
     }
 
-    .contact-info-side > p {
-      font-size: 14px;
-      color: rgba(255,255,255,.7);
-      line-height: 1.6;
+    .cadastur-note strong {
+      font-weight: 800;
+      color: #1f2227;
     }
-
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 8px;
-    }
-
-    .contact-detail-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-      color: rgba(255,255,255,.85);
-    }
-
-    .contact-detail-item a {
-      color: rgba(255,255,255,.85);
-      text-decoration: none;
-      transition: color .2s;
-    }
-
-    .contact-detail-item a:hover { color: var(--orange); }
 
     .contact-form { flex: 1; min-width: 0; }
 
@@ -1169,7 +1153,7 @@
       border-color: rgba(255,255,255,.3);
     }
 
-    .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,.45); }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,.77); }
 
     .field textarea { height: 90px; resize: none; margin-bottom: 14px; }
 
@@ -1332,7 +1316,7 @@
     }
 
     .footer-social a:hover {
-      background: var(--orange); border-color: var(--orange);
+      background: var(--orange-dark); border-color: var(--orange-dark);
       transform: translateY(-2px);
     }
 
@@ -1360,7 +1344,7 @@
       text-align: center;
     }
 
-    .footer-bottom span { font-size: 12px; color: rgba(255,255,255,.35); }
+    .footer-bottom span { font-size: 12px; color: rgba(255,255,255,.55); }
 
     /* ── FLOATING WHATSAPP ────────────────────────────── */
     .wa-float {
@@ -1408,8 +1392,12 @@
       .wa-float { bottom: 20px; right: 20px; width: 54px; height: 54px; }
       .wa-float svg { width: 26px; height: 26px; }
       .testimonial-arrow { width: 34px; height: 34px; font-size: 16px; }
-      .contact-info-side { width: 100%; padding: 28px 24px; }
-      .contact-logo { width: 100px; }
+      .contact-info-side {
+        width: 100%;
+      }
+      .cadastur-card { padding: 34px 22px; gap: 18px; }
+      .contact-logo { width: min(300px, 100%); }
+      .cadastur-note { font-size: clamp(14px, 3.8vw, 17px); }
     }
 
     @media (max-width: 480px) {
@@ -1441,7 +1429,7 @@
 
   <!-- ══ NAVBAR ════════════════════════════════════════ -->
   <nav class="navbar">
-    <img src="fotos-drive/ZERO9  LOGOS/LOGO BRANCA.png" alt="Zero9 Logo" class="navbar-logo" />
+    <img src="/GRUPO ZERO 9 logo 2 (1).png" alt="Zero9 Logo" class="navbar-logo" />
     <div class="navbar-menu">
       <a href="#excursoes">Excursões</a>
       <a href="#vantagens">Vantagens</a>
@@ -1929,28 +1917,9 @@
   <!-- ══ CONTATO ═══════════════════════════════════════ -->
   <section class="contact reveal">
     <div class="contact-inner">
-      <div class="contact-info-side">
-        <img src="cadastur-logo-0fade506dc39935332d5d38e9e0276dd0b02ed16635eaf3f25344bedf6e2a1ee.png" alt="Zero9 Logo" class="contact-logo" loading="lazy" decoding="async" />
-        <h3>Vamos planejar juntos?</h3>
-        <p>Entre em contato e receba um roteiro personalizado para a sua escola.</p>
-        <div class="contact-details">
-          <div class="contact-detail-item">
-            <span>📞</span>
-            <a href="https://wa.me/553184799725">(31) 8479-9725</a>
-          </div>
-          <div class="contact-detail-item">
-            <span>📍</span>
-            <span>Belo Horizonte – MG</span>
-          </div>
-          <div class="contact-detail-item">
-            <span>🕐</span>
-            <span>Seg–Sex · 8h às 18h</span>
-          </div>
-          <div class="contact-detail-item">
-            <span>📸</span>
-            <a href="https://www.instagram.com/zero9turismo" target="_blank" rel="noopener noreferrer">@zero9turismo</a>
-          </div>
-        </div>
+      <div class="contact-info-side cadastur-card">
+        <img src="cadastur-logo-0fade506dc39935332d5d38e9e0276dd0b02ed16635eaf3f25344bedf6e2a1ee.png" alt="Logo Cadastur" class="contact-logo" loading="lazy" decoding="async" />
+        <p class="cadastur-note">Somos registrados no Cadastur, o <strong>que assegura nossa qualificação e regularidade</strong> no setor de turismo. Esse selo do Ministério do Turismo garante a você mais segurança e confiança ao escolher nossos serviços. Aproveite sua viagem com tranquilidade!</p>
       </div>
       <div class="contact-form">
         <h3>Fale com a Zero9</h3>
@@ -2108,3 +2077,4 @@
 </script>
 </body>
 </html>
+
