@@ -6,7 +6,10 @@
   <title>Zero9 – Turismo Pedagógico em Minas Gerais</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="preload" as="image" href="Frame.png" fetchpriority="high">
   <style>
     *, *::before, *::after {
       margin: 0; padding: 0; box-sizing: border-box;
@@ -46,12 +49,12 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: #fff;
+      background: var(--green-3);
       padding: 12px var(--pad);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 16px rgba(0,0,0,.1);
+      box-shadow: 0 2px 20px rgba(0,0,0,.25);
     }
 
     .navbar-logo {
@@ -67,7 +70,7 @@
     }
 
     .navbar-menu a {
-      color: var(--green-3);
+      color: rgba(255,255,255,.9);
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
@@ -95,14 +98,14 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      background: var(--green-3);
+      background: rgba(255,255,255,.1);
       border: none;
       padding: 10px 12px;
       border-radius: 10px;
       transition: background .2s;
     }
 
-    .hamburger:hover { background: var(--green); }
+    .hamburger:hover { background: rgba(255,255,255,.2); }
 
     .hamburger span {
       display: block;
@@ -309,22 +312,29 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── ORANGE BAR ───────────────────────────────────── */
+    /* ── ORANGE BAR (Marquee) ─────────────────────────── */
     .orange-bar {
       background: var(--orange);
-      padding: 0 var(--pad);
-      display: flex;
-      justify-content: center;
-      gap: 0;
       min-height: 72px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
       align-items: center;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
     }
 
-    .orange-bar::-webkit-scrollbar { display: none; }
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      animation: marquee 18s linear infinite;
+      width: max-content;
+    }
+
+    .orange-bar:hover .marquee-track { animation-play-state: paused; }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     .orange-item {
       display: flex;
@@ -355,78 +365,114 @@
       flex-shrink: 0;
     }
 
-    /* ── SEÇÃO VERDE: CARDS ───────────────────────────── */
-    .top-block { background: var(--green); }
-
-    .section-cards {
-      padding: 52px var(--pad) 60px;
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
+    /* ── SEÇÃO EXCURSÕES ─────────────────────────────── */
+    .excursions-section {
+      background: var(--green);
+      padding: 60px var(--pad) 72px;
     }
 
-    .card {
-      width: 320px;
+    .excursions-header {
+      text-align: center;
+      margin-bottom: 44px;
+      max-width: var(--maxw);
+      margin-left: auto; margin-right: auto;
+    }
+
+    .excursions-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 900; color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .excursions-header p {
+      font-size: 15px; color: rgba(255,255,255,.75);
+      max-width: 560px; margin: 0 auto;
+    }
+
+    .excursions-grid {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .dest-card {
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 12px 32px rgba(0,0,0,.22);
       position: relative;
       cursor: pointer;
+      height: 340px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.22);
       transition: transform .3s, box-shadow .3s;
     }
 
-    .card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,.3); }
+    .dest-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+    }
 
-    .card img {
-      width: 100%; height: 370px;
+    .dest-card img {
+      width: 100%; height: 100%;
       object-fit: cover; display: block;
-      transition: transform .6s ease;
+      transition: transform .5s ease;
     }
 
-    .card:hover img { transform: scale(1.07); }
+    .dest-card:hover img { transform: scale(1.08); }
 
-    .card-title {
-      position: absolute; top: 0; left: 0; right: 0;
-      padding: 18px 20px;
-      font-family: var(--font-display);
-      font-size: 18px; font-weight: 800;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0,0,0,.5);
-      z-index: 2;
-    }
-
-    .card-overlay {
+    .dest-info {
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.1) 0%, rgba(0,0,0,.85) 100%);
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.82) 100%);
       display: flex; flex-direction: column;
       justify-content: flex-end;
-      padding: 28px 24px;
-      opacity: 0; transition: opacity .35s;
-      z-index: 3;
+      padding: 22px;
+      transition: background .35s;
     }
 
-    .card:hover .card-overlay,
-    .card:focus-within .card-overlay { opacity: 1; }
-
-    .card-overlay p {
-      color: #fff; font-size: 13px; line-height: 1.65;
-      margin-bottom: 16px; font-weight: 400;
+    .dest-card:hover .dest-info {
+      background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.9) 100%);
     }
 
-    .card-btn {
+    .dest-name {
+      font-family: var(--font-display);
+      font-size: 17px; font-weight: 800;
+      color: #fff; margin-bottom: 6px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.5);
+    }
+
+    .dest-desc {
+      font-size: 12.5px; color: rgba(255,255,255,.88);
+      line-height: 1.6;
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height .35s, opacity .3s, margin .3s;
+      margin-bottom: 0;
+    }
+
+    .dest-card:hover .dest-desc,
+    .dest-card:focus-within .dest-desc {
+      max-height: 100px; opacity: 1; margin-bottom: 12px;
+    }
+
+    .dest-cta {
       background: #fff; color: #222;
-      padding: 10px 20px; border-radius: 8px;
-      font-size: 13px; font-weight: 700;
+      padding: 9px 16px; border-radius: 8px;
+      font-size: 12px; font-weight: 700;
       text-decoration: none; display: inline-flex;
-      align-items: center; gap: 8px;
-      transition: background .2s, color .2s, transform .2s;
+      align-items: center; gap: 7px;
       align-self: flex-start;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .3s, transform .3s, background .2s, color .2s;
     }
 
-    .card-btn:hover { background: var(--wa); color: #fff; transform: translateY(-1px); }
-    .card-btn svg { width: 16px; height: 16px; }
-    .card-btn svg path { fill: currentColor; }
+    .dest-card:hover .dest-cta,
+    .dest-card:focus-within .dest-cta {
+      opacity: 1; transform: translateY(0);
+    }
+
+    .dest-cta:hover { background: var(--wa); color: #fff; }
+    .dest-cta svg { width: 14px; height: 14px; }
+    .dest-cta svg path { fill: currentColor; }
 
     /* ── TURISMO PEDAGÓGICO ───────────────────────────── */
     .pedagogy-section {
@@ -505,82 +551,183 @@
 
     .pedagogy-visual img:hover { transform: scale(1.04); }
 
-    /* ── GALLERY / DEPOIMENTOS ────────────────────────── */
-    .gallery-section {
-      background: var(--green);
-      padding: 72px 0;
-      text-align: center;
+    /* Render sections below the fold on demand to improve first paint */
+    .excursions-section,
+    .pedagogy-section,
+    .testimonials-section,
+    .cta,
+    .solutions-wrap,
+    .clients-section,
+    .faq-section,
+    .contact,
+    .final,
+    .site-footer {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 900px;
     }
 
-    .gallery-header {
+    /* ── DEPOIMENTOS / TESTIMONIALS ──────────────────── */
+    .testimonials-section {
+      background: var(--green);
+      padding: 80px 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .testimonials-header {
       max-width: var(--maxw);
-      margin: 0 auto 40px;
+      margin: 0 auto 52px;
       padding: 0 var(--pad);
     }
 
-    .gallery-header h2 {
+    .testimonials-header h2 {
       font-family: var(--font-display);
-      font-size: clamp(24px, 2.8vw, 34px);
+      font-size: clamp(24px, 3.2vw, 36px);
       color: #fff; font-weight: 900;
     }
 
-    .gallery-wrapper {
-      max-width: 900px;
+    .testimonials-header p {
+      font-size: 15px;
+      color: rgba(255,255,255,.7);
+      margin-top: 10px;
+    }
+
+    .testimonials-slider {
+      max-width: 800px;
       margin: 0 auto;
       padding: 0 var(--pad);
+      position: relative;
+    }
+
+    .testimonial-track {
+      position: relative;
+      min-height: 440px;
+    }
+
+    .testimonial-card {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      opacity: 0;
+      transition: opacity .55s ease;
+      pointer-events: none;
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 24px;
     }
 
-    .gallery-container {
-      flex: 1;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 18px;
-      padding: 36px;
-      display: flex; flex-direction: column;
-      gap: 24px;
+    .testimonial-card.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-rows: 120px 120px;
-      gap: 12px;
+    .testimonial-photos {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
     }
 
-    .gallery-grid .big {
-      grid-column: 1; grid-row: 1 / 3;
-      width: 100%; height: 100%;
-      object-fit: cover; border-radius: 10px;
-      transition: opacity .18s;
+    .testimonial-photos img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 3px solid rgba(255,255,255,.18);
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+      transition: transform .3s ease;
     }
 
-    .gallery-grid .small {
-      width: 100%; height: 100%;
-      object-fit: cover; border-radius: 10px;
-      transition: opacity .18s;
+    .testimonial-photos img:hover {
+      transform: scale(1.05);
     }
 
-    .testimonial {
-      font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.75;
-      text-align: center; transition: opacity .18s;
+    .testimonial-quote {
+      position: relative;
+      max-width: 620px;
     }
 
-    .testimonial strong { color: #fff; font-weight: 700; }
+    .testimonial-quote::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 80px;
+      color: var(--orange);
+      line-height: 1;
+      display: block;
+      margin-bottom: -16px;
+      opacity: .8;
+    }
 
-    .arrow {
-      width: 48px; height: 48px;
-      border-radius: 50%; background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.25);
+    .testimonial-text {
+      font-size: 16px;
+      color: rgba(255,255,255,.92);
+      line-height: 1.85;
+      font-style: italic;
+    }
+
+    .testimonial-author-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .testimonial-author-info .author-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .testimonial-author-info .author-role {
+      font-size: 13px;
+      color: var(--orange);
+      font-weight: 600;
+      letter-spacing: .3px;
+    }
+
+    .testimonial-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .testimonial-dots {
+      display: flex;
+      gap: 10px;
+    }
+
+    .testimonial-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      border: none;
+      cursor: pointer;
+      transition: background .3s, transform .3s;
+      padding: 0;
+    }
+
+    .testimonial-dot.active {
+      background: var(--orange);
+      transform: scale(1.3);
+    }
+
+    .testimonial-arrow {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-weight: 700; font-size: 24px;
-      flex-shrink: 0; cursor: pointer;
-      transition: transform .2s, background .2s;
+      color: #fff; font-size: 20px; font-weight: 700;
+      cursor: pointer; flex-shrink: 0;
+      transition: background .2s, transform .2s;
     }
 
-    .arrow:hover { transform: scale(1.08); background: rgba(255,255,255,.25); }
+    .testimonial-arrow:hover {
+      background: rgba(255,255,255,.22);
+      transform: scale(1.08);
+    }
 
     /* ── CTA GREEN ────────────────────────────────────── */
     .cta {
@@ -721,11 +868,27 @@
     }
 
     .clients-logos {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      max-width: 900px;
+      overflow: hidden;
+      position: relative;
+      max-width: 1100px;
       margin: 0 auto;
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+
+    .clients-track {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      animation: clientsScroll 35s linear infinite;
+      width: max-content;
+    }
+
+    .clients-logos:hover .clients-track { animation-play-state: paused; }
+
+    @keyframes clientsScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     .client-logo-item {
@@ -762,12 +925,7 @@
       opacity: 1;
     }
 
-    @media (max-width: 960px) {
-      .clients-logos { grid-template-columns: repeat(4, 1fr); }
-    }
-
     @media (max-width: 640px) {
-      .clients-logos { grid-template-columns: repeat(3, 1fr); gap: 10px; }
       .client-logo-item { height: 64px; padding: 8px; }
       .client-logo-item img { max-height: 40px; }
     }
@@ -924,6 +1082,61 @@
 
     .map iframe { width: 100%; height: 100%; border: 0; display: block; }
 
+    .contact-info-side {
+      width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 16px;
+      padding: 40px 32px;
+    }
+
+    .contact-logo {
+      width: 120px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .contact-info-side > h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .contact-info-side > p {
+      font-size: 14px;
+      color: rgba(255,255,255,.7);
+      line-height: 1.6;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,.85);
+    }
+
+    .contact-detail-item a {
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .contact-detail-item a:hover { color: var(--orange); }
+
     .contact-form { flex: 1; min-width: 0; }
 
     .contact-form h3 {
@@ -1011,8 +1224,17 @@
     .t5 { grid-column: 3; }
 
     /* ── REVEAL ───────────────────────────────────────── */
-    .reveal { opacity: 0; transform: translateY(16px); }
-    .reveal.in { opacity: 1; transform: translateY(0); transition: opacity .55s ease, transform .55s ease; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 960px) {
@@ -1028,21 +1250,27 @@
       }
       .pedagogy-visual .pv-main { grid-column: 1 / span 2; grid-row: 1; height: 200px; }
       .pedagogy-visual .pv-side { height: 160px; }
+      .excursions-grid { grid-template-columns: repeat(3, 1fr); }
+      .dest-desc { max-height: 100px; opacity: 1; margin-bottom: 12px; }
+      .dest-cta { opacity: 1; transform: translateY(0); }
+      .dest-card .dest-info { background: linear-gradient(180deg, transparent 25%, rgba(0,0,0,.88) 100%); }
       .solutions { grid-template-columns: 1fr; }
       .contact-inner { flex-direction: column; }
       .map { width: 100%; }
       .cta { flex-direction: column; }
       .cta .btn-wa { width: 100%; }
-      .gallery-wrapper { flex-direction: column; }
-      .arrow { display: none; }
+      .testimonial-track { min-height: 380px; }
+      .testimonial-photos img { width: 90px; height: 90px; }
+      .testimonial-arrow { width: 38px; height: 38px; font-size: 18px; }
       .faq-header { margin-bottom: 24px; }
       .pedagogy-section { padding: 40px var(--pad); }
     }
 
     @media (max-width: 640px) {
-      .section-cards { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-left: var(--pad); padding-right: var(--pad); scroll-snap-type: x mandatory; gap: 16px; }
-      .section-cards::-webkit-scrollbar { display: none; }
-      .card { flex-shrink: 0; scroll-snap-align: center; width: 290px; }
+      .excursions-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .dest-card { height: 280px; }
+      .dest-name { font-size: 15px; }
+      .dest-desc { font-size: 11.5px; }
       .solutions { grid-template-columns: 1fr !important; gap: 16px; }
       .solution-card { padding: 24px 20px 20px; }
       .solution-card h3 { font-size: 18px; }
@@ -1062,6 +1290,149 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .reveal { opacity: 1; transform: none; }
+      .marquee-track, .clients-track { animation: none !important; }
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    .site-footer {
+      background: linear-gradient(180deg, var(--green-3) 0%, #0F2914 100%);
+    }
+
+    .footer-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 56px var(--pad) 40px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+    }
+
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo {
+      width: clamp(100px, 16vw, 160px);
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .footer-brand > p {
+      font-size: 13px; color: rgba(255,255,255,.55);
+      line-height: 1.75; max-width: 320px;
+    }
+
+    .footer-social { display: flex; gap: 12px; margin-top: 8px; }
+    .footer-social a {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .2s, border-color .2s;
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      background: var(--orange); border-color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .footer-social a svg { width: 18px; height: 18px; fill: #fff; }
+
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-links h4 {
+      font-family: var(--font-display);
+      font-size: 15px; font-weight: 800; color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .footer-links a, .footer-links span {
+      font-size: 13px; color: rgba(255,255,255,.55);
+      text-decoration: none; transition: color .2s;
+      line-height: 1.6;
+    }
+
+    .footer-links a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 20px var(--pad);
+      text-align: center;
+    }
+
+    .footer-bottom span { font-size: 12px; color: rgba(255,255,255,.35); }
+
+    /* ── FLOATING WHATSAPP ────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 60px; height: 60px;
+      background: var(--wa);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,.4), 0 2px 8px rgba(0,0,0,.15);
+      z-index: 999;
+      transition: transform .3s, box-shadow .3s;
+      animation: waPulse 2.5s ease-in-out infinite;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.12);
+      box-shadow: 0 8px 32px rgba(37,211,102,.55);
+      animation-play-state: paused;
+    }
+
+    .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,.4); }
+      50% { box-shadow: 0 6px 32px rgba(37,211,102,.6), 0 0 0 14px rgba(37,211,102,.08); }
+    }
+
+    /* ── MOBILE ENHANCEMENTS ─────────────────────────── */
+    @media (max-width: 640px) {
+      .hero-logo { width: 72px; height: 72px; }
+      .hero h1 { font-size: clamp(26px, 7vw, 34px); }
+      .hero-sub { font-size: 14px; }
+      .hero-right p { font-size: 14px; }
+      .testimonial-track { min-height: 420px; }
+      .testimonial-photos img { width: 80px; height: 80px; border-radius: 12px; }
+      .testimonial-text { font-size: 14px; }
+      .cta h2, .cta p { text-align: center; }
+      .pedagogy-visual .pv-main { height: 180px; }
+      .pedagogy-visual .pv-side { height: 140px; }
+      .faq-question { padding: 18px 16px; gap: 12px; }
+      .faq-question span { font-size: 14px; }
+      .faq-answer-inner { padding: 0 16px 20px; font-size: 13px; }
+      .footer-inner { grid-template-columns: 1fr !important; gap: 28px; }
+      .wa-float { bottom: 20px; right: 20px; width: 54px; height: 54px; }
+      .wa-float svg { width: 26px; height: 26px; }
+      .testimonial-arrow { width: 34px; height: 34px; font-size: 16px; }
+      .contact-info-side { width: 100%; padding: 28px 24px; }
+      .contact-logo { width: 100px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-left { margin-top: 0; }
+      .hero-eyebrow { font-size: 10px; padding: 4px 10px; }
+      .hero h1 { font-size: clamp(22px, 6.5vw, 28px); }
+      .btn-wa { font-size: 13px; padding: 12px 18px; }
+      .excursions-grid { grid-template-columns: 1fr !important; }
+      .dest-card { height: 260px; }
+      .excursions-section { padding: 40px 16px 48px; }
+      .orange-item { padding: 14px 18px; font-size: 12px; }
+      .solution-card { padding: 20px 16px 16px; }
+      .contact-inner { gap: 20px; }
+      .testimonial-track { min-height: 440px; }
+      .testimonial-photos img { width: 70px; height: 70px; }
+      .testimonial-text { font-size: 13px; line-height: 1.7; }
+      .testimonials-section { padding: 48px 0; }
+    }
+
+    @media (max-width: 960px) and (min-width: 641px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+      .contact-info-side { width: 100%; }
     }
   </style>
 </head>
@@ -1070,13 +1441,13 @@
 
   <!-- ══ NAVBAR ════════════════════════════════════════ -->
   <nav class="navbar">
-    <img src="Group 7.png" alt="Zero9 Logo" class="navbar-logo" />
+    <img src="fotos-drive/ZERO9  LOGOS/LOGO BRANCA.png" alt="Zero9 Logo" class="navbar-logo" />
     <div class="navbar-menu">
       <a href="#excursoes">Excursões</a>
       <a href="#vantagens">Vantagens</a>
       <a href="#depoimentos">Depoimentos</a>
       <a href="#faq">FAQ</a>
-      <a href="https://wa.me/553135001713" class="navbar-cta">
+      <a href="https://wa.me/553184799725" class="navbar-cta">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
         Falar no WhatsApp
       </a>
@@ -1092,14 +1463,14 @@
     <a href="#vantagens">Vantagens</a>
     <a href="#depoimentos">Depoimentos</a>
     <a href="#faq">FAQ</a>
-    <a href="https://wa.me/553135001713" class="mobile-cta">💬 Falar no WhatsApp</a>
+    <a href="https://wa.me/553184799725" class="mobile-cta">💬 Falar no WhatsApp</a>
   </div>
 
   <!-- ══ HERO ══════════════════════════════════════════ -->
   <section class="hero reveal">
     <div class="hero-inner">
       <div class="hero-left">
-        <img class="hero-logo" src="Group 7.png" alt="Zero9 Logo" />
+        <img class="hero-logo" src="fotos-drive/ZERO9  LOGOS/GRUPO Z9 bussola.png" alt="Zero9 Logo" width="100" height="100" fetchpriority="high" decoding="async" />
         <span class="hero-eyebrow">Turismo Pedagógico · Minas Gerais</span>
         <h1>
           Sua escola pode ir<br/>
@@ -1110,7 +1481,7 @@
       </div>
       <div class="hero-right">
         <p>Planeje já a visita escolar inesquecível da sua turma</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Olá%2C%20quero%20saber%20mais%20sobre%20as%20excursões%20Zero9" class="btn-wa">
+        <a href="https://wa.me/553184799725?text=Olá%2C%20quero%20saber%20mais%20sobre%20as%20excursões%20Zero9" class="btn-wa">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Conversar pelo WhatsApp
         </a>
@@ -1120,54 +1491,148 @@
 
   <!-- ══ ORANGE BAR ═══════════════════════════════════ -->
   <div class="orange-bar reveal">
-    <div class="orange-item"><span class="orange-dot"></span>Excursões Escolares</div>
-    <div class="orange-item"><span class="orange-dot"></span>Turismo Pedagógico</div>
-    <div class="orange-item"><span class="orange-dot"></span>Viagens de Formatura</div>
-    <div class="orange-item"><span class="orange-dot"></span>Roteiros de Lazer</div>
+    <div class="marquee-track">
+      <div class="orange-item"><span class="orange-dot"></span>Excursões Escolares</div>
+      <div class="orange-item"><span class="orange-dot"></span>Turismo Pedagógico</div>
+      <div class="orange-item"><span class="orange-dot"></span>Viagens de Formatura</div>
+      <div class="orange-item"><span class="orange-dot"></span>Roteiros de Lazer</div>
+      <div class="orange-item"><span class="orange-dot"></span>Excursões Escolares</div>
+      <div class="orange-item"><span class="orange-dot"></span>Turismo Pedagógico</div>
+      <div class="orange-item"><span class="orange-dot"></span>Viagens de Formatura</div>
+      <div class="orange-item"><span class="orange-dot"></span>Roteiros de Lazer</div>
+    </div>
   </div>
 
-  <!-- ══ CARDS: 3 PRINCIPAIS EXCURSÕES ════════════════ -->
-  <div class="top-block" id="excursoes">
-    <section class="section-cards reveal">
+  <!-- ══ EXCURSÕES: 10 DESTINOS ═════════════════════ -->
+  <section class="excursions-section reveal" id="excursoes">
+    <div class="excursions-header">
+      <h2>Conheça nossos destinos</h2>
+      <p>Excursões pedagógicas planejadas para cada faixa etária, com roteiros que transformam aprendizado em experiência.</p>
+    </div>
+    <div class="excursions-grid">
 
-      <div class="card" tabindex="0">
-        <div class="card-title">🌿 Fazendinha</div>
-        <img src="Frame 509.png" alt="Fazendinha – excursão escolar com animais e natureza" />
-        <div class="card-overlay">
-          <p>Mais de 25 espécies, passeio de trator e atividades ao ar livre. Ideal para despertar o amor pela natureza e criar memórias afetivas que acompanham a infância.</p>
-          <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20a%20Fazendinha" class="card-btn">
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/Ihotim/Foto 03-09-2025, 11 28 21.jpg" alt="Instituto Inhotim" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Instituto Inhotim</h3>
+          <p class="dest-desc">Maior museu a céu aberto da América Latina, com arte contemporânea e jardim botânico exuberante.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Instituto%20Inhotim" class="dest-cta">
             <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
             Saiba mais
           </a>
         </div>
       </div>
 
-      <div class="card" tabindex="0">
-        <div class="card-title">🦘 Park Trampolim</div>
-        <img src="Frame 509-1.png" alt="Park Trampolim – excursão de lazer e integração" />
-        <div class="card-overlay">
-          <p>Ambiente seguro e monitorado para pular, brincar e fortalecer os laços de amizade. Ideal para promover integração, bem-estar e um dia de pura alegria.</p>
-          <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20o%20Park%20Trampolim" class="card-btn">
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/OuroPreto/Foto 04-06-2025, 10 16 18.jpg" alt="Ouro Preto" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Ouro Preto</h3>
+          <p class="dest-desc">Patrimônio da Humanidade com igrejas barrocas, história do ciclo do ouro e cultura mineira viva.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Ouro%20Preto" class="dest-cta">
             <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
             Saiba mais
           </a>
         </div>
       </div>
 
-      <div class="card" tabindex="0">
-        <div class="card-title">🏙️ City Tour BH</div>
-        <img src="Frame 509-2.png" alt="City Tour Belo Horizonte – excursão cultural e pedagógica" />
-        <div class="card-overlay">
-          <p>Imersão pedagógica por BH com degustação no Mercado Central. Ideal para enriquecer conteúdos de História, Geografia e Cultura — aprendizado vivo e significativo.</p>
-          <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20o%20City%20Tour%20BH" class="card-btn">
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/CityTour/Foto 20-08-2025, 14 36 09.jpg" alt="City Tour BH" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">City Tour BH</h3>
+          <p class="dest-desc">Imersão cultural por Belo Horizonte com Mercado Central, Praça da Liberdade e pontos históricos.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20o%20City%20Tour%20BH" class="dest-cta">
             <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
             Saiba mais
           </a>
         </div>
       </div>
 
-    </section>
-  </div>
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/GrutaReiDoMato/Foto 24-09-2024, 10 24 12.jpg" alt="Gruta Rei do Mato" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Gruta Rei do Mato</h3>
+          <p class="dest-desc">Caverna com estalactites e estalagmites impressionantes, unindo aventura e aprendizado geológico.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Gruta%20Rei%20do%20Mato" class="dest-cta">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
+
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/MuseuPUC/Foto 11-06-2025, 14 49 42.jpg" alt="Museu PUC Minas" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Museu PUC Minas</h3>
+          <p class="dest-desc">Museu de Ciências Naturais com fósseis, dinossauros e exposições interativas sobre a vida na Terra.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Museu%20PUC%20Minas" class="dest-cta">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
+
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/Trampolim/Foto 06-08-2025, 08 13 43 (1).jpg" alt="Trampolim Parque" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Trampolim Parque</h3>
+          <p class="dest-desc">Parque de trampolins com ambiente seguro para diversão, integração e bem-estar dos alunos.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Trampolim%20Parque" class="dest-cta">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
+
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/GrutaDoBau/Foto 07-10-2025, 11 17 28.jpg" alt="Gruta do Baú" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Gruta do Baú</h3>
+          <p class="dest-desc">Formações rochosas milenares em trilha ecológica que ensina geologia e preservação ambiental.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Gruta%20do%20Bau" class="dest-cta">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
+
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/Begreen/Foto 22-10-2025, 15 07 35.jpg" alt="BeGreen Pampulha" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">BeGreen Pampulha</h3>
+          <p class="dest-desc">Horta urbana e espaço sustentável que ensina alimentação saudável e consciência ambiental.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20BeGreen%20Pampulha" class="dest-cta">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
+
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/AquarioPequetitos/Foto 26-09-2025, 14 42 55.jpg" alt="Aquário Pequetitos" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Aquário Pequetitos</h3>
+          <p class="dest-desc">Aquário interativo com diversas espécies marinhas e atividades educativas para pequenos exploradores.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Aquario%20Pequetitos" class="dest-cta">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
+
+      <div class="dest-card" tabindex="0">
+        <img src="fotos-drive/MuseuDosBrinquedos/Foto 09-06-2025, 14 38 26.jpg" alt="Museu dos Brinquedos" loading="lazy" />
+        <div class="dest-info">
+          <h3 class="dest-name">Museu dos Brinquedos</h3>
+          <p class="dest-desc">Acervo lúdico que resgata a história dos brinquedos e estimula a criatividade infantil.</p>
+          <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20Museu%20dos%20Brinquedos" class="dest-cta">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+            Saiba mais
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ══ TURISMO PEDAGÓGICO ════════════════════════════ -->
   <section class="pedagogy-section reveal">
@@ -1185,34 +1650,81 @@
         </ul>
       </div>
       <div class="pedagogy-visual">
-        <img src="Frame 510-1.png" alt="Alunos em excursão pedagógica" class="pv-main" />
-        <img src="Rectangle 80.png" alt="Atividade escolar ao ar livre" class="pv-side" />
-        <img src="Frame 509.png" alt="Crianças aprendendo na natureza" class="pv-side" />
+        <img src="fotos-drive/Ihotim/Foto 03-09-2025, 10 17 56.jpg" alt="Alunos em excursão pedagógica" class="pv-main" loading="lazy" decoding="async" />
+        <img src="fotos-drive/GrutaReiDoMato/Foto 27-08-2025, 15 54 31.jpg" alt="Atividade escolar ao ar livre" class="pv-side" loading="lazy" decoding="async" />
+        <img src="fotos-drive/Begreen/Foto 22-10-2025, 15 41 17.jpg" alt="Crianças aprendendo na natureza" class="pv-side" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
 
   <!-- ══ DEPOIMENTOS ═══════════════════════════════════ -->
-  <section class="gallery-section reveal" id="depoimentos">
-    <div class="gallery-header">
+  <section class="testimonials-section reveal" id="depoimentos">
+    <div class="testimonials-header">
       <h2>Confiança se constrói com resultados reais.</h2>
-      <p style="font-size:15px;color:rgba(255,255,255,.75);margin-top:8px;">Veja o que dizem as instituições que confiaram na Zero9</p>
+      <p>Veja o que dizem as instituições que confiaram na Zero9</p>
     </div>
-    <div class="gallery-wrapper">
-      <button class="arrow" id="galPrev" aria-label="Anterior">‹</button>
-      <div class="gallery-container">
-        <div class="gallery-grid">
-          <img src="Rectangle 79.png" alt="Galeria – imagem principal" class="big" id="galBig" />
-          <img src="Rectangle 80.png" alt="Galeria – imagem 2" class="small" id="galSmall1" />
-          <img src="Rectangle 81.png" alt="Galeria – imagem 3" class="small" id="galSmall2" />
+    <div class="testimonials-slider">
+      <div class="testimonial-track">
+
+        <!-- Slide 1 -->
+        <div class="testimonial-card active">
+          <div class="testimonial-photos">
+            <img src="fotos-drive/Ihotim/Foto 03-09-2025, 11 08 18.jpg" alt="Excursão Inhotim" loading="lazy" />
+            <img src="fotos-drive/GrutaReiDoMato/Foto 10-06-2025, 09 37 45.jpg" alt="Excursão Gruta Rei do Mato" loading="lazy" />
+            <img src="fotos-drive/AquarioPequetitos/Foto 26-09-2025, 14 42 55.jpg" alt="Excursão Aquário Pequetitos" loading="lazy" />
+          </div>
+          <div class="testimonial-quote">
+            <p class="testimonial-text">Sou apaixonada pelo trabalho impecavelmente estruturado e, ao mesmo tempo, flexível na personalização das excursões. Fomos extremamente bem atendidos em todas as etapas, e o resultado foi incrível: alunos e pais simplesmente adoraram a experiência!</p>
+          </div>
+          <div class="testimonial-author-info">
+            <span class="author-name">Caroline Braga</span>
+            <span class="author-role">Coordenadora</span>
+          </div>
         </div>
-        <div class="testimonial" id="galTestimonial">
-          <span id="galText">Sou apaixonada pelo trabalho impecavelmente estruturado e, ao mesmo tempo, flexível na personalização das excursões. Fomos extremamente bem atendidos em todas as etapas, e o resultado foi incrível: alunos e pais simplesmente adoraram a experiência!</span>
-          <br/><br/>
-          <strong id="galAuthor">Caroline Braga — Coordenadora</strong>
+
+        <!-- Slide 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-photos">
+            <img src="fotos-drive/MuseuPUC/Foto 11-06-2025, 14 49 42.jpg" alt="Excursão Museu PUC" loading="lazy" />
+            <img src="fotos-drive/CityTour/Foto 20-08-2025, 14 36 09.jpg" alt="Excursão City Tour" loading="lazy" />
+            <img src="fotos-drive/Begreen/Foto 22-10-2025, 15 07 35.jpg" alt="Excursão Begreen" loading="lazy" />
+          </div>
+          <div class="testimonial-quote">
+            <p class="testimonial-text">Mantemos essa parceria a alguns anos porque prezamos pela qualidade e isso se confirma nos transporte, lanche e toda entrega da empresa. A equipe demonstra competência, cuidado e responsabilidade em todas as etapas da excursão. A cada experiência, o padrão se mantém alto e sempre surpreende positivamente.</p>
+          </div>
+          <div class="testimonial-author-info">
+            <span class="author-name">Flávia Soraia</span>
+            <span class="author-role">Proprietária</span>
+          </div>
         </div>
+
+        <!-- Slide 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-photos">
+            <img src="fotos-drive/OuroPreto/Foto 04-06-2025, 10 16 18.jpg" alt="Excursão Ouro Preto" loading="lazy" />
+            <img src="fotos-drive/Trampolim/Foto 06-08-2025, 08 13 44.jpg" alt="Excursão Trampolim" loading="lazy" />
+            <img src="fotos-drive/MuseuDosBrinquedos/Foto 09-06-2025, 14 38 55.jpg" alt="Excursão Museu dos Brinquedos" loading="lazy" />
+          </div>
+          <div class="testimonial-quote">
+            <p class="testimonial-text">A organização da Zero9 é sensacional. Já participamos de diversas excursões e, em todas, fomos muito bem atendidos. Possuem carta de exclusividade e toda documentação para aprovação da Caixa escolar o que sempre facilita e trás segurança na prestação de contas.</p>
+          </div>
+          <div class="testimonial-author-info">
+            <span class="author-name">Fernanda Dourado</span>
+            <span class="author-role">Vice-diretora — EMEI Belmonte</span>
+          </div>
+        </div>
+
       </div>
-      <button class="arrow" id="galNext" aria-label="Próximo">›</button>
+
+      <div class="testimonial-nav">
+        <button class="testimonial-arrow" id="tmPrev" aria-label="Anterior">&#8249;</button>
+        <div class="testimonial-dots">
+          <button class="testimonial-dot active" data-idx="0" aria-label="Depoimento 1"></button>
+          <button class="testimonial-dot" data-idx="1" aria-label="Depoimento 2"></button>
+          <button class="testimonial-dot" data-idx="2" aria-label="Depoimento 3"></button>
+        </div>
+        <button class="testimonial-arrow" id="tmNext" aria-label="Próximo">&#8250;</button>
+      </div>
     </div>
   </section>
 
@@ -1222,7 +1734,7 @@
       <h2>Pronto para levar sua escola além da sala de aula?</h2>
       <p>Atendemos <strong>escolas públicas e privadas em toda Minas Gerais</strong>. Possuímos toda a documentação exigida pela Caixa Escolar, incluindo <strong>Carta de Exclusividade</strong> — sem burocracia para a gestão escolar.</p>
     </div>
-    <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20planejar%20uma%20excursão%20com%20a%20Zero9" class="btn-wa">
+    <a href="https://wa.me/553184799725?text=Quero%20planejar%20uma%20excursão%20com%20a%20Zero9" class="btn-wa">
       <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
       Falar com um especialista
     </a>
@@ -1240,7 +1752,7 @@
         <div class="sol-label">🍔 Incluso</div>
         <h3>Lanches Deliciosos</h3>
         <p>Pacotes com <strong>opções de lanche</strong> incluídas. Nada de preocupação extra para a escola ou para os pais.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20os%20pacotes%20Zero9" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20os%20pacotes%20Zero9" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1250,7 +1762,7 @@
         <div class="sol-label">📡 Exclusivo Z9 Pass</div>
         <h3>Pulseira Localizadora</h3>
         <p>O que é importante para você, é <strong>prioridade para nós</strong>: a segurança dos seus alunos. <strong>Rastreamento em tempo real</strong> via chip durante toda a excursão.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20a%20pulseira%20localizadora" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20a%20pulseira%20localizadora" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1260,7 +1772,7 @@
         <div class="sol-label">👨‍🏫 Equipe</div>
         <h3>Monitores Capacitados</h3>
         <p><strong>Preparados para prestar todo atendimento necessário</strong>, nossa equipe é treinada em primeiros socorros e acompanha os alunos em todas as etapas da excursão.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20os%20monitores%20Zero9" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20os%20monitores%20Zero9" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1270,7 +1782,7 @@
         <div class="sol-label">🚌 Transporte</div>
         <h3>Transporte Seguro com Ar</h3>
         <p>Transporte com <strong>cinto de segurança</strong>, confortável, climatizado e com <strong>motoristas especializados</strong>. Regularizado e vistoriado para total tranquilidade.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20o%20transporte%20Zero9" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20o%20transporte%20Zero9" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1280,7 +1792,7 @@
         <div class="sol-label">📷 Memória</div>
         <h3>Fotos Exclusivas</h3>
         <p><strong>Cobertura fotográfica opcional</strong>, disponível em todos os roteiros. Os alunos levam para casa não só as memórias, mas também os registros desse dia especial.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20as%20fotos%20Zero9" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20as%20fotos%20Zero9" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1290,7 +1802,7 @@
         <div class="sol-label">🗺️ Personalizado</div>
         <h3>Roteiros Personalizados</h3>
         <p>Roteiro <strong>planejado conforme os objetivos pedagógicos da escola</strong>. Cada excursão é única, adaptada à faixa etária, disciplina e proposta pedagógica da sua instituição.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20um%20roteiro%20personalizado%20Zero9" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20um%20roteiro%20personalizado%20Zero9" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1300,7 +1812,7 @@
         <div class="sol-label">📄 Documentação</div>
         <h3>Carta de Exclusividade</h3>
         <p>Mais facilidade para sua <strong>prestação de contas com a Caixa Escolar</strong>. Possuímos toda documentação exigida, garantindo conformidade total para escolas públicas e privadas.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20a%20Carta%20de%20Exclusividade" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20a%20Carta%20de%20Exclusividade" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1310,7 +1822,7 @@
         <div class="sol-label">💳 Facilidade</div>
         <h3>Pagamento Online</h3>
         <p><strong>Condições facilitadas e pagamento ajustado à realidade escolar</strong>. Sem burocracia, sem complicação — para a escola e para as famílias dos alunos.</p>
-        <a href="https://wa.me/55XXXXXXXXXX?text=Quero%20saber%20sobre%20pagamento%20Zero9" class="btn-small">
+        <a href="https://wa.me/553184799725?text=Quero%20saber%20sobre%20pagamento%20Zero9" class="btn-small">
           <span class="wa-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg></span>
           Saber mais
         </a>
@@ -1324,19 +1836,34 @@
     <h2>Conheça alguns de nossos clientes</h2>
     <p>Escolas públicas e privadas de toda Minas Gerais que já confiam na Zero9</p>
     <div class="clients-logos">
-      <div class="client-logo-item"><img src="images/Aprimorar.png" alt="Colégio Aprimorar"/></div>
-      <div class="client-logo-item"><img src="images/Bernoulli.png" alt="Colégio Bernoulli"/></div>
-      <div class="client-logo-item"><img src="images/CEC.png"       alt="Colégio CEC"/></div>
-      <div class="client-logo-item"><img src="images/CNSD.png"      alt="Colégio Nossa Senhora das Dores"/></div>
-      <div class="client-logo-item"><img src="images/Coleguim.png"  alt="Colégio Coleguium"/></div>
-      <div class="client-logo-item"><img src="images/Crescer.png"   alt="Colégio Crescer"/></div>
-      <div class="client-logo-item"><img src="images/CSCJ.png"      alt="Colégio Sagrado Coração de Jesus"/></div>
-      <div class="client-logo-item"><img src="images/IEP.png"       alt="I.E Planalto"/></div>
-      <div class="client-logo-item"><img src="images/JP.png"        alt="Colégio Jean Piaget"/></div>
-      <div class="client-logo-item"><img src="images/Maple.png"     alt="Colégio Maple Bear"/></div>
-      <div class="client-logo-item"><img src="images/Sagrado.png"   alt="Colégio Sagrado Coração Contagem"/></div>
-      <div class="client-logo-item"><img src="images/SES.png"       alt="Colégio SES"/></div>
-      <div class="client-logo-item"><img src="images/Sistema.png"   alt="Colégio Sistema"/></div>
+      <div class="clients-track">
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Aprimorar.png" alt="Colégio Aprimorar"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Bernoulli.png" alt="Colégio Bernoulli"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/CEC.png"       alt="Colégio CEC"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/CNSD.png"      alt="Colégio Nossa Senhora das Dores"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Coleguim.png"  alt="Colégio Coleguium"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Crescer.png"   alt="Colégio Crescer"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/CSCJ.png"      alt="Colégio Sagrado Coração de Jesus"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/IEP.png"       alt="I.E Planalto"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/JP.png"        alt="Colégio Jean Piaget"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Maple.png"     alt="Colégio Maple Bear"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Sagrado.png"   alt="Colégio Sagrado Coração Contagem"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/SES.png"       alt="Colégio SES"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Sistema.png"   alt="Colégio Sistema"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Aprimorar.png" alt="Colégio Aprimorar"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Bernoulli.png" alt="Colégio Bernoulli"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/CEC.png"       alt="Colégio CEC"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/CNSD.png"      alt="Colégio Nossa Senhora das Dores"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Coleguim.png"  alt="Colégio Coleguium"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Crescer.png"   alt="Colégio Crescer"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/CSCJ.png"      alt="Colégio Sagrado Coração de Jesus"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/IEP.png"       alt="I.E Planalto"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/JP.png"        alt="Colégio Jean Piaget"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Maple.png"     alt="Colégio Maple Bear"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Sagrado.png"   alt="Colégio Sagrado Coração Contagem"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/SES.png"       alt="Colégio SES"/></div>
+        <div class="client-logo-item"><img loading="lazy" decoding="async" src="images/Sistema.png"   alt="Colégio Sistema"/></div>
+      </div>
     </div>
   </section>
 
@@ -1402,38 +1929,27 @@
   <!-- ══ CONTATO ═══════════════════════════════════════ -->
   <section class="contact reveal">
     <div class="contact-inner">
-      <div class="map" style="
-        display:flex; 
-        align-items:center; 
-        justify-content:center;
-        background: linear-gradient(135deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.04) 100%);
-        border: 1px solid rgba(255,255,255,.2);
-        border-radius: 16px;
-        padding: 32px;
-        align-self: stretch;
-        position: relative;
-        overflow: hidden;
-      ">
-        <!-- brilho decorativo de fundo -->
-        <div style="
-          position:absolute; width:280px; height:280px;
-          background: radial-gradient(circle, rgba(242,164,0,.15) 0%, transparent 70%);
-          top:50%; left:50%; transform:translate(-50%,-50%);
-          pointer-events:none;
-        "></div>
-        <div style="
-          background: #fff;
-          border-radius: 20px;
-          padding: 40px 52px;
-          box-shadow: 0 16px 48px rgba(0,0,0,.25), 0 0 0 1px rgba(242,164,0,.15);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          position: relative;
-          z-index: 1;
-        ">
-          <img src="Group 7.png" alt="Zero9 Logo" style="width:240px; max-width:100%; display:block;"/>
+      <div class="contact-info-side">
+        <img src="fotos-drive/ZERO9  LOGOS/GRUPO ZERO 9 logo.png" alt="Zero9 Logo" class="contact-logo" loading="lazy" decoding="async" />
+        <h3>Vamos planejar juntos?</h3>
+        <p>Entre em contato e receba um roteiro personalizado para a sua escola.</p>
+        <div class="contact-details">
+          <div class="contact-detail-item">
+            <span>📞</span>
+            <a href="https://wa.me/553184799725">(31) 8479-9725</a>
+          </div>
+          <div class="contact-detail-item">
+            <span>📍</span>
+            <span>Belo Horizonte – MG</span>
+          </div>
+          <div class="contact-detail-item">
+            <span>🕐</span>
+            <span>Seg–Sex · 8h às 18h</span>
+          </div>
+          <div class="contact-detail-item">
+            <span>📸</span>
+            <a href="https://www.instagram.com/zero9turismo" target="_blank" rel="noopener noreferrer">@zero9turismo</a>
+          </div>
         </div>
       </div>
       <div class="contact-form">
@@ -1456,15 +1972,54 @@
   <!-- ══ MOSAICO FINAL ═════════════════════════════════ -->
   <section class="final reveal">
     <div class="mosaic">
-      <div class="tile t1"><img src="Frame 510-1.png" alt="Excursão Fazendinha"/><div class="tag">Fazendinha</div></div>
-      <div class="tile t2"><img src="Frame 510-2.png" alt="Park Trampolim"/><div class="tag">Park Trampolim</div></div>
-      <div class="tile t3"><img src="Frame 509.png" alt="City Tour BH"/><div class="tag">City Tour BH</div></div>
-      <div class="tile t4"><img src="Rectangle 79.png" alt="Excursão escolar"/><div class="tag">Saída Pedagógica</div></div>
-      <div class="tile t5"><img src="Rectangle 80.png" alt="Viagem de formatura"/><div class="tag">Formatura</div></div>
+      <div class="tile t1"><img src="fotos-drive/Ihotim/Foto 03-09-2025, 11 36 00.jpg" alt="Excursão Inhotim" loading="lazy"/><div class="tag">Instituto Inhotim</div></div>
+      <div class="tile t2"><img src="fotos-drive/Trampolim/Foto 06-08-2025, 08 13 44.jpg" alt="Trampolim Parque" loading="lazy"/><div class="tag">Trampolim Parque</div></div>
+      <div class="tile t3"><img src="fotos-drive/OuroPreto/Foto 04-06-2025, 11 00 20.jpg" alt="Ouro Preto" loading="lazy"/><div class="tag">Ouro Preto</div></div>
+      <div class="tile t4"><img src="fotos-drive/GrutaReiDoMato/Foto 10-06-2025, 09 37 45.jpg" alt="Gruta Rei do Mato" loading="lazy"/><div class="tag">Gruta Rei do Mato</div></div>
+      <div class="tile t5"><img src="fotos-drive/MuseuPUC/Foto 06-03-2025, 14 54 18.jpg" alt="Museu PUC Minas" loading="lazy"/><div class="tag">Museu PUC Minas</div></div>
     </div>
   </section>
 
+  <!-- ══ FOOTER ════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="fotos-drive/ZERO9  LOGOS/LOGO BRANCA.png" alt="Zero9 Turismo Pedagógico" class="footer-logo" loading="lazy" decoding="async" />
+        <p>Turismo pedagógico que transforma a educação em experiências inesquecíveis para escolas de toda Minas Gerais.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/zero9turismo" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://wa.me/553184799725" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <a href="#excursoes">Excursões</a>
+        <a href="#vantagens">Vantagens</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contato</h4>
+        <a href="https://wa.me/553184799725">📞 (31) 8479-9725</a>
+        <span>📍 Belo Horizonte – MG</span>
+        <span>🕐 Seg–Sex · 8h às 18h</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zero9 Turismo Pedagógico. Todos os direitos reservados.</span>
+    </div>
+  </footer>
+
 </div>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/553184799725?text=Olá%2C%20quero%20saber%20mais%20sobre%20as%20excursões%20Zero9" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M20.5 11.9c0 4.7-3.8 8.5-8.5 8.5-1.5 0-2.9-.4-4.2-1.1L3.5 20.5l1.3-4.1c-.8-1.3-1.3-2.9-1.3-4.5 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5zm-8.5-7c-3.9 0-7 3.1-7 7 0 1.5.5 2.9 1.3 4.1l-.8 2.6 2.7-.8c1.2.7 2.5 1.1 3.8 1.1 3.9 0 7-3.1 7-7s-3.1-7-7-7zm4.1 8.6c-.1-.1-.6-.3-1-.5-.4-.2-.7-.2-.9.1-.2.3-.4.5-.5.6-.1.1-.3.1-.6 0-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.3 0-.4.1-.5l.3-.4c.1-.1.1-.3.2-.4.1-.1 0-.3 0-.5 0-.2-.5-1.2-.7-1.6-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.1 1.6 2.5 3.9 3.5.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+</a>
 
 <script>
 // ── Reveal on scroll ────────────────────────────────
@@ -1473,57 +2028,49 @@
   if (!('IntersectionObserver' in window)) { els.forEach(e=>e.classList.add('in')); return; }
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
-  els.forEach(e => io.observe(e));
+  }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+  els.forEach((e, idx) => {
+    e.style.transitionDelay = (idx * 0.04) + 's';
+    io.observe(e);
+  });
 })();
 
-// ── Gallery ─────────────────────────────────────────
+// ── Testimonials Carousel ───────────────────────────
 (function(){
-  const big = document.getElementById('galBig');
-  const s1  = document.getElementById('galSmall1');
-  const s2  = document.getElementById('galSmall2');
-  const txt = document.getElementById('galText');
-  const aut = document.getElementById('galAuthor');
-  const wrap= document.getElementById('galTestimonial');
-  if (!big) return;
+  const cards = document.querySelectorAll('.testimonial-card');
+  const dots  = document.querySelectorAll('.testimonial-dot');
+  const track = document.querySelector('.testimonial-track');
+  if (!cards.length) return;
 
-  const slides = [
-    {
-      big:'Rectangle 79.png', s1:'Rectangle 80.png', s2:'Rectangle 81.png',
-      text:'Sou apaixonada pelo trabalho impecavelmente estruturado e, ao mesmo tempo, flexível na personalização das excursões. Fomos extremamente bem atendidos em todas as etapas, e o resultado foi incrível: alunos e pais simplesmente adoraram a experiência!',
-      author:'Caroline Braga — Coordenadora'
-    },
-    {
-      big:'Frame 509.png', s1:'Frame 509-1.png', s2:'Frame 509-2.png',
-      text:'Mantemos essa parceria a alguns anos porque prezamos pela qualidade e isso se confirma nos transporte, lanche e toda entrega da empresa. A equipe demonstra competência, cuidado e responsabilidade em todas as etapas da excursão. A cada experiência, o padrão se mantém alto e sempre surpreende positivamente.',
-      author:'Flávia Soraia — Proprietária'
-    },
-    {
-      big:'Frame 510-1.png', s1:'Frame 510-2.png', s2:'Frame 509.png',
-      text:'A organização da Zero9 é sensacional. Já participamos de diversas excursões e, em todas, fomos muito bem atendidos. Possuem carta de exclusividade e toda documentação para aprovação da Caixa escolar o que sempre facilita e trás segurança na prestação de contas.',
-      author:'Fernanda Dourado — Vice diretora EMEI Belmonte'
-    }
-  ];
+  let current = 0;
 
-  let i = 0;
-
-  function fade(out) {
-    [big, s1, s2, wrap].forEach(el => el.style.opacity = out ? '0' : '1');
+  function goTo(idx) {
+    cards[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (idx + cards.length) % cards.length;
+    cards[current].classList.add('active');
+    dots[current].classList.add('active');
   }
 
-  function go(dir) {
-    i = (i + dir + slides.length) % slides.length;
-    fade(true);
-    setTimeout(() => {
-      const sl = slides[i];
-      big.src = sl.big; s1.src = sl.s1; s2.src = sl.s2;
-      txt.textContent = sl.text; aut.textContent = sl.author;
-      fade(false);
-    }, 160);
-  }
+  document.getElementById('tmPrev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('tmNext').addEventListener('click', () => goTo(current + 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
 
-  document.getElementById('galPrev').addEventListener('click', () => go(-1));
-  document.getElementById('galNext').addEventListener('click', () => go(1));
+  // Auto-play
+  let autoPlay = setInterval(() => goTo(current + 1), 5500);
+  const slider = document.querySelector('.testimonials-slider');
+  if (slider) {
+    slider.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    slider.addEventListener('mouseleave', () => { autoPlay = setInterval(() => goTo(current + 1), 5500); });
+    // Touch swipe
+    let startX = 0;
+    slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; clearInterval(autoPlay); }, { passive: true });
+    slider.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+      autoPlay = setInterval(() => goTo(current + 1), 5500);
+    }, { passive: true });
+  }
 })();
 
 // ── FAQ Accordion ───────────────────────────────────
