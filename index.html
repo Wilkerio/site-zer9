@@ -1169,6 +1169,17 @@
 
     .send button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
 
+    .form-feedback {
+      min-height: 20px;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffd58a;
+    }
+
+    .form-feedback.error { color: #ffd58a; }
+    .form-feedback.success { color: #b6f2c5; }
+
     /* ── MOSAICO FINAL ────────────────────────────────── */
     .final {
       background: var(--green-3);
@@ -1907,15 +1918,16 @@
       <div class="contact-form">
         <h3>Fale com a Zero9</h3>
         <p class="subtext">Preencha abaixo e entraremos em contato em breve para planejar seu trabalho de campo.</p>
-        <form onsubmit="return false;">
+        <form id="contactForm">
           <div class="form-row">
-            <div class="field"><label for="f-wa">WhatsApp*</label><input id="f-wa" type="tel" placeholder="(31) 99999-9999"/></div>
+            <div class="field"><label for="f-wa">WhatsApp*</label><input id="f-wa" type="tel" placeholder="(31) 99999-9999" required/></div>
             <div class="field"><label for="f-email">E-mail</label><input id="f-email" type="email" placeholder="seu@email.com"/></div>
           </div>
-          <div class="field"><label for="f-nome">Nome*</label><input id="f-nome" type="text" placeholder="Seu nome"/></div>
+          <div class="field"><label for="f-nome">Nome*</label><input id="f-nome" type="text" placeholder="Seu nome" required/></div>
           <div class="field"><label for="f-escola">Escola</label><input id="f-escola" type="text" placeholder="Nome da escola"/></div>
           <div class="field"><label for="f-msg">Fale um pouco sobre a ideia da viagem</label><textarea id="f-msg" placeholder="Ex: turma do 5º ano, 30 alunos, visita em março..."></textarea></div>
           <div class="send"><button type="submit">Enviar Mensagem →</button></div>
+          <p id="formFeedback" class="form-feedback" aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -2038,6 +2050,62 @@
   });
 })();
   // ── HAMBURGER ──────────────────────────────────────
+// Contact form -> WhatsApp
+(function () {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const waInput = document.getElementById('f-wa');
+  const emailInput = document.getElementById('f-email');
+  const nomeInput = document.getElementById('f-nome');
+  const escolaInput = document.getElementById('f-escola');
+  const msgInput = document.getElementById('f-msg');
+  const feedback = document.getElementById('formFeedback');
+  const waDestination = '553184799725';
+
+  function setFeedback(message, type) {
+    if (!feedback) return;
+    feedback.textContent = message;
+    feedback.classList.remove('error', 'success');
+    if (type) feedback.classList.add(type);
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const nome = (nomeInput.value || '').trim();
+    const whatsapp = (waInput.value || '').trim();
+    const email = (emailInput.value || '').trim();
+    const escola = (escolaInput.value || '').trim();
+    const ideia = (msgInput.value || '').trim();
+    const phoneDigits = whatsapp.replace(/\D/g, '');
+
+    if (!nome || !whatsapp) {
+      setFeedback('Preencha nome e WhatsApp para continuar.', 'error');
+      return;
+    }
+
+    if (phoneDigits.length < 10) {
+      setFeedback('Digite um WhatsApp valido com DDD.', 'error');
+      return;
+    }
+
+    const message = [
+      'Ola! Vim pelo site da Zero9 e quero falar sobre um trabalho de campo.',
+      '',
+      'Nome: ' + nome,
+      'WhatsApp: ' + whatsapp,
+      'E-mail: ' + (email || 'Nao informado'),
+      'Escola: ' + (escola || 'Nao informada'),
+      'Ideia da viagem: ' + (ideia || 'Nao informada')
+    ].join('\n');
+
+    const waUrl = 'https://wa.me/' + waDestination + '?text=' + encodeURIComponent(message);
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    setFeedback('Mensagem pronta! Abrimos o WhatsApp para enviar.', 'success');
+  });
+})();
+
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
   hamburger.addEventListener('click', () => {
